@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     head: {
       title: "AI Anything",
     },
-    pageTransition: { name: 'page', mode: 'out-in' }
+    pageTransition: { name: "page", mode: "out-in" },
   },
   runtimeConfig: {
     openaiApiKey: "",
@@ -18,5 +18,8 @@ export default defineNuxtConfig({
   css: ["@anu-vue/preset-theme-default/dist/style.css", "~/assets/global.css"],
   colorMode: {
     classSuffix: "",
+  },
+  nitro: {
+    preset: "netlify-edge",
   },
 });
