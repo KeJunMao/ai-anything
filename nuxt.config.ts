@@ -20,6 +20,6 @@ export default defineNuxtConfig({
     classSuffix: "",
   },
   nitro: {
-    preset: "netlify-edge",
+    preset: "netlify",
   },
 });
