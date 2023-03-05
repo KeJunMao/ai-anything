@@ -1,5 +1,6 @@
 // @unocss-include
 
+import { translator } from "./translator";
 import { Tool } from "./types";
 
 const tools: Tool[] = [
@@ -36,53 +37,7 @@ const tools: Tool[] = [
       },
     },
   },
-  {
-    name: "translator",
-    title: "AI 翻译器",
-    icon: "i-mdi:translate-variant",
-    desc: "外语好难？AI 帮你翻译",
-    promptTemplate: (data) => {
-      return "translate from ${detectFrom} to ${detectTo}:\n\n ${message} =>";
-    },
-    forms: {
-      detectFrom: {
-        type: "ASelect",
-        props: {
-          label: "原始语言",
-          options: [
-            {
-              label: "自动检测",
-              value: "auto",
-            },
-            {
-              label: "简体中文",
-              value: "zh-cn",
-            },
-          ],
-        },
-        default: "auto",
-      },
-      detectTo: {
-        type: "ASelect",
-        props: {
-          label: "目标语言",
-          options: [
-            {
-              label: "English",
-              value: "en",
-            },
-          ],
-        },
-        default: "en",
-      },
-      message: {
-        type: "ATextarea",
-        props: {
-          placeholder: "输入要翻译的内容",
-        },
-      },
-    },
-  },
+  translator,
 ];
 
 export default tools;
