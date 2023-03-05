@@ -1,5 +1,6 @@
-import { Tool } from "./types";
+// @unocss-include
 
+import { Tool } from "./types";
 // copy from https://github.com/yetone/bob-plugin-openai-translator
 const supportLanguages = [
   ["auto", "自动检测"],

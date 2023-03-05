@@ -4,7 +4,7 @@
     <Nav flex-1 />
     <div flex flex-cols gap-4>
       <ThemeSelect />
-      <NuxtLink to="https://github.com/KeJunMao/ai-anything">
+      <NuxtLink to="https://github.com/KeJunMao/ai-anything" target="_blank">
         <ABtn color="inherit" variant="text">
           <div class="i-mdi:github"></div>
         </ABtn>

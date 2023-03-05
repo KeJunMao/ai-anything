@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     head: {
       title: "AI Anything",
     },
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
   runtimeConfig: {
     openaiApiKey: "",
