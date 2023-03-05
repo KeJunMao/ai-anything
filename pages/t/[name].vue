@@ -11,36 +11,10 @@ const tool = useTool(route.params.name as string);
 useHead({
   title: tool.value?.title,
 });
-const message = ref("");
-const result = ref("");
-const loading = ref(false);
-const resultHtml = computed(() => marked.parse(result.value));
-const submit = async () => {
-  if (message.value) {
-    result.value = "";
-    loading.value = true;
-    // @ts-expect-error
-    const response: ReadableStream = await $fetch("/api/generate", {
-      method: "post",
-      body: {
-        prompt: {
-          message: message.value,
-        },
-        tool: tool.value?.name,
-      },
-      responseType: "stream",
-    });
-    const reader = response.getReader();
-    const decoder = new TextDecoder();
-    let isDone = false;
-    while (!isDone) {
-      const { value, done } = await reader.read();
-      isDone = done;
-      const text = decoder.decode(value);
-      result.value += text.replace(/\$id:([a-zA-Z0-9\-]+)\$/, "");
-    }
-    loading.value = false;
-  }
+const form = ref();
+const { loading, resultHtml, send } = useAi(tool.value?.name!);
+const submit = () => {
+  send(form.value.data);
 };
 </script>
 <template>
@@ -48,16 +22,13 @@ const submit = async () => {
     <ATypography mb-5 :title="tool!.title" :subtitle="tool?.desc"></ATypography>
     <ACard>
       <div class="a-card-body" flex flex-col gap-y-4>
-        <ATextarea
-          v-model="message"
-          :placeholder="tool?.placeholder"
-        ></ATextarea>
+        <Forms ref="form" v-if="tool?.forms" :forms="tool?.forms" />
         <ABtn :disabled="loading" w-full @click="submit"> 提交 </ABtn>
       </div>
     </ACard>
     <ACard
       mt-2
-      v-if="result"
+      v-show="resultHtml"
       variant="outline"
       :color="loading ? 'warning' : 'primary'"
     >

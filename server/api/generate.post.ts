@@ -12,9 +12,12 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const message = tool.promptTemplate.replace(/\${(.*?)}/gm, function (_, $1) {
-    return body.prompt[$1];
-  });
+  let message =
+    typeof tool.promptTemplate === "string"
+      ? tool.promptTemplate
+      : tool.promptTemplate(body.data);
+  message = message.replace(/\${(.*?)}/gm, (_, $1) => body.data[$1]);
+
   const response = await $fetch("https://c-api.okmiku.com/ai/chat", {
     method: "post",
     body: {
