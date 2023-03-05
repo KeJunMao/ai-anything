@@ -1,0 +1,4 @@
+body {
+  --color-primary: 155, 100%, 43%;
+  --a-primary: var(--color-primary);
+}

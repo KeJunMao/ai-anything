@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxtjs/color-mode": "^3.2.0",
+    "@types/marked": "^4.0.8",
+    "@unocss/nuxt": "^0.50.3",
+    "@vueuse/nuxt": "^9.13.0",
+    "nuxt": "^3.2.3",
+    "unocss": "^0.50.3"
+  },
+  "dependencies": {
+    "@anu-vue/nuxt": "^0.12.0",
+    "@anu-vue/preset-theme-default": "^0.12.0",
+    "@iconify-json/mdi": "^1.1.49",
+    "@vueuse/core": "^9.13.0",
+    "marked": "^4.2.12"
+  }
+}
