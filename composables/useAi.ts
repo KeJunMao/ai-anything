@@ -9,22 +9,26 @@ export const useAi = (tool: string) => {
     if (data.message) {
       result.value = "";
       loading.value = true;
-      const response: ReadableStream = await $fetch("/api/generate", {
-        method: "post",
-        body: {
-          data,
-          tool,
-        },
-        responseType: "stream",
-      });
-      const reader = response.getReader();
-      const decoder = new TextDecoder();
-      let isDone = false;
-      while (!isDone) {
-        const { value, done } = await reader.read();
-        isDone = done;
-        const text = decoder.decode(value);
-        result.value += text.replace(/\$id:([a-zA-Z0-9\-]+)\$/, "");
+      try {
+        const response: ReadableStream = await $fetch("/api/generate", {
+          method: "post",
+          body: {
+            data,
+            tool,
+          },
+          responseType: "stream",
+        });
+        const reader = response.getReader();
+        const decoder = new TextDecoder();
+        let isDone = false;
+        while (!isDone) {
+          const { value, done } = await reader.read();
+          isDone = done;
+          const text = decoder.decode(value);
+          result.value += text.replace(/\$id:([a-zA-Z0-9\-]+)\$/, "");
+        }
+      } catch (error) {
+        result.value = String(error);
       }
       loading.value = false;
     }
