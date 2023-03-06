@@ -1,11 +1,15 @@
+import { ChatGPTOptions } from "~/composables/useChatGPT";
+
 export interface Tool {
   name: string;
   title?: string;
   desc?: string;
   icon?: string;
   keywords?: string[];
-  promptTemplate: string | ((data: any) => string);
+  systemMessageTemplate: string | ((data: any) => string);
+  userMessageTemplate: string | ((data: any) => string);
   forms?: Record<string, FormItem>;
+  GPTOptions?: Partial<ChatGPTOptions>;
 }
 
 export interface FormBase {

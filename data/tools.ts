@@ -9,8 +9,9 @@ const tools: Tool[] = [
     title: "周报生成器",
     icon: "i-mdi-calendar-week-end",
     desc: "不想写周报？AI 帮你写",
-    promptTemplate:
-      "请帮我把以下的工作内容填充为一篇完整的周报,尽量避免在回答内容中出现可能在中国是敏感的内容，用markdown格式以分点叙述的形式输出: ${message}",
+    systemMessageTemplate:
+      "请帮我把以下的工作内容填充为一篇完整的周报,尽量避免在回答内容中出现可能在中国是敏感的内容,用markdown格式以分点叙述的形式输出",
+    userMessageTemplate: "${message}",
     forms: {
       message: {
         type: "ATextarea",
@@ -26,8 +27,9 @@ const tools: Tool[] = [
     title: "OKR 生成器",
     icon: "i-mdi:frequently-asked-questions",
     desc: "怎么定OKR？AI 帮你编",
-    promptTemplate:
-      "请帮我把以下的工作目标填充为一篇完整的OKR规划,尽量避免在回答内容中出现可能在中国是敏感的内容，用markdown格式以分点叙述的形式输出: ${message}",
+    systemMessageTemplate:
+      "请帮我把以下的工作目标填充为一篇完整的OKR规划,尽量避免在回答内容中出现可能在中国是敏感的内容,用markdown格式以分点叙述的形式输出",
+    userMessageTemplate: "${message}",
     forms: {
       message: {
         type: "ATextarea",

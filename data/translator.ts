@@ -130,7 +130,7 @@ export const translator: Tool = {
   title: "AI 翻译器",
   icon: "i-mdi:translate-variant",
   desc: "外语好难？AI 帮你翻译",
-  promptTemplate: (query) => {
+  systemMessageTemplate: (query) => {
     let prompt = `translate from ${query.detectFrom} to ${query.detectTo}`;
     if (query.detectTo === "wyw" || query.detectTo === "yue") {
       prompt = `翻译成${query.detectTo}`;
@@ -155,8 +155,9 @@ export const translator: Tool = {
         prompt = "polish this sentence";
       }
     }
-    return `${prompt}:\n\n${query.message} =>`;
+    return prompt;
   },
+  userMessageTemplate: "${message}",
   forms: {
     detectFrom: {
       type: "ASelect",

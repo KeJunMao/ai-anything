@@ -6,9 +6,6 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
-  runtimeConfig: {
-    openaiApiKey: "",
-  },
   modules: [
     "@anu-vue/nuxt",
     "@unocss/nuxt",
