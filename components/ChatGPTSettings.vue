@@ -4,7 +4,7 @@ import { defaultChatGPTOptions } from "~~/composables/useChatGPT";
 
 const emit = defineEmits(["save", "reset"]);
 
-const { options } = useChatGPT();
+const { options, setOptions } = useChatGPT();
 const defaultOptions = objectPick(defaultChatGPTOptions, [
   "apiKey",
   "apiBaseUrl",
@@ -29,12 +29,16 @@ const storageOptions = useLocalStorage("ai-anything:globalChatGPTOptions", {
 
 function save() {
   storageOptions.value = { ...currentOptions.value };
+  setOptions({ ...currentOptions.value });
+  console.log(options.value);
   emit("save");
 }
 
 function reset() {
   storageOptions.value = { ...defaultOptions };
   currentOptions.value = { ...defaultOptions };
+  setOptions({ ...defaultOptions });
+
   emit("reset");
 }
 </script>

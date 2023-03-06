@@ -31,56 +31,65 @@ export const defaultChatGPTOptions: ChatGPTOptions = {
   frequency_penalty: 0,
 };
 
-export const useChatGPT = (userOptions: Partial<ChatGPTOptions> = {}) => {
-  const storageOptions = useLocalStorage(
-    "ai-anything:globalChatGPTOptions",
-    {}
-  );
-  const options = ref<ChatGPTOptions>({
-    ...defaultChatGPTOptions,
-    ...storageOptions.value,
-    ...userOptions,
-  });
-  const sendMessage = async (
-    messages: ChatGPTMessages,
-    onProgress?: (message: string, data: Record<string, any>) => void
-  ) => {
-    const { apiKey, apiBaseUrl, ...opts } = options.value;
-    const response: ReadableStream = await $fetch("/v1/chat/completions", {
-      baseURL: apiBaseUrl,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      method: "post",
-      body: {
-        ...opts,
-        messages,
-      },
-      responseType: "stream",
+export const useChatGPT = createSharedComposable(
+  (userOptions: Partial<ChatGPTOptions> = {}) => {
+    const storageOptions = useLocalStorage(
+      "ai-anything:globalChatGPTOptions",
+      {}
+    );
+    const options = ref<ChatGPTOptions>({
+      ...defaultChatGPTOptions,
+      ...storageOptions.value,
+      ...userOptions,
     });
-    const reader = response.getReader();
-    const decoder = new TextDecoder();
-    let isDone = false;
-    while (!isDone) {
-      const { value, done } = await reader.read();
-      isDone = done;
-      const text = decoder.decode(value);
-      const data = text
-        .split("data:")
-        .filter((v) => !!v.trim() && v.trim() !== "[DONE]")
-        .map((v) => JSON.parse(v));
+    const setOptions = (opts: Partial<ChatGPTOptions> = {}) => {
+      options.value = {
+        ...options.value,
+        ...opts,
+        ...userOptions,
+      };
+    };
+    const sendMessage = async (
+      messages: ChatGPTMessages,
+      onProgress?: (message: string, data: Record<string, any>) => void
+    ) => {
+      const { apiKey, apiBaseUrl, ...opts } = options.value;
+      const response: ReadableStream = await $fetch("/v1/chat/completions", {
+        baseURL: apiBaseUrl,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        method: "post",
+        body: {
+          ...opts,
+          messages,
+        },
+        responseType: "stream",
+      });
+      const reader = response.getReader();
+      const decoder = new TextDecoder();
+      let isDone = false;
+      while (!isDone) {
+        const { value, done } = await reader.read();
+        isDone = done;
+        const text = decoder.decode(value);
+        const data = text
+          .split("data:")
+          .filter((v) => !!v.trim() && v.trim() !== "[DONE]")
+          .map((v) => JSON.parse(v));
 
-      const message = data
-        .map((v) => {
-          const msg = v.choices[0];
-          return msg.message ? msg.message.content : msg.delta.content;
-        })
-        .join("");
-      if (onProgress) {
-        onProgress(message, data);
+        const message = data
+          .map((v) => {
+            const msg = v.choices[0];
+            return msg.message ? msg.message.content : msg.delta.content;
+          })
+          .join("");
+        if (onProgress) {
+          onProgress(message, data);
+        }
       }
-    }
-  };
-  return { options, sendMessage };
-};
+    };
+    return { options, sendMessage, setOptions };
+  }
+);
