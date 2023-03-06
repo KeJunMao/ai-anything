@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { marked } from "marked";
+import getTools from "~~/tools";
+
 definePageMeta({
   validate(route) {
-    const tool = useTool(route.params.name as string);
-    return !!tool.value;
+    const tool = getTools().find((v) => v.name === route.params.name);
+    return !!tool;
   },
 });
 const route = useRoute();
@@ -19,9 +20,14 @@ const submit = () => {
 </script>
 <template>
   <div pt-0 md:pt-5 px-4 md:px-0 max-w-2xl w-full m-auto>
-    <ATypography mb-5 :title="tool!.title" :subtitle="tool?.desc"></ATypography>
     <ACard>
       <div class="a-card-body" flex flex-col gap-y-4>
+        <div flex justify-between>
+          <Tool :tool="tool!" mb-4></Tool>
+          <ABtn color="inherit" variant="text">
+            <div class="i-mdi:edit"></div>
+          </ABtn>
+        </div>
         <Forms ref="form" v-if="tool?.forms" :forms="tool?.forms" />
         <ABtn :disabled="loading" w-full @click="submit"> 提交 </ABtn>
       </div>

@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 const isSettingsShow = ref(false);
+const localePath = useLocalePath();
 </script>
 
 <template>
   <header h-16 flex items-center container mx-auto px-4 md:px-0>
-    <NuxtLink to="/"><Logo /></NuxtLink>
+    <NuxtLink :to="localePath('/')"><Logo /></NuxtLink>
     <Nav flex-1 />
     <div flex flex-cols gap-4>
       <NuxtLink to="https://github.com/KeJunMao/ai-anything" target="_blank">

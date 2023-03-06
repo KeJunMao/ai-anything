@@ -1,0 +1,20 @@
+{
+  "search-placeholder": "搜索 AI 小助手",
+  "no-results-found-for-search": "暂无 \"{0}\" 相关结果",
+  "tool.coding_function.title": "写函数",
+  "tool.coding_function.desc": "函数专家",
+  "tool.finding_bugs.title": "找BUG",
+  "tool.finding_bugs.desc": "真正的QA，往往...",
+  "tool.okr_generator.title": "OKR 生成器",
+  "tool.okr_generator.desc": "怎么定OKR？AI 帮你编",
+  "tool.redbook.title": "小红书文案生成器",
+  "tool.redbook.desc": "帮你生成小红书风格文案",
+  "tool.translator.title": "AI 翻译器",
+  "tool.translator.desc": "外语好难？AI 帮你翻译",
+  "tool.weekly_report.title": "周报生成器",
+  "tool.weekly_report.desc": "不想写周报？AI 帮你写",
+  "chatgpt.settings.hit": "默认值为 \"{0}\"",
+  "chatgpt.settings.reset": "重置",
+  "chatgpt.settings.save": "保存",
+  "chatgpt.settings.title": "全局设置"
+}

@@ -46,7 +46,7 @@ function reset() {
 <template>
   <div class="a-card-body">
     <div>
-      <ATypography title="Global" mb-2></ATypography>
+      <ATypography :title="$t('chatgpt.settings.title')" mb-2></ATypography>
       <AInput
         v-model="currentOptions[name]"
         class="my-2"
@@ -55,14 +55,14 @@ function reset() {
         :label="name"
         :hint="
           item != defaultOptions[name] && defaultOptions[name]
-            ? `Default is '${defaultOptions[name]}'`
+            ? $t('chatgpt.settings.hit', [defaultOptions[name]])
             : ''
         "
       ></AInput>
     </div>
     <div flex flex-cols gap-2 mt-2>
-      <ABtn @click="save" mr-1>Save</ABtn>
-      <ABtn @click="reset" color="danger">Reset</ABtn>
+      <ABtn @click="save" mr-1>{{ $t('chatgpt.settings.save') }}</ABtn>
+      <ABtn @click="reset" color="danger">{{ $t('chatgpt.settings.reset') }}</ABtn>
     </div>
   </div>
 </template>

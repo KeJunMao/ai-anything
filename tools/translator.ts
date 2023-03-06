@@ -125,11 +125,11 @@ const options = supportLanguages.map((v) => ({
   value: v[0],
 }));
 
-export const translator: Tool = {
+export const translator = (t: any): Tool => ({
   name: "translator",
-  title: "AI 翻译器",
+  title: t('tool.translator.title'),
   icon: "i-mdi:translate-variant",
-  desc: "外语好难？AI 帮你翻译",
+  desc: t('tool.translator.desc'),
   systemMessageTemplate: (query) => {
     let prompt = `translate from ${query.detectFrom} to ${query.detectTo}`;
     if (query.detectTo === "wyw" || query.detectTo === "yue") {
@@ -182,4 +182,4 @@ export const translator: Tool = {
       },
     },
   },
-};
+});
