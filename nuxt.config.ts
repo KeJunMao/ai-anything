@@ -18,8 +18,5 @@ export default defineNuxtConfig({
   css: ["@anu-vue/preset-theme-default/dist/style.css", "~/assets/global.css"],
   colorMode: {
     classSuffix: "",
-  },
-  nitro: {
-    preset: "netlify",
-  },
+  }
 });
