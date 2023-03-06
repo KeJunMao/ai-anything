@@ -14,12 +14,12 @@ export interface Tool {
 
 export interface FormBase {
   type: string;
-  label?: string;
   default?: string;
 }
 export interface FormPropsBase {
   label?: string;
   placeholder?: string;
+  [x: string]: any;
 }
 
 export interface FormInput extends FormBase {
