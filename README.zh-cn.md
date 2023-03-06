@@ -13,27 +13,27 @@
   </a>
 </p>
 
-English | [简体中文](./README.zh-cn.md)
+[English](./README.md) | 简体中文
 
-## Introduction
+## 简介
 
-Currently, most ChatGPT related tools essentially adjust prompts. AI Anything can generate tools by only writing structured data and also supports using functions to generate more complex prompts.
+就目前来看，大部分 ChatGPT 相关的工具本质上就是调整 prompt， AI Anything 可以在只编写结构化数据的情况下生成工具，同时还支持使用函数来生成更复杂的 prompt
 
-## Screenshot
+## 截图
 
 <p align='center'>
   <img src='./assets/screenshot.png' alt="Screenshot">
 <p>
 
-## 💻 Development
+## 💻 发展
 
-- Clone this repository
-- Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable` (use `npm i -g corepack` for Node.js < 16.10)
-- Install dependencies using `pnpm install`
-- Run interactive tests using `pnpm dev`
+- 克隆此代码库
+- 使用 `corepack enable` 启用 Corepack (对于 Node.js < 16.10，请使用`npm i -g corepack`)
+- 使用 `pnpm install` 安装依赖项
+- 使用 `pnpm dev` 运行交互测试
 
-## License
+## 协议
 
-Made with 💛
+用 💛 发电
 
-Published under [MIT License](./LICENSE).
+根据[MIT 许可证](./LICENSE)发布
