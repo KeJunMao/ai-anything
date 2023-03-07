@@ -16,5 +16,8 @@
   "chatgpt.settings.title": "Global Settings",
   "chatgpt.settings.hit": "Default is '{0}",
   "chatgpt.settings.save": "Save",
-  "chatgpt.settings.reset": "Reset"
+  "chatgpt.settings.reset": "Reset",
+  "tool.frontend_helper.title": "Frontend Helper",
+  "tool.frontend_helper.forms.message.placeholder": "Monitor the X and Y coordinates of a specific element node relative to the top-left corner of the user's device screen, and enable the element to be dragged to adjust its position and resized to fit different browser window sizes.",
+  "tool.frontend_helper.desc": "Does everyone know how to do front-end?"
 }

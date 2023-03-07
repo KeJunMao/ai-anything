@@ -16,5 +16,8 @@
   "chatgpt.settings.hit": "默认值为 \"{0}\"",
   "chatgpt.settings.reset": "重置",
   "chatgpt.settings.save": "保存",
-  "chatgpt.settings.title": "全局设置"
+  "chatgpt.settings.title": "全局设置",
+  "tool.frontend_helper.title": "前端助手",
+  "tool.frontend_helper.forms.message.placeholder": "监听某个元素节点距离当前电脑设备屏幕的左上角的X和Y轴，通过拖拽移动位置浏览器窗口和改变大小浏览器窗口",
+  "tool.frontend_helper.desc": "前端不是是个人就会吗？"
 }

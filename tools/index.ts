@@ -7,6 +7,7 @@ import { okr_generator } from "./okr_generator";
 import { coding_function } from "./coding_function";
 import { finding_bugs } from "./finding_bugs";
 import { redbook } from "./redbook";
+import { frontend_helper } from "./frontend_helper";
 
 export default function getTool(t?: any): Tool[] {
   if (!t) {
@@ -19,5 +20,6 @@ export default function getTool(t?: any): Tool[] {
     coding_function(t),
     finding_bugs(t),
     redbook(t),
+    frontend_helper(t)
   ];
 }
