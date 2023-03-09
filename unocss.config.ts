@@ -1,6 +1,3 @@
-import { presetAnu, presetIconExtraProperties } from "anu-vue";
-import { presetThemeDefault } from "@anu-vue/preset-theme-default";
-
 import {
   defineConfig,
   presetIcons,
@@ -20,14 +17,7 @@ export default defineConfig({
     presetUno(),
     presetIcons({
       scale: 1.2,
-      extraProperties: presetIconExtraProperties,
     }),
-
-    // anu-vue preset
-    presetAnu(),
-
-    // default theme preset
-    presetThemeDefault(),
 
     presetAttributify(),
     presetTypography(),

@@ -6,29 +6,41 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "AI Anything",
+      meta: [
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        {
+          hid: "description",
+          name: "description",
+          content: "AI Anything Power by ChatGPT",
+        },
+      ],
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
+  typescript: {
+    strict: true,
+    shim: false,
+  },
   modules: [
-    "@anu-vue/nuxt",
     "@unocss/nuxt",
     "@nuxtjs/color-mode",
     "@vueuse/nuxt",
     "@nuxtjs/i18n",
+    "@element-plus/nuxt",
   ],
-  css: ["@anu-vue/preset-theme-default/dist/style.css", "~/assets/global.css"],
+  css: ["~/assets/scss/index.scss", "@unocss/reset/tailwind.css"],
   colorMode: {
     classSuffix: "",
   },
   i18n: {
     locales: [
       {
-        code: 'en',
-        name: 'English'
+        code: "en",
+        name: "English",
       },
       {
-        code: 'zh-cn',
-        name: '简体中文'
+        code: "zh-cn",
+        name: "简体中文",
       },
     ],
     defaultLocale: "en",
@@ -39,11 +51,24 @@ export default defineNuxtConfig({
         "zh-cn": zhCN,
       },
     },
-    // detectBrowserLanguage: {
-    //   useCookie: true,
-    //   alwaysRedirect: true,
-    //   redirectOn: "root",
-    //   fallbackLocale: "en",
-    // },
+    detectBrowserLanguage: {
+      useCookie: true,
+      alwaysRedirect: true,
+      redirectOn: "root",
+      fallbackLocale: "en",
+    },
+  },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/assets/scss/element/index.scss" as element;`,
+        },
+      },
+    },
+  },
+  elementPlus: {
+    themes: ["dark"],
+    importStyle: "scss",
   },
 });

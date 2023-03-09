@@ -9,17 +9,17 @@ const onClick = () => {
 </script>
 
 <template>
-  <ABtn variant="text" color="inherit" aria-label="Color Mode" @click="onClick">
+  <el-button text @click="onClick">
     <ColorScheme placeholder="...">
       <div
         v-if="colorMode.preference === 'dark'"
-        class="i-mdi:moon-waxing-crescent"
+        class="i-carbon:moon"
       ></div>
       <div
         v-else-if="colorMode.preference === 'light'"
-        class="i-mdi:white-balance-sunny"
+        class="i-carbon:color-switch"
       ></div>
-      <div v-else class="i-mdi:sun-angle"></div>
+      <div v-else class="i-carbon:sun"></div>
     </ColorScheme>
-  </ABtn>
+  </el-button>
 </template>

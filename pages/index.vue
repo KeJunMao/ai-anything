@@ -1,6 +1,9 @@
+<script lang="ts" setup>
+definePageMeta({
+  layout: "home",
+});
+</script>
+
 <template>
-  <div pt-0 md:pt-5>
-    <Search />
-    <ToolList />
-  </div>
+  <div max-w-300 mx-auto px-4>TODO</div>
 </template>
