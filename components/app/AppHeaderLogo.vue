@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+const localePath = useLocalePath();
+</script>
+
 <template>
   <NuxtLink
     text-xl
@@ -6,7 +10,7 @@
     dark:color-gray-100
     hover:color-gray-500
     whitespace-nowrap
-    to="/"
+    :to="localePath('/')"
   >
     AI Anything
   </NuxtLink>

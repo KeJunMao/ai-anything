@@ -10,7 +10,7 @@ import {
 export default defineConfig({
   theme: {
     colors: {
-      primary: "hsl(var(--color-primary))",
+      primary: "var(--color-primary)",
     },
   },
   presets: [
