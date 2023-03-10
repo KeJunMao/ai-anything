@@ -13,26 +13,13 @@ const localePath = useLocalePath();
       lg:grid-cols-4
       gap-6
     >
-      <ToolItem
-        name="Create"
-        desc="Make you own GPT tool"
-        icon="i-carbon:add-filled"
-      />
-      <ToolItem
-        name="Official agency partners"
-        desc="A carefully built network of trusted agencies from all over the world!"
-        icon="i-carbon:add-filled"
-      />
-      <!-- <NuxtLink
-        :to="localePath(`/t/${item.name}`)"
-        v-for="item in list"
-        :key="item.name"
-      >
-        <Tool :tool="item" />
-      </NuxtLink> -->
+      <NuxtLink :to="localePath('create')">
+        <ToolItem
+          name="Create"
+          desc="Make you own GPT tool"
+          icon="i-carbon:add-filled"
+        />
+      </NuxtLink>
     </div>
-    <!-- <div v-if="!list.length">
-      {{ $t("no-results-found-for-search", [search]) }}
-    </div> -->
   </div>
 </template>
