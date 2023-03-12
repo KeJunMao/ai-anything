@@ -1,4 +1,4 @@
-export const useToolSearch = createSharedComposable(() => {
+export const useQuerySearch = createSharedComposable(() => {
   const route = useRoute();
   const search = ref((route.query.q as string) ?? "");
   watch(search, () => {

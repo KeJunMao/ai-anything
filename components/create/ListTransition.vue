@@ -1,0 +1,24 @@
+<template>
+  <TransitionGroup name="list">
+    <slot></slot>
+  </TransitionGroup>
+</template>
+
+<style>
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(-20%);
+}
+
+.list-leave-active {
+  position: absolute;
+  width: 100%;
+}
+</style>

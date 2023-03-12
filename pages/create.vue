@@ -6,13 +6,9 @@ definePageMeta({
 
 <template>
   <NuxtLayout name="create">
-    TODO
+    <CreateForms />
     <template #preview>
-      <ToolItem
-        name="Create"
-        desc="Make you own GPT tool"
-        icon="i-carbon:add-filled"
-      />
+      <CreatePreviews />
     </template>
   </NuxtLayout>
 </template>

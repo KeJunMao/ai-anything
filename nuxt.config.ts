@@ -17,6 +17,7 @@ export default defineNuxtConfig({
       ],
     },
     pageTransition: { name: "page", mode: "out-in" },
+    layoutTransition: { name: "layout", mode: "out-in" },
   },
   typescript: {
     strict: true,
@@ -71,5 +72,6 @@ export default defineNuxtConfig({
   elementPlus: {
     themes: ["dark"],
     importStyle: "scss",
+    components: ["ElInput"],
   },
 });

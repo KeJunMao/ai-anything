@@ -14,7 +14,7 @@
           <div px-16px py-20px>
             <slot></slot>
           </div>
-          <div bg-dark-800 px-16px py-20px>
+          <div bg-light-200 dark:bg-dark-800 px-16px py-20px of-hidden>
             <slot name="preview"></slot>
           </div>
         </div>

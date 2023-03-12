@@ -1,20 +1,57 @@
-import getTools from "~/tools";
-import { Tool } from "~~/tools/types";
+import { ChatGPTOptions } from "./useChatGPT";
 
-// const reg = /^i18n.t\(['"](.*?)['"]\)$/;
-// function setI18n(object: Record<string, any>, t: any) {
-//   for (const key in object) {
-//     if (Object.prototype.hasOwnProperty.call(object, key)) {
-//       const element = object[key];
-//       if (element.)
-//     }
-//   }
-// }
+// @unocss-include
+export interface ToolItemOptions extends Partial<ChatGPTOptions> {}
+export interface ToolItemRole {
+  id?: string;
+  type: string;
+  template: string;
+}
+export interface ToolItemFormItem {
+  id?: string;
+  type: string;
+  name: string;
+  lable?: string;
+  props?: Record<string, any>;
+}
+export type ToolItemForms = ToolItemFormItem[];
+export interface ToolItemMeta {
+  /**
+   * uuid
+   */
+  id?: string;
+  /**
+   * tool name
+   */
+  name?: string;
+  /**
+   * tool desc
+   */
+  desc?: string;
+  /**
+   * tool icon
+   */
+  icon?: string;
+}
+
+export interface ToolItem extends ToolItemMeta {
+  roles: ToolItemRole[];
+  forms: ToolItemForms;
+  options?: ToolItemOptions;
+}
 
 export const useTools = () => {
-  const { t } = useI18n();
-  const tools = ref(getTools(t));
+  const { tools: customTools } = useCustomTools();
+
+  const buildInTools = ref<ToolItem[]>([]);
+
+  const tools = computed<ToolItem[]>(() => {
+    return [...buildInTools.value, ...customTools.value];
+  });
+  const isCustomTool = (id: string) =>
+    !!customTools.value.find((v) => v.id === id);
   return {
-    tools: tools,
+    tools,
+    isCustomTool,
   };
 };

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
+import { ToolItem } from "~/composables/useTools";
+
 defineProps<{
-  icon?: string;
-  name?: string;
-  desc?: string;
+  tool: ToolItem;
 }>();
 </script>
 
@@ -25,17 +25,22 @@ defineProps<{
     class="group"
   >
     <div
+      v-if="tool?.icon"
       transition-all
       text-xl
-      :class="icon"
+      :class="tool?.icon?.startsWith('i') ? tool?.icon : ''"
       class="group-hover:color-primary"
       text-gray-800
       dark:text-gray-200
       mb-2
-    ></div>
-    <div text-2xl font-semibold text-gray-900 dark:text-gray-100>
-      {{ name }}
+    >
+      <template v-if="!tool?.icon?.startsWith('i')">{{ tool?.icon }}</template>
     </div>
-    <div font-medium text-gray-500 dark:text-gray-400>{{ desc }}</div>
+    <div text-2xl font-semibold text-gray-900 dark:text-gray-100>
+      {{ tool?.name }}
+    </div>
+    <div v-if="tool?.desc" mt-1 font-medium text-gray-500 dark:text-gray-400>
+      {{ tool?.desc }}
+    </div>
   </div>
 </template>

@@ -4,7 +4,7 @@ const localePath = useLocalePath();
 
 <template>
   <NuxtLink
-    text-xl
+    text-2xl
     font-bold
     color-gray-900
     dark:color-gray-100

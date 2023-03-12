@@ -10,6 +10,7 @@
       <AppHeaderNavigation />
     </div>
     <div flex items-center col-span-4 justify-end>
+      <AppSettings />
       <AppThemeSelect />
       <AppSocialIcons hidden md:flex />
     </div>

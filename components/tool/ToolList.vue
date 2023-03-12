@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const localePath = useLocalePath();
+const { tools } = useTools();
 </script>
 
 <template>
@@ -15,10 +16,23 @@ const localePath = useLocalePath();
     >
       <NuxtLink :to="localePath('create')">
         <ToolItem
-          name="Create"
-          desc="Make you own GPT tool"
-          icon="i-carbon:add-filled"
+          h-full
+          :tool="{
+            id: 'create',
+            name: 'Create',
+            desc: 'Make you own GPT tool',
+            icon: 'i-carbon:add-filled',
+            roles: [],
+            forms: [],
+          }"
         />
+      </NuxtLink>
+      <NuxtLink
+        v-for="item in tools"
+        :key="item.id"
+        :to="localePath(`/ai-${item.id}`)"
+      >
+        <ToolItem h-full :tool="item" />
       </NuxtLink>
     </div>
   </div>
