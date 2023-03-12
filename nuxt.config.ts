@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from "nuxt/config";
-import en from "./locales/en.json";
-import zhCN from "./locales/zh-cn.json";
+// import en from "./locales/en.json";
+// import zhCN from "./locales/zh-cn.json";
 
 export default defineNuxtConfig({
   app: {
@@ -47,13 +47,13 @@ export default defineNuxtConfig({
       },
     ],
     defaultLocale: "en",
-    vueI18n: {
-      legacy: false,
-      messages: {
-        en,
-        "zh-cn": zhCN,
-      },
-    },
+    // vueI18n: {
+    //   legacy: false,
+    //   messages: {
+    //     en,
+    //     "zh-cn": zhCN,
+    //   },
+    // },
     detectBrowserLanguage: {
       useCookie: true,
       alwaysRedirect: true,
