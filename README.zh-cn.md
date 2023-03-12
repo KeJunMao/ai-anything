@@ -2,14 +2,14 @@
   AI Anything
 </h1>
 <p align="center">
-  ChatGPT Related Toolset Based on Structured Data Generation
+  人人都能创建 GPT 工具
 </p>
 <p align="center">
   <a style="text-decoration:none" href="https://aianything.netlify.app" target="_blank">
-    <img src="https://img.shields.io/badge/Website-aianything.netlify.app-blue" alt="Website" />
+    <img src="https://img.shields.io/badge/网站-aianything.netlify.app-blue" alt="Website" />
   </a>
   <a style="text-decoration:none" href="https://github.com/KeJunMao" target="_blank">
-    <img src="https://img.shields.io/badge/Author-KeJun-blue" alt="Author" />
+    <img src="https://img.shields.io/badge/作者-KeJun-blue" alt="Author" />
   </a>
 </p>
 
@@ -17,13 +17,18 @@
 
 ## 简介
 
-就目前来看，大部分 ChatGPT 相关的工具本质上就是调整 prompt， AI Anything 可以在只编写结构化数据的情况下生成工具，同时还支持使用函数来生成更复杂的 prompt
+就目前来看，大部分 ChatGPT 相关的工具本质上就是调整 prompt， AI Anything 让人人都可以快速创建 ChatGPT 小工具
 
-## 截图
+## 功能
 
-<p align='center'>
-  <img src='./assets/screenshot.png' alt="Screenshot">
-<p>
+- 🔥 几秒即可创建一个 GPT 小工具
+- 😃 [100,000+](https://icones.js.org/) 图标可供使用
+- 🦾 允许配置 AI 的角色！
+- ⚙️ 不止一个输入框，如何愿意你可以创建无数个！
+- 🤙🏻 支持模板插值，prompt 更加灵活
+- 🎨 干净的 UI，流畅的动画，支持夜间模式
+- ⚡️ Nuxt3 驱动，就是快！
+- [ ] 🌍 多语言
 
 ## 💻 发展
 

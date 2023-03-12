@@ -8,19 +8,25 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@element-plus/nuxt": "^1.0.3",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/i18n": "8.0.0-beta.10",
     "@types/marked": "^4.0.8",
+    "@types/uuid": "^9.0.1",
     "@unocss/nuxt": "^0.50.3",
     "@vueuse/nuxt": "^9.13.0",
     "nuxt": "^3.2.3",
+    "nuxt-icon": "^0.3.2",
+    "sass": "^1.58.3",
     "unocss": "^0.50.3"
   },
   "dependencies": {
-    "@anu-vue/nuxt": "^0.12.0",
-    "@anu-vue/preset-theme-default": "^0.12.0",
-    "@iconify-json/mdi": "^1.1.49",
+    "@iconify-json/carbon": "^1.1.16",
+    "@unocss/reset": "^0.50.4",
     "@vueuse/core": "^9.13.0",
-    "marked": "^4.2.12"
+    "element-plus": "^2.2.36",
+    "marked": "^4.2.12",
+    "unstorage": "^1.4.0",
+    "uuid": "^9.0.0"
   }
 }

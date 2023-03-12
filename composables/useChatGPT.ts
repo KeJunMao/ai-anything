@@ -34,26 +34,19 @@ export const defaultChatGPTOptions: ChatGPTOptions = {
 export const useChatGPT = createSharedComposable(
   (userOptions: Partial<ChatGPTOptions> = {}) => {
     const storageOptions = useLocalStorage(
-      "ai-anything:globalChatGPTOptions",
-      {}
+      "ai-anything:GPTSetting",
+      defaultChatGPTOptions
     );
-    const options = ref<ChatGPTOptions>({
-      ...defaultChatGPTOptions,
+    const options = computed<ChatGPTOptions>(() => ({
       ...storageOptions.value,
       ...userOptions,
-    });
-    const setOptions = (opts: Partial<ChatGPTOptions> = {}) => {
-      options.value = {
-        ...options.value,
-        ...opts,
-        ...userOptions,
-      };
-    };
+    }));
     const sendMessage = async (
       messages: ChatGPTMessages,
       onProgress?: (message: string, data: Record<string, any>) => void
     ) => {
       const { apiKey, apiBaseUrl, ...opts } = options.value;
+      // @ts-ignroe
       const response: ReadableStream = await $fetch("/v1/chat/completions", {
         baseURL: apiBaseUrl,
         headers: {
@@ -67,6 +60,7 @@ export const useChatGPT = createSharedComposable(
         },
         responseType: "stream",
       });
+
       const reader = response.getReader();
       const decoder = new TextDecoder();
       let isDone = false;
@@ -90,6 +84,6 @@ export const useChatGPT = createSharedComposable(
         }
       }
     };
-    return { options, sendMessage, setOptions };
+    return { options, sendMessage, storageOptions };
   }
 );

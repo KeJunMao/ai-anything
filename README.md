@@ -2,7 +2,7 @@
   AI Anything
 </h1>
 <p align="center">
-  ChatGPT Related Toolset Based on Structured Data Generation
+  Anyone can create GPT tools
 </p>
 <p align="center">
   <a style="text-decoration:none" href="https://aianything.netlify.app" target="_blank">
@@ -17,13 +17,18 @@ English | [简体中文](./README.zh-cn.md)
 
 ## Introduction
 
-Currently, most ChatGPT related tools essentially adjust prompts. AI Anything can generate tools by only writing structured data and also supports using functions to generate more complex prompts.
+For now, most ChatGPT-related tools are essentially tweaks to prompts, and AI Anything makes it possible for everyone to create ChatGPT widgets quickly
 
-## Screenshot
+## Features
 
-<p align='center'>
-  <img src='./assets/screenshot.png' alt="Screenshot">
-<p>
+- 🔥 Create a GPT widget in seconds
+- 😃 [100,000+](https://icones.js.org/) icons available
+- 🦾 Allows to configure the AI's role!
+- ⚙️ More than one input box, how willing you can create countless ones!
+- 🤙🏻 supports template interpolation, prompt is more flexible
+- 🎨 Clean UI, smooth animations, dark mode support
+- ⚡️ Power by Nuxt3 , just fast!
+- [ ] 🌍 Multi-language
 
 ## 💻 Development
 
