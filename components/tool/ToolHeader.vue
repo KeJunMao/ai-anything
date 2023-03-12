@@ -23,8 +23,7 @@ const { isCustomTool } = useTools();
       border
       dark:border-gray-800
     >
-      <template v-if="!tool?.icon?.startsWith('i')">{{ tool?.icon }}</template>
-      <div v-else :class="tool?.icon"></div>
+      <ToolIcon :icon="tool.icon"/>
     </div>
     <div flex flex-col gap-y-1 flex-1>
       <div font-bold>{{ tool?.name }}</div>

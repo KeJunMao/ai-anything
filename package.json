@@ -16,6 +16,7 @@
     "@unocss/nuxt": "^0.50.3",
     "@vueuse/nuxt": "^9.13.0",
     "nuxt": "^3.2.3",
+    "nuxt-icon": "^0.3.2",
     "sass": "^1.58.3",
     "unocss": "^0.50.3"
   },
@@ -24,7 +25,6 @@
     "@unocss/reset": "^0.50.4",
     "@vueuse/core": "^9.13.0",
     "element-plus": "^2.2.36",
-    "iconify-icon": "^1.0.7",
     "marked": "^4.2.12",
     "unstorage": "^1.4.0",
     "uuid": "^9.0.0"

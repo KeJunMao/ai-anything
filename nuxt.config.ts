@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxtjs/i18n",
     "@element-plus/nuxt",
+    "nuxt-icon",
   ],
   css: ["@/assets/scss/index.scss", "@unocss/reset/tailwind.css"],
   colorMode: {

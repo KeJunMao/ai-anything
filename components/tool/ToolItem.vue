@@ -28,13 +28,12 @@ defineProps<{
       v-if="tool?.icon"
       transition-all
       text-xl
-      :class="tool?.icon?.startsWith('i') ? tool?.icon : ''"
       class="group-hover:color-primary"
       text-gray-800
       dark:text-gray-200
       mb-2
     >
-      <template v-if="!tool?.icon?.startsWith('i')">{{ tool?.icon }}</template>
+      <ToolIcon :icon="tool.icon" />
     </div>
     <div text-2xl font-semibold text-gray-900 dark:text-gray-100>
       {{ tool?.name }}
