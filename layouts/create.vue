@@ -10,11 +10,11 @@
         border-light
         of-hidden
       >
-        <div grid grid-cols-1 sm:grid-cols-2>
-          <div px-16px py-20px>
+        <div flex flex-col-reverse sm:flex-row>
+          <div px-16px py-20px flex-1>
             <slot></slot>
           </div>
-          <div bg-light-200 dark:bg-dark-800 px-16px py-20px of-hidden>
+          <div flex-1 bg-light-200 dark:bg-dark-800 px-16px py-20px of-hidden>
             <slot name="preview"></slot>
           </div>
         </div>
