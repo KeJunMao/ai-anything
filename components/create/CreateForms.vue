@@ -18,7 +18,7 @@ const handleSave = async () => {
 <template>
   <div relative>
     <h2 text-xl>
-      {{ isCreate ? "Create" : "Update" }} GPT tool ({{ step + 1 }}/{{
+      {{ isCreate ? "Create" : "Update" }} Settings ({{ step + 1 }}/{{
         maxStep
       }})
     </h2>
