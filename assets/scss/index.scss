@@ -1,5 +1,8 @@
-html {
+html,
+body {
   --color-primary: var(--el-color-primary);
+  --el-border-radius-base: 8px;
+  --el-border-radius-small: 4px;
 }
 
 html.dark {

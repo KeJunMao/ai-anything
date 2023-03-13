@@ -17,9 +17,9 @@ const onClick = () => {
       ></div>
       <div
         v-else-if="colorMode.preference === 'light'"
-        class="i-carbon:color-switch"
+        class="i-carbon:sun"
       ></div>
-      <div v-else class="i-carbon:sun"></div>
+      <div v-else class="i-carbon:color-switch"></div>
     </ColorScheme>
   </el-button>
 </template>

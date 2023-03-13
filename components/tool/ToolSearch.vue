@@ -11,6 +11,9 @@ const localePath = useLocalePath();
       type="search"
       placeholder="Search Tool"
     >
+      <template #prefix>
+        <el-icon class="i-carbon:search"></el-icon>
+      </template>
     </el-input>
     <div flex items-center>
       <div hidden sm:block mr-2 class="animate-bounce-x" text-2xl>👉🏻</div>
