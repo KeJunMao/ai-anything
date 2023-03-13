@@ -1,7 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from "nuxt/config";
-// import en from "./locales/en.json";
-// import zhCN from "./locales/zh-cn.json";
 
 export default defineNuxtConfig({
   app: {

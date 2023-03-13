@@ -4,14 +4,13 @@ const localePath = useLocalePath();
 
 <template>
   <NuxtLink
-    text-2xl
+    text-8
     font-bold
-    color-gray-900
     dark:color-gray-100
     hover:color-gray-500
     whitespace-nowrap
     :to="localePath('/')"
   >
-    AI Anything
+    <div class="i-app:logo"></div>
   </NuxtLink>
 </template>

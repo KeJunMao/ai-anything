@@ -8,7 +8,7 @@
     <div flex flex-1 items-center col-span-4 justify-center>
       <AppHeaderNavigation />
     </div>
-    <div flex items-center col-span-4 justify-end>
+    <div flex gap-1 sm:gap-2 items-center col-span-4 justify-end>
       <AppSettings />
       <AppThemeSelect />
       <AppSocialIcons />

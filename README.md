@@ -1,15 +1,19 @@
-<h1 align="center">
-  AI Anything
-</h1>
 <p align="center">
-  Anyone can create GPT tools
+  <br>
+  <img width="100" src="assets/icons/logo.svg" alt="AI Anything logo">
+  <br>
 </p>
+<h2 align='center'>AI Anything</h2>
+
+<p align='center'>
+Anyone can create GPT tools
+<br>
 <p align="center">
   <a style="text-decoration:none" href="https://aianything.netlify.app" target="_blank">
-    <img src="https://img.shields.io/badge/Website-aianything.netlify.app-blue" alt="Website" />
+    <img src="https://img.shields.io/badge/Website-aianything.netlify.app-00db80" alt="Website" />
   </a>
   <a style="text-decoration:none" href="https://github.com/KeJunMao" target="_blank">
-    <img src="https://img.shields.io/badge/Author-KeJun-blue" alt="Author" />
+    <img src="https://img.shields.io/badge/Author-KeJun-00db80" alt="Author" />
   </a>
 </p>
 

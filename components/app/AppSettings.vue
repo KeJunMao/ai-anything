@@ -10,8 +10,8 @@ const { storageOptions } = useChatGPT();
       type="danger"
       @click="show = true"
     >
-      <el-icon class="i-carbon:settings mr-1"></el-icon>
-      <span hidden sm:block>Please set the API key first</span>
+      <el-icon class="i-carbon:settings"></el-icon>
+      <span hidden sm:block ml-1>Please set the API key first</span>
     </el-button>
     <el-button v-else text @click="show = true">
       <el-icon class="i-carbon:settings"></el-icon>
