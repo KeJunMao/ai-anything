@@ -1,22 +1,17 @@
 <script lang="ts" setup>
 const show = ref(false);
 const { storageOptions } = useChatGPT();
+const showWarning = computed(() => !storageOptions.value.apiKey);
 </script>
 <template>
   <div>
-    <el-button
-      v-if="!storageOptions.apiKey"
-      plain
-      type="danger"
-      @click="show = true"
-    >
-      <el-icon class="i-carbon:settings"></el-icon>
-      <span hidden sm:block ml-1>Please set the API key first</span>
-    </el-button>
-    <el-button v-else text @click="show = true">
-      <el-icon class="i-carbon:settings"></el-icon>
-    </el-button>
     <ClientOnly>
+      <el-button :text="!showWarning" :plain="showWarning" :type="showWarning ? 'danger' : ''" @click="show = true">
+        <el-icon class="i-carbon:settings"></el-icon>
+        <span hidden sm:block ml-1 v-if="showWarning"
+          >Please set the API key first</span
+        >
+      </el-button>
       <el-dialog
         v-model="show"
         align-center
@@ -28,6 +23,11 @@ const { storageOptions } = useChatGPT();
       >
         <AppGPTSettingForms />
       </el-dialog>
+      <template #fallback>
+        <el-button text>
+          <el-icon class="i-carbon:settings"></el-icon>
+        </el-button>
+      </template>
     </ClientOnly>
   </div>
 </template>
