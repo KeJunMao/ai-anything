@@ -6,6 +6,7 @@ definePageMeta({
 
 <template>
   <div max-w-400 mx-auto px-4 mt-10>
+    <ToolSearch />
     <ToolList />
   </div>
 </template>

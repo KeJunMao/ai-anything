@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 const localePath = useLocalePath();
 const { tools } = useTools();
+const { search } = useQuerySearch();
+const searchTools = computed(() =>
+  tools.value.filter((v) => v.name?.toLocaleLowerCase()?.includes(search.value))
+);
 </script>
 
 <template>
@@ -14,26 +18,21 @@ const { tools } = useTools();
       lg:grid-cols-4
       gap-6
     >
-      <NuxtLink :to="localePath('create')">
-        <ToolItem
-          h-full
-          :tool="{
-            id: 'create',
-            name: 'Create',
-            desc: 'Make you own GPT tool',
-            icon: 'i-carbon:add-filled',
-            roles: [],
-            forms: [],
-          }"
-        />
-      </NuxtLink>
       <NuxtLink
-        v-for="item in tools"
+        v-for="item in searchTools"
         :key="item.id"
         :to="localePath(`/ai-${item.id}`)"
       >
         <ToolItem h-full :tool="item" />
       </NuxtLink>
     </div>
+    <el-empty
+      v-if="!searchTools.length"
+      :description="
+        tools.length === 0
+          ? 'Please create the tool first'
+          : `No '${search}' results found`
+      "
+    ></el-empty>
   </div>
 </template>
