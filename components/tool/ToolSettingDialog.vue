@@ -20,8 +20,12 @@ function handleRemove() {
       <el-icon class="i-carbon:settings"></el-icon>
     </el-button>
     <el-dialog
-      :title="`${tool.name || 'Tool'} Settings`"
       v-model="show"
+      :title="`${tool.name || 'Tool'} Settings`"
+      align-center
+      width="auto"
+      class="max-w-2xl w-full! h-screen sm:h-auto"
+      lock-scroll
       append-to-body
     >
       <el-form label-position="top">
