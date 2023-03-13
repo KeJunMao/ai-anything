@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const { step, maxStep, nextStep, prevStep, tool, isCreate } = useCreateTool();
-const { save } = useCustomTools();
+const { save, remove } = useCustomTools();
 const localePath = useLocalePath();
 const handleSave = async () => {
   await save(tool.value);
@@ -14,13 +14,34 @@ const handleSave = async () => {
     ElMessage.success("Update Success");
   }
 };
+const handleRemove = async () => {
+  await remove(tool.value.id!);
+  navigateTo({
+    path: localePath("/"),
+    replace: true,
+  });
+  ElMessage.success("Delete Success");
+};
 </script>
 <template>
   <div relative>
-    <h2 text-xl>
-      {{ isCreate ? "Create" : "Update" }} Settings ({{ step + 1 }}/{{
-        maxStep
-      }})
+    <h2 text-xl flex justify-between>
+      <div>
+        {{ isCreate ? "Create" : "Update" }} Settings ({{ step + 1 }}/{{
+          maxStep
+        }})
+      </div>
+      <ClientOnly>
+        <el-popconfirm
+          v-if="!isCreate"
+          @confirm="handleRemove"
+          title="Are you sure to delete this?"
+        >
+          <template #reference>
+            <el-button type="danger">Delete</el-button>
+          </template>
+        </el-popconfirm>
+      </ClientOnly>
     </h2>
     <CreateTheInfo v-if="step === 0" />
     <CreateTheForms v-else-if="step === 1" />
