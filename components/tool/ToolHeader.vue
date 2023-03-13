@@ -23,7 +23,7 @@ const { isCustomTool } = useTools();
       border
       dark:border-gray-800
     >
-      <ToolIcon :icon="tool.icon"/>
+      <ToolIcon :icon="tool.icon" />
     </div>
     <div flex flex-col gap-y-1 flex-1>
       <div font-bold>{{ tool?.name }}</div>
@@ -32,7 +32,6 @@ const { isCustomTool } = useTools();
       </div>
     </div>
     <div v-if="showAction && isCustomTool(tool.id!)" flex gap-1>
-      <ToolSettingDialog :tool="tool" />
       <NuxtLink
         :to="{
           path: localePath('/create'),
@@ -41,10 +40,11 @@ const { isCustomTool } = useTools();
           },
         }"
       >
-        <el-button text>
+        <el-button size="small" text>
           <el-icon class="i-carbon:edit"></el-icon>
         </el-button>
       </NuxtLink>
+      <ToolSettingDialog :tool="tool" />
     </div>
   </div>
 </template>
