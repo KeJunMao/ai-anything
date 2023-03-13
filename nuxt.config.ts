@@ -21,6 +21,13 @@ export default defineNuxtConfig({
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "layout", mode: "out-in" },
   },
+  runtimeConfig: {
+    githubClientId: "",
+    githubClientSecret: "",
+    public: {
+      version: "1",
+    },
+  },
   typescript: {
     strict: true,
     shim: false,
@@ -32,6 +39,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@element-plus/nuxt",
     "nuxt-icon",
+    "@sidebase/nuxt-auth",
   ],
   css: ["@/assets/scss/index.scss", "@unocss/reset/tailwind.css"],
   colorMode: {

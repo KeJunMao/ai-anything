@@ -11,12 +11,15 @@
     "@element-plus/nuxt": "^1.0.3",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/i18n": "8.0.0-beta.10",
+    "@prisma/client": "^4.11.0",
+    "@sidebase/nuxt-auth": "^0.4.3",
     "@types/marked": "^4.0.8",
     "@types/uuid": "^9.0.1",
     "@unocss/nuxt": "^0.50.3",
     "@vueuse/nuxt": "^9.13.0",
     "nuxt": "^3.2.3",
     "nuxt-icon": "^0.3.2",
+    "prisma": "^4.11.0",
     "sass": "^1.58.3",
     "unocss": "^0.50.3"
   },
@@ -26,6 +29,7 @@
     "@vueuse/core": "^9.13.0",
     "element-plus": "^2.2.36",
     "marked": "^4.2.12",
+    "next-auth": "4.18.8",
     "unstorage": "^1.4.0",
     "uuid": "^9.0.0"
   }

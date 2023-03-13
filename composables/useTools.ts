@@ -32,6 +32,7 @@ export interface ToolItemMeta {
    * tool icon
    */
   icon?: string;
+  author?: string;
 }
 
 export interface ToolItem extends ToolItemMeta {
@@ -42,16 +43,21 @@ export interface ToolItem extends ToolItemMeta {
 
 export const useTools = () => {
   const { tools: customTools } = useCustomTools();
+  const { data } = useSession();
 
   const buildInTools = ref<ToolItem[]>([]);
 
   const tools = computed<ToolItem[]>(() => {
     return [...buildInTools.value, ...customTools.value];
   });
-  const isCustomTool = (id: string) =>
+  const isLocalTool = (id: string) =>
     !!customTools.value.find((v) => v.id === id);
+  const isRemoteTool = (id: string) => !id.includes("-");
+  const isOwnTool = (tool: ToolItem) => tool.author === data.value?.user?.email;
   return {
     tools,
-    isCustomTool,
+    isLocalTool: isLocalTool,
+    isRemoteTool,
+    isOwnTool,
   };
 };

@@ -1,12 +1,25 @@
 <script lang="ts" setup>
 import { ToolItem } from "~/composables/useTools";
+import { v4 as uuidv4 } from "uuid";
 const localePath = useLocalePath();
 
-defineProps<{
+const props = defineProps<{
   tool: ToolItem;
   showAction?: boolean;
 }>();
-const { isCustomTool } = useTools();
+const { isLocalTool } = useTools();
+const { save } = useCustomTools();
+function handleFork() {
+  const id = uuidv4();
+  save({
+    ...props.tool,
+    id,
+  });
+  navigateTo({
+    path: localePath(`/ai-${id}`),
+    replace: true,
+  });
+}
 </script>
 <template>
   <div flex gap-2 mb-4>
@@ -31,20 +44,28 @@ const { isCustomTool } = useTools();
         {{ tool?.desc ?? "Nothing in here" }}
       </div>
     </div>
-    <div v-if="showAction && isCustomTool(tool.id!)" flex gap-1>
-      <NuxtLink
-        :to="{
-          path: localePath('/create'),
-          query: {
-            id: tool.id,
-          },
-        }"
-      >
-        <el-button size="small" text>
-          <el-icon class="i-carbon:edit"></el-icon>
+    <div flex gap-1>
+      <template v-if="showAction && isLocalTool(tool.id!)">
+        <ToolRemoteAction :tool="tool" />
+        <NuxtLink
+          :to="{
+            path: localePath('/create'),
+            query: {
+              id: tool.id,
+            },
+          }"
+        >
+          <el-button size="small" text>
+            <el-icon class="i-carbon:edit"></el-icon>
+          </el-button>
+        </NuxtLink>
+        <ToolSettingDialog :tool="tool" />
+      </template>
+      <template v-else>
+        <el-button @click="handleFork" size="small" text>
+          <el-icon class="i-carbon:fork"></el-icon>
         </el-button>
-      </NuxtLink>
-      <ToolSettingDialog :tool="tool" />
+      </template>
     </div>
   </div>
 </template>

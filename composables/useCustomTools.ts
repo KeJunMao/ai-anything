@@ -1,23 +1,22 @@
 import { ToolItem } from "./useTools";
 
-export const CustomToolskey = "customTools:v1";
-
 export const useCustomTools = createSharedComposable(() => {
+  const customToolskey = "customTools:v" + useRuntimeConfig().public.version;
   const { $storage } = useNuxtApp();
   onNuxtReady(async () => {
     sync();
   });
-  const customTools = ref<ToolItem[]>([]);
+  const customTools = useState<ToolItem[]>("customTools", () => []);
 
   const sync = async () => {
-    const tools = (await $storage.getItem(CustomToolskey)) as ToolItem[];
+    const tools = (await $storage.getItem(customToolskey)) as ToolItem[];
     customTools.value = (tools as any) || [];
   };
 
   const remove = async (id: string) => {
     await sync();
     customTools.value = customTools.value.filter((v) => v.id !== id);
-    await $storage.setItem(CustomToolskey, customTools.value);
+    await $storage.setItem(customToolskey, customTools.value);
   };
   const save = async (tool: ToolItem) => {
     await sync();
@@ -31,7 +30,7 @@ export const useCustomTools = createSharedComposable(() => {
     } else {
       customTools.value.push(tool);
     }
-    await $storage.setItem(CustomToolskey, customTools.value);
+    await $storage.setItem(customToolskey, customTools.value);
   };
   return {
     tools: customTools,
