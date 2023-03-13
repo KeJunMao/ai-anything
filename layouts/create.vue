@@ -6,7 +6,8 @@
         bg-white
         dark:bg-dark-900
         transition-all
-        drop-shadow-lg
+        drop-shadow-none
+        sm:drop-shadow-lg
         border-light
         of-hidden
       >
