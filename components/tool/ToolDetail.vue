@@ -3,10 +3,15 @@ import { ToolItem } from "~/composables/useTools";
 const props = defineProps<{
   tool: ToolItem;
 }>();
+const { storageOptions } = useChatGPT();
 const { send, loading, result, resultHtml } = useAi(props.tool.id!);
 
 function submit(data: any) {
-  send(data);
+  if (storageOptions.value.apiKey) {
+    send(data);
+  } else {
+    ElMessage.warning("Please set the API key first");
+  }
 }
 </script>
 <template>

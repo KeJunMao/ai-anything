@@ -1,9 +1,19 @@
 <script lang="ts" setup>
 const show = ref(false);
+const { storageOptions } = useChatGPT();
 </script>
 <template>
   <div>
-    <el-button text @click="show = true">
+    <el-button
+      v-if="!storageOptions.apiKey"
+      plain
+      type="danger"
+      @click="show = true"
+    >
+      <el-icon class="i-carbon:settings mr-1"></el-icon>
+      <span hidden sm:block>Please set the API key first</span>
+    </el-button>
+    <el-button v-else text @click="show = true">
       <el-icon class="i-carbon:settings"></el-icon>
     </el-button>
     <ClientOnly>
