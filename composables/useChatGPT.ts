@@ -1,3 +1,5 @@
+import { MaybeRef } from "@vueuse/shared";
+
 export interface ChatGPTOptions {
   apiKey: string;
   apiBaseUrl: string;
@@ -31,59 +33,57 @@ export const defaultChatGPTOptions: ChatGPTOptions = {
   frequency_penalty: 0,
 };
 
-export const useChatGPT = createSharedComposable(
-  (userOptions: Partial<ChatGPTOptions> = {}) => {
-    const storageOptions = useLocalStorage(
-      "ai-anything:GPTSetting",
-      defaultChatGPTOptions
-    );
-    const options = computed<ChatGPTOptions>(() => ({
+export const useChatGPT = createSharedComposable(() => {
+  const storageOptions = useLocalStorage(
+    "ai-anything:GPTSetting",
+    defaultChatGPTOptions
+  );
+  const sendMessage = async (
+    messages: ChatGPTMessages,
+    onProgress?: (message: string, data: Record<string, any>) => void,
+    options: Partial<ChatGPTOptions> = {}
+  ) => {
+    const { apiKey, apiBaseUrl, ...opts } = {
       ...storageOptions.value,
-      ...userOptions,
-    }));
-    const sendMessage = async (
-      messages: ChatGPTMessages,
-      onProgress?: (message: string, data: Record<string, any>) => void
-    ) => {
-      const { apiKey, apiBaseUrl, ...opts } = options.value;
-      // @ts-ignroe
-      const response: ReadableStream = await $fetch("/v1/chat/completions", {
-        baseURL: apiBaseUrl,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        method: "post",
-        body: {
-          ...opts,
-          messages,
-        },
-        responseType: "stream",
-      });
-
-      const reader = response.getReader();
-      const decoder = new TextDecoder();
-      let isDone = false;
-      while (!isDone) {
-        const { value, done } = await reader.read();
-        isDone = done;
-        const text = decoder.decode(value);
-        const data = text
-          .split("data:")
-          .filter((v) => !!v.trim() && v.trim() !== "[DONE]")
-          .map((v) => JSON.parse(v));
-
-        const message = data
-          .map((v) => {
-            const msg = v.choices[0];
-            return msg.message ? msg.message.content : msg.delta.content;
-          })
-          .join("");
-        if (onProgress) {
-          onProgress(message, data);
-        }
-      }
+      ...options,
     };
-    return { options, sendMessage, storageOptions };
-  }
-);
+    // @ts-ignroe
+    const response: ReadableStream = await $fetch("/v1/chat/completions", {
+      baseURL: apiBaseUrl,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      method: "post",
+      body: {
+        ...opts,
+        messages,
+      },
+      responseType: "stream",
+    });
+
+    const reader = response.getReader();
+    const decoder = new TextDecoder();
+    let isDone = false;
+    while (!isDone) {
+      const { value, done } = await reader.read();
+      isDone = done;
+      const text = decoder.decode(value);
+      const data = text
+        .split("data:")
+        .filter((v) => !!v.trim() && v.trim() !== "[DONE]")
+        .map((v) => JSON.parse(v));
+
+      const message = data
+        .map((v) => {
+          const msg = v.choices[0];
+          return msg.message ? msg.message.content : msg.delta.content;
+        })
+        .join("");
+      if (onProgress) {
+        onProgress(message, data);
+      }
+    }
+  };
+  return { sendMessage, storageOptions };
+});
