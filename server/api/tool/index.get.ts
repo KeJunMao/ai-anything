@@ -1,9 +1,17 @@
 import { prisma } from "~/server/plugins/prisma";
+import { getServerSession } from "#auth";
 
 export default defineEventHandler(async (event) => {
-  const { currentPage = 0, pageSize = 10 } = getQuery(event);
-  return await prisma.tool.findMany({
-    skip: currentPage * pageSize,
-    take: pageSize,
-  });
+  const session = await getServerSession(event);
+  let { currentPage = 0, pageSize = 10 } = getQuery(event);
+  if (session?.user?.email) {
+    return await prisma.tool.findMany({
+      skip: currentPage * pageSize,
+      take: pageSize,
+      where: {
+        author: session?.user?.email,
+      },
+    });
+  }
+  return [];
 });
