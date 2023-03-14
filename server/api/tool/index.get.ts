@@ -3,13 +3,10 @@ import { getServerSession } from "#auth";
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event);
-  let { currentPage = 0, pageSize = 10 } = getQuery(event);
-  if (session?.user?.email) {
+  if (session) {
     return await prisma.tool.findMany({
-      skip: currentPage * pageSize,
-      take: pageSize,
       where: {
-        author: session?.user?.email,
+        author: session?.user?.email ?? "",
       },
     });
   }
