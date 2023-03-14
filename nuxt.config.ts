@@ -24,6 +24,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     githubClientId: "",
     githubClientSecret: "",
+    authSecret: "",
+    auth: {
+      // origin: "https://aianything.netlify.app",
+    },
     public: {
       version: "1",
     },
