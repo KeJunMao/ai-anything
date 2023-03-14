@@ -11,7 +11,9 @@
     min-h-screen
   >
     <AppHeader />
-    <slot />
+    <div flex-1>
+      <slot />
+    </div>
     <AppFooter />
   </div>
 </template>

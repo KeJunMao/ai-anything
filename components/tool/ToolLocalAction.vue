@@ -1,0 +1,55 @@
+<script lang="ts" setup>
+import { ToolItem } from "~~/types";
+const localePath = useLocalePath();
+
+const { remove, create: localCreate } = useLocalTools();
+const { create } = await useAsyncRemoteTools({
+  immediate: false,
+});
+const loading = ref(false);
+
+const props = defineProps<{
+  tool: ToolItem;
+}>();
+
+const handleRemove = () => {
+  remove(props.tool.id!);
+  navigateTo({
+    path: localePath("/"),
+    replace: true,
+  });
+  ElMessage.success("Delete Success");
+};
+
+const handleUpload = async () => {
+  loading.value = true;
+  const tool = (await create(props.tool)) as ToolItem;
+
+  localCreate(tool);
+  navigateTo({
+    path: localePath(`/ai-${tool.id}`),
+    replace: true,
+  });
+  remove(props.tool.id!);
+  loading.value = false;
+  ElMessage.success("Upload Success, Switching...");
+};
+</script>
+
+<template>
+  <div>
+    <el-button @click="handleRemove" type="danger" size="small" text>
+      <el-icon class="i-carbon:trash-can"></el-icon>
+    </el-button>
+    <el-button
+      :loading="loading"
+      class="ml-0!"
+      @click="handleUpload"
+      type="primary"
+      size="small"
+      text
+    >
+      <el-icon class="i-carbon:cloud-upload"></el-icon>
+    </el-button>
+  </div>
+</template>

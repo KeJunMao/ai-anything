@@ -1,18 +1,22 @@
 import { MaybeRef } from "@vueuse/core";
-import { ToolItem } from "./useTools";
+import { ToolItem } from "~~/types";
+
+const { get } = await useAsyncRemoteTools({
+  immediate: false,
+});
 
 export const useTool = (id?: MaybeRef<string>) => {
   const { tools } = useTools();
   const tool = ref<ToolItem>();
   watch(
-    () => id,
+    tools,
     () => {
       tool.value = tools.value.find((v) => v.id === unref(id));
-      if (!tool.value && unref(id) && !unref(id)?.includes("-")) {
+      if (!tool.value && id && unref(id) && !unref(id)?.includes("-")) {
         nextTick(async () => {
-          const remoteTool = await $fetch("/api/tool/" + unref(id));
+          const remoteTool = await get(id);
           if (remoteTool) {
-            tool.value = remoteTool as unknown as ToolItem;
+            tool.value = remoteTool;
           }
         });
       }

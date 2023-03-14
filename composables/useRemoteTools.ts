@@ -1,7 +1,11 @@
 import { MaybeRef } from "@vueuse/shared";
 import { ToolItem } from "~~/types";
 
-export const useAsyncRemoteTools = async () => {
+export const useAsyncRemoteTools = async ({
+  immediate = true,
+}: {
+  immediate?: boolean;
+} = {}) => {
   const tools = ref<ToolItem[]>([]);
 
   async function refresh() {
@@ -38,7 +42,9 @@ export const useAsyncRemoteTools = async () => {
     });
   }
 
-  await refresh();
+  if (immediate) {
+    await refresh();
+  }
 
   return {
     tools,

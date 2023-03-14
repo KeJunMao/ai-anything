@@ -3,7 +3,7 @@ import { ToolItem } from "~~/types";
 const initializeTools = async () => {
   const { tools: local } = useLocalTools();
   const { tools: remote } = await useAsyncRemoteTools();
-  return computed<ToolItem>(() => {
+  return computed<ToolItem[]>(() => {
     return [
       ...local.value.filter((v) => !remote.value.find((r) => r.id === v.id)),
       ...remote.value,

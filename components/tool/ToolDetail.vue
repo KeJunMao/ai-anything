@@ -5,7 +5,8 @@ const props = defineProps<{
   tool: ToolItem;
 }>();
 const { storageOptions } = useChatGPT();
-const { send, loading, result, resultHtml } = useAi(props.tool.id!);
+const tool = computed(() => props.tool);
+const { send, loading, result, resultHtml } = useAi(tool);
 
 function submit(data: any) {
   if (storageOptions.value.apiKey) {
