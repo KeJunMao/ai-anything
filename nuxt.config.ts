@@ -86,6 +86,9 @@ export default defineNuxtConfig({
         },
       },
     },
+    build: {
+      target: "esnext",
+    },
   },
   elementPlus: {
     themes: ["dark"],
@@ -94,5 +97,12 @@ export default defineNuxtConfig({
   },
   vueuse: {
     ssrHandlers: true,
+  },
+  nitro: {
+    esbuild: {
+      options: {
+        target: "esnext",
+      },
+    },
   },
 });
