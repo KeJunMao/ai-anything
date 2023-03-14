@@ -9,12 +9,17 @@ export default defineEventHandler(async (event) => {
       statusMessage: "unauthenticated",
     });
   }
+
   const id = event.context.params?.id;
   const author = session.user?.email as string;
-
-  return await prisma.tool.deleteMany({
+  const { id: _id, author: _author, ...body } = await readBody(event);
+  return await prisma.tool.updateMany({
     where: {
       id,
+      author,
+    },
+    data: {
+      ...body,
       author,
     },
   });

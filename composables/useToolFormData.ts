@@ -1,4 +1,4 @@
-import { ToolItem } from "./useTools";
+import { ToolItem } from "~~/types";
 
 export const useToolFormData = createSharedComposable((tool: ToolItem) => {
   const formData = ref<Record<any, any>>();

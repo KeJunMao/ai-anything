@@ -1,21 +1,22 @@
 <script lang="ts" setup>
 const { step, maxStep, nextStep, prevStep, tool, isCreate } = useCreateTool();
-const { save, remove } = useCustomTools();
+const { create, remove, update } = useLocalTools();
 const localePath = useLocalePath();
-const handleSave = async () => {
-  await save(tool.value);
+const handleSave = () => {
   navigateTo({
     path: localePath(`/ai-${tool.value.id}`),
     replace: true,
   });
   if (isCreate.value) {
+    create(tool.value);
     ElMessage.success("Create Success");
   } else {
+    update(tool.value);
     ElMessage.success("Update Success");
   }
 };
-const handleRemove = async () => {
-  await remove(tool.value.id!);
+const handleRemove = () => {
+  remove(tool.value.id!);
   navigateTo({
     path: localePath("/"),
     replace: true,

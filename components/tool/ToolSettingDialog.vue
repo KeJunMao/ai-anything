@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { ToolItem } from "~/composables/useTools";
 import { defaultChatGPTOptions } from "~/composables/useChatGPT";
 import { objectPick } from "@vueuse/core";
+import { ToolItem } from "~~/types";
 
 const props = defineProps<{
   tool: ToolItem;
 }>();
 const show = ref(false);
-const { save } = useCustomTools();
+const { create } = useLocalTools();
 
 const formData = ref<Record<string, any>>({
   ...objectPick(defaultChatGPTOptions, [
@@ -22,7 +22,7 @@ const formData = ref<Record<string, any>>({
 });
 
 async function handleSave() {
-  await save({
+  await create({
     ...props.tool,
     options: formData.value,
   });

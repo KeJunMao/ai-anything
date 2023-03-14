@@ -10,11 +10,13 @@ const { tool, step } = useCreateTool();
         <Card max-w-2xl flex-1 v-else-if="step === 1">
           <ToolForms readonly :tool="tool" />
         </Card>
-        <Card max-w-2xl flex-1 v-else-if="step === 2">
+        <template v-else-if="step === 2">
           <ToolHeader :tool="tool" />
-          <ToolForms :tool="tool" />
-          <ToolRequestPreview :tool="tool" />
-        </Card>
+          <Card>
+            <ToolForms :tool="tool" />
+            <ToolRequestPreview :tool="tool" />
+          </Card>
+        </template>
       </CreatePreviewTransition>
     </div>
   </div>
