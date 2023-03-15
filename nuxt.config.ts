@@ -93,7 +93,7 @@ export default defineNuxtConfig({
   elementPlus: {
     themes: ["dark"],
     importStyle: "scss",
-    components: ["ElInput"],
+    components: ["ElInput", "ElSelect", "ElOption"],
   },
   vueuse: {
     ssrHandlers: true,

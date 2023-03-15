@@ -1,13 +1,19 @@
 import { v4 as uuidv4 } from "uuid";
 import { ToolItem } from "~~/types";
+import { ElForm } from "element-plus";
 
 export const useCreateTool = createSharedComposable(() => {
   const maxStep = ref(3);
   const step = ref(0);
+  const formEl = ref<InstanceType<typeof ElForm> | null>();
   const nextStep = () => {
-    if (step.value + 1 < maxStep.value) {
-      step.value += 1;
-    }
+    formEl.value?.validate((isValid) => {
+      if (isValid) {
+        if (step.value + 1 < maxStep.value) {
+          step.value += 1;
+        }
+      }
+    });
   };
   const prevStep = () => {
     if (step.value - 1 >= 0) {
@@ -68,5 +74,6 @@ export const useCreateTool = createSharedComposable(() => {
     nextStep,
     prevStep,
     isCreate,
+    formEl,
   };
 });

@@ -1,19 +1,24 @@
 <script lang="ts" setup>
-const { step, maxStep, nextStep, prevStep, tool, isCreate } = useCreateTool();
-const { create, remove, update } = useLocalTools();
+const { step, maxStep, nextStep, prevStep, tool, isCreate, formEl } =
+  useCreateTool();
+const { create, update } = useLocalTools();
 const localePath = useLocalePath();
 const handleSave = () => {
-  navigateTo({
-    path: localePath(`/ai-${tool.value.id}`),
-    replace: true,
+  formEl.value?.validate((isValid) => {
+    if (isValid) {
+      navigateTo({
+        path: localePath(`/ai-${tool.value.id}`),
+        replace: true,
+      });
+      if (isCreate.value) {
+        create(tool.value);
+        ElMessage.success("Create Success");
+      } else {
+        update(tool.value);
+        ElMessage.success("Update Success");
+      }
+    }
   });
-  if (isCreate.value) {
-    create(tool.value);
-    ElMessage.success("Create Success");
-  } else {
-    update(tool.value);
-    ElMessage.success("Update Success");
-  }
 };
 </script>
 <template>
