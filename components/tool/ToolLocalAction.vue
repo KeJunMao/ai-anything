@@ -2,6 +2,8 @@
 import { ToolItem } from "~~/types";
 const localePath = useLocalePath();
 
+const { status } = useSession();
+
 const { remove, create: localCreate } = useLocalTools();
 const { create } = await useAsyncRemoteTools({
   immediate: false,
@@ -42,6 +44,7 @@ const handleUpload = async () => {
       <el-icon class="i-carbon:trash-can"></el-icon>
     </el-button>
     <el-button
+      v-if="status === 'authenticated'"
       :loading="loading"
       class="ml-0!"
       @click="handleUpload"
