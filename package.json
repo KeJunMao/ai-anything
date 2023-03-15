@@ -8,28 +8,29 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@element-plus/nuxt": "^1.0.3",
+    "@element-plus/nuxt": "^1.0.4",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/i18n": "8.0.0-beta.10",
     "@prisma/client": "^4.11.0",
     "@sidebase/nuxt-auth": "^0.4.3",
     "@types/marked": "^4.0.8",
     "@types/uuid": "^9.0.1",
-    "@unocss/nuxt": "^0.50.3",
+    "@unocss/nuxt": "^0.50.4",
     "@vueuse/nuxt": "^9.13.0",
     "nuxt": "^3.2.3",
-    "nuxt-icon": "^0.3.2",
+    "nuxt-icon": "^0.3.3",
     "prisma": "^4.11.0",
-    "sass": "^1.58.3",
-    "unocss": "^0.50.3"
+    "sass": "^1.59.3",
+    "unocss": "^0.50.4"
   },
   "dependencies": {
     "@iconify-json/carbon": "^1.1.16",
     "@unocss/reset": "^0.50.4",
     "@vueuse/core": "^9.13.0",
-    "element-plus": "^2.2.36",
+    "element-plus": "^2.3.0",
     "marked": "^4.2.12",
-    "next-auth": "4.18.8",
+    "next-auth": "4.20.1",
+    "std-env": "^3.3.2",
     "unstorage": "^1.4.0",
     "uuid": "^9.0.0"
   }
