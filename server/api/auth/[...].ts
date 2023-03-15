@@ -1,5 +1,6 @@
 import { NuxtAuthHandler } from "#auth";
 import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
 const nuxtAuthHandler = NuxtAuthHandler({
   secret: useRuntimeConfig().authSecret,
@@ -11,6 +12,11 @@ const nuxtAuthHandler = NuxtAuthHandler({
       httpOptions: {
         timeout: 10000,
       },
+    }),
+    // @ts-ignore
+    GoogleProvider.default({
+      clientId: useRuntimeConfig().googleClientId,
+      clientSecret: useRuntimeConfig().googleClientSecret,
     }),
   ],
 });

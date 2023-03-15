@@ -16,8 +16,12 @@ async function handleSignIn() {
       <div class="i-carbon:user-avatar-filled"></div>
     </el-button>
     <el-dropdown v-else-if="status === 'authenticated'">
-      <el-avatar :size="32" :src="data?.user?.image ?? ''">
-        {{ data?.user?.name }}
+      <el-avatar :size="32">
+        <img
+          referrerpolicy="no-referrer"
+          :src="data?.user?.image ?? ''"
+          :alt="data?.user?.name ?? 'avatar'"
+        />
       </el-avatar>
       <template #dropdown>
         <el-dropdown-menu>

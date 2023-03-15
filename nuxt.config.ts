@@ -24,6 +24,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     githubClientId: "",
     githubClientSecret: "",
+    googleClientId: "",
+    googleClientSecret: "",
     authSecret: "",
   },
   typescript: {
