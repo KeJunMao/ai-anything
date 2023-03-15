@@ -25,15 +25,6 @@ export default defineNuxtConfig({
     githubClientId: "",
     githubClientSecret: "",
     authSecret: "",
-    auth: {
-      origin:
-        process.env.NODE_ENV === "development"
-          ? ""
-          : "https://aianything.netlify.app",
-    },
-    public: {
-      version: "1",
-    },
   },
   typescript: {
     strict: true,
@@ -94,9 +85,6 @@ export default defineNuxtConfig({
     themes: ["dark"],
     importStyle: "scss",
     components: ["ElInput", "ElSelect", "ElOption"],
-  },
-  vueuse: {
-    ssrHandlers: true,
   },
   nitro: {
     esbuild: {
