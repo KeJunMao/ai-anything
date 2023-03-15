@@ -41,7 +41,7 @@ const handleUpload = async () => {
 <template>
   <div>
     <el-button @click="handleRemove" type="danger" size="small" text>
-      <el-icon class="i-carbon:trash-can"></el-icon>
+      <el-icon class="i-carbon:trash-can mr-1"></el-icon> Remove from local
     </el-button>
     <el-button
       v-if="status === 'authenticated'"
@@ -52,7 +52,7 @@ const handleUpload = async () => {
       size="small"
       text
     >
-      <el-icon class="i-carbon:cloud-upload"></el-icon>
+      <el-icon class="i-carbon:cloud-upload mr-1"></el-icon> Upload to workshop
     </el-button>
   </div>
 </template>

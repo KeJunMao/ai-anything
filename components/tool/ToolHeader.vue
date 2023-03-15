@@ -6,7 +6,7 @@ defineProps<{
 }>();
 </script>
 <template>
-  <div flex flex-col items-center text-center mb-8>
+  <div flex flex-col items-center text-center mb-4xl>
     <div v-if="tool?.icon" text-6xl color-primary my-2 sm:my-6>
       <ToolIcon :icon="tool.icon" />
     </div>

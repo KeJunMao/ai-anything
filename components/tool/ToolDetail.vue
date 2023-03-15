@@ -19,7 +19,7 @@ function submit(data: any) {
 <template>
   <div>
     <ToolHeader :tool="tool" />
-    <Card relative>
+    <Card relative class="group">
       <ToolActions :tool="tool" />
       <ToolForms :loading="loading" @submit="submit" :tool="tool" />
       <ToolResult v-if="result" :html="resultHtml" />
