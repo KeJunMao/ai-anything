@@ -1,7 +1,7 @@
 import { NuxtAuthHandler } from "#auth";
 import GithubProvider from "next-auth/providers/github";
 
-export default NuxtAuthHandler({
+const nuxtAuthHandler = NuxtAuthHandler({
   secret: useRuntimeConfig().authSecret,
   providers: [
     // @ts-ignore
@@ -13,4 +13,12 @@ export default NuxtAuthHandler({
       },
     }),
   ],
+});
+export default defineEventHandler(async (event) => {
+  const result = await nuxtAuthHandler(event);
+  const setCookie = event.node.res.getHeader("set-cookie")
+  console.log('start---------')
+  console.log(setCookie);
+  console.log('end---------')
+  return result;
 });
