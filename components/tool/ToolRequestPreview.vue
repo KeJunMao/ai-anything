@@ -17,7 +17,7 @@ ${JSON.stringify(response.value, null, 4)}
 </script>
 
 <template>
-  <Card rounded-4px>
+  <Card rounded-4px of-auto>
     <div v-html="html"></div>
   </Card>
 </template>
