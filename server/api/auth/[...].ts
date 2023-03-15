@@ -16,9 +16,10 @@ const nuxtAuthHandler = NuxtAuthHandler({
 });
 export default defineEventHandler(async (event) => {
   const result = await nuxtAuthHandler(event);
-  const setCookie = event.node.res.getHeader("set-cookie")
-  console.log('start---------')
-  console.log(setCookie);
-  console.log('end---------')
+  const headerCookies = event.node.res.getHeader("set-cookie");
+  if (headerCookies && typeof headerCookies === "string") {
+    event.node.res.removeHeader("set-cookie");
+    event.node.res.setHeader("set-cookie", headerCookies.split(/,(?!\s)/));
+  }
   return result;
 });
