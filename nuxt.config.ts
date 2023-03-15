@@ -2,6 +2,7 @@
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
+  ssr: false,
   app: {
     head: {
       title: "AI Anything",
