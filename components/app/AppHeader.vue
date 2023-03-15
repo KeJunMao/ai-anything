@@ -5,13 +5,14 @@
     <div flex items-center col-span-4>
       <AppHeaderLogo></AppHeaderLogo>
     </div>
-    <div flex flex-1 items-center col-span-4 justify-center>
+    <div flex flex-1 items-center col-span-3 justify-center>
       <AppHeaderNavigation />
     </div>
-    <div flex gap-1 sm:gap-2 items-center col-span-4 justify-end>
+    <div flex gap-1 sm:gap-2 items-center col-span-5 justify-end>
       <AppSettings />
       <AppThemeSelect />
       <AppSocialIcons />
+      <AppAccount />
     </div>
   </el-header>
 </template>

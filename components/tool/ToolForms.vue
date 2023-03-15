@@ -1,9 +1,9 @@
 <script lang="ts">
-import { ToolItem } from "~/composables/useTools";
-import { ElInput } from "element-plus";
+import { ElInput, ElSelect, ElOption } from "element-plus";
+import { ToolItem } from "~/types";
 
 export default defineComponent({
-  components: { ElInput },
+  components: { ElInput, ElSelect, ElOption },
   props: {
     tool: Object as PropType<ToolItem>,
     readonly: Boolean,
@@ -30,11 +30,18 @@ export default defineComponent({
       :label="item.lable"
     >
       <component
+        w-full
         :is="item.type"
         v-model="formData[item.name]"
         v-bind="item.props"
         :readonly="readonly"
-      />
+      >
+        <el-option
+          v-if="item.props.options && item.type === 'ElSelect'"
+          v-for="opt in item.props.options"
+          :value="opt"
+        ></el-option>
+      </component>
     </el-form-item>
     <el-form-item>
       <el-button :loading="loading" @click="submit" type="primary" w-full

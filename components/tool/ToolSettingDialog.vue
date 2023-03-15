@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { ToolItem } from "~/composables/useTools";
 import { defaultChatGPTOptions } from "~/composables/useChatGPT";
 import { objectPick } from "@vueuse/core";
+import { ToolItem } from "~~/types";
 
 const props = defineProps<{
   tool: ToolItem;
 }>();
 const show = ref(false);
-const { save } = useCustomTools();
+const { update } = useLocalTools();
 
 const formData = ref<Record<string, any>>({
   ...objectPick(defaultChatGPTOptions, [
@@ -21,8 +21,8 @@ const formData = ref<Record<string, any>>({
   ...props.tool.options,
 });
 
-async function handleSave() {
-  await save({
+function handleSave() {
+  update({
     ...props.tool,
     options: formData.value,
   });
@@ -47,7 +47,7 @@ async function handleSave() {
     >
       <el-form label-position="top" size="large">
         <el-form-item v-for="(_, name) in formData" :label="name">
-          <el-input v-model="formData[name]"></el-input>
+          <el-input v-model.number="formData[name]"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="handleSave" type="primary">Save</el-button>

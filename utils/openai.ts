@@ -1,5 +1,4 @@
-import type { ToolItemRole } from "~/composables/useTools";
-import { ChatGPTMessages } from "~/composables/useChatGPT";
+import { ChatGPTMessages, ToolItemRole } from "~~/types";
 
 export const parseTemplate = (
   data: Record<string, any>,

@@ -15,12 +15,18 @@ const localePath = useLocalePath();
         <el-icon class="i-carbon:search"></el-icon>
       </template>
     </el-input>
-    <div flex items-center>
+    <div flex items-center gap-2>
       <div hidden sm:block mr-2 class="animate-bounce-x" text-2xl>👉🏻</div>
       <nuxt-link :to="localePath('/create')" w-full>
-        <el-button type="primary" w-full>
+        <el-button w-full>
           <el-icon class="i-carbon:add-filled mr-1"></el-icon>
           Create
+        </el-button>
+      </nuxt-link>
+      <nuxt-link :to="localePath('/workshop')" w-full>
+        <el-button type="primary" w-full>
+          <el-icon class="i-carbon:apps mr-1"></el-icon>
+          Workshop
         </el-button>
       </nuxt-link>
     </div>

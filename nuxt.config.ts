@@ -21,6 +21,20 @@ export default defineNuxtConfig({
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "layout", mode: "out-in" },
   },
+  runtimeConfig: {
+    githubClientId: "",
+    githubClientSecret: "",
+    authSecret: "",
+    auth: {
+      origin:
+        process.env.NODE_ENV === "development"
+          ? ""
+          : "https://aianything.netlify.app",
+    },
+    public: {
+      version: "1",
+    },
+  },
   typescript: {
     strict: true,
     shim: false,
@@ -32,6 +46,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@element-plus/nuxt",
     "nuxt-icon",
+    "@sidebase/nuxt-auth",
   ],
   css: ["@/assets/scss/index.scss", "@unocss/reset/tailwind.css"],
   colorMode: {
@@ -71,10 +86,23 @@ export default defineNuxtConfig({
         },
       },
     },
+    build: {
+      target: "esnext",
+    },
   },
   elementPlus: {
     themes: ["dark"],
     importStyle: "scss",
-    components: ["ElInput"],
+    components: ["ElInput", "ElSelect", "ElOption"],
+  },
+  vueuse: {
+    ssrHandlers: true,
+  },
+  nitro: {
+    esbuild: {
+      options: {
+        target: "esnext",
+      },
+    },
   },
 });

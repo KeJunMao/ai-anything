@@ -1,6 +1,6 @@
 <template>
   <main flex-1>
-    <div max-w-300 mx-auto px-4 mt-10>
+    <div max-w-300 mx-auto px-4 mt-6 sm:mt-10>
       <div
         rounded-xl
         bg-white

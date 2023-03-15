@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import { ToolItem } from "~/composables/useTools";
+import { ToolItem } from "~~/types";
+
 const props = defineProps<{
   tool: ToolItem;
 }>();
 const { storageOptions } = useChatGPT();
-const { send, loading, result, resultHtml } = useAi(props.tool.id!);
+const tool = computed(() => props.tool);
+const { send, loading, result, resultHtml } = useAi(tool);
 
 function submit(data: any) {
   if (storageOptions.value.apiKey) {
@@ -16,8 +18,11 @@ function submit(data: any) {
 </script>
 <template>
   <div>
-    <ToolHeader show-action :tool="tool" />
-    <ToolForms :loading="loading" @submit="submit" :tool="tool" />
-    <ToolResult v-if="result" :html="resultHtml" />
+    <ToolHeader :tool="tool" />
+    <Card relative>
+      <ToolActions :tool="tool" />
+      <ToolForms :loading="loading" @submit="submit" :tool="tool" />
+      <ToolResult v-if="result" :html="resultHtml" />
+    </Card>
   </div>
 </template>

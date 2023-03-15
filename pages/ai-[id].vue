@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const route = useRoute();
-const { tool } = useTool(route.params.id as string);
+let { tool } = useTool(route.params.id as string);
 </script>
 <template>
   <div>

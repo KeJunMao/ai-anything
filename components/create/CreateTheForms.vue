@@ -1,11 +1,15 @@
 <script lang="ts" setup>
 import { v4 as uuidv4 } from "uuid";
 
-const { tool } = useCreateTool();
+const { tool, formEl } = useCreateTool();
 const formTypes = [
   {
     value: "ElInput",
     name: "Input",
+  },
+  {
+    value: "ElSelect",
+    name: "Select",
   },
 ];
 function insertForm(index: number) {
@@ -25,17 +29,88 @@ function stop(event: MouseEvent) {
     event.stopPropagation();
   }
 }
+
+const rules = reactive(
+  defineRules({
+    name: [
+      {
+        max: 20,
+        message: "Name cannot be longer than 20 characters",
+        trigger: "blur",
+      },
+      {
+        required: true,
+        trigger: "blur",
+        message: "Name is required",
+      },
+    ],
+    label: [
+      {
+        max: 20,
+        message: "Label cannot be longer than 20 characters",
+        trigger: "blur",
+      },
+    ],
+    type: [
+      {
+        required: true,
+        trigger: "change",
+        message: "Type is required",
+      },
+    ],
+  })
+);
+
+const propsRules = reactive(
+  defineRules({
+    type: [],
+    options: [
+      {
+        type: "array",
+        trigger: "change",
+        defaultField: {
+          max: 40,
+          message: "Option item cannot be longer than 40 characters",
+        },
+      },
+    ],
+    placeholder: [
+      {
+        max: 100,
+        message: "Placeholder cannot be longer than 100 characters",
+        trigger: "blur",
+      },
+    ],
+    default: [
+      {
+        max: 100,
+        message: "Default cannot be longer than 100 characters",
+        trigger: "blur",
+      },
+    ],
+  })
+);
 </script>
 
 <template>
   <h3 mb-2 text text-gray>The Forms</h3>
-  <el-form label-position="top" size="large">
+  <el-form :model="tool.forms" ref="formEl" label-position="top" size="large">
     <el-collapse accordion>
       <CreateListTransition name="list">
         <el-collapse-item v-for="(item, index) in tool.forms" :key="item.id">
           <template #title>
-            <el-form-item flex-1 @click="stop">
-              <el-input v-model="item.name" placeholder="Please input name">
+            <el-form-item
+              flex-1
+              @click="stop"
+              :prop="`${index}.name`"
+              :rules="rules.name"
+            >
+              <el-input
+                v-model="item.name"
+                placeholder="Please input name"
+                maxlength="20"
+                show-word-limit
+              >
                 <template #append>
                   <el-button id="expand">
                     <el-icon id="expand" class="i-carbon:row-expand"></el-icon>
@@ -70,13 +145,23 @@ function stop(event: MouseEvent) {
             </el-form-item>
           </template>
           <div>
-            <el-form-item label="Label">
+            <el-form-item
+              label="Label"
+              :prop="`${index}.label`"
+              :rules="rules.label"
+            >
               <el-input
                 v-model="item.lable"
                 placeholder="Please input label"
+                maxlength="20"
+                show-word-limit
               ></el-input>
             </el-form-item>
-            <el-form-item label="Type">
+            <el-form-item
+              label="Type"
+              :prop="`${index}.type`"
+              :rules="rules.type"
+            >
               <el-select
                 placeholder="Please select type"
                 w-full
@@ -91,8 +176,13 @@ function stop(event: MouseEvent) {
               </el-select>
             </el-form-item>
             <el-divider> Props </el-divider>
-            <el-form size="large" v-if="item.props">
-              <el-form-item v-if="item.type === 'ElInput'" label="Input Type">
+            <div v-if="item.props">
+              <el-form-item
+                v-if="item.type === 'ElInput'"
+                :prop="`${index}.props.type`"
+                :rules="propsRules.type"
+                label="Input Type"
+              >
                 <el-select
                   placeholder="Select input type"
                   w-full
@@ -102,19 +192,50 @@ function stop(event: MouseEvent) {
                   <el-option value="textarea"></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="Placeholder">
+              <el-form-item
+                v-if="item.type === 'ElSelect'"
+                :rules="propsRules.options"
+                :prop="`${index}.props.options`"
+                label="Create Options"
+              >
+                <el-select
+                  w-full
+                  v-model="item.props.options"
+                  multiple
+                  filterable
+                  allow-create
+                  default-first-option
+                  :reserve-keyword="false"
+                  placeholder="Create select options"
+                  no-data-text="Please input something"
+                >
+                </el-select>
+              </el-form-item>
+              <el-form-item
+                label="Placeholder"
+                :prop="`${index}.props.placeholder`"
+                :rules="propsRules.placeholder"
+              >
                 <el-input
                   placeholder="Please input placeholder"
                   v-model="item.props.placeholder"
+                  maxlength="100"
+                  show-word-limit
                 ></el-input>
               </el-form-item>
-              <el-form-item label="Default">
+              <el-form-item
+                label="Default"
+                :prop="`${index}.props.default`"
+                :rules="propsRules.default"
+              >
                 <el-input
                   placeholder="Please input default value"
                   v-model="item.props.default"
+                  maxlength="100"
+                  show-word-limit
                 ></el-input>
               </el-form-item>
-            </el-form>
+            </div>
           </div>
         </el-collapse-item>
       </CreateListTransition>
@@ -132,6 +253,8 @@ function stop(event: MouseEvent) {
 }
 .el-form-item__label {
   padding-right: 0;
+  display: flex !important;
+  justify-content: flex-start;
 }
 .el-collapse-item__header .el-form-item {
   margin-bottom: 0;
