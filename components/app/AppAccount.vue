@@ -5,11 +5,14 @@ async function handleSignOut() {
   clearRemoteCache();
   await signOut();
 }
+async function handleSignIn() {
+  signIn();
+}
 </script>
 
 <template>
   <div>
-    <el-button v-if="status === 'unauthenticated'" text @click="() => signIn()">
+    <el-button v-if="status === 'unauthenticated'" text @click="handleSignIn">
       <div class="i-carbon:user-avatar-filled"></div>
     </el-button>
     <el-dropdown v-else-if="status === 'authenticated'">
