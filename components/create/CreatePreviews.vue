@@ -4,17 +4,19 @@ const { tool, step } = useCreateTool();
 <template>
   <div w-full h-full>
     <h2 text-xl mb-2>Preview</h2>
-    <div flex items-center justify-center h-full>
+    <div flex items-center justify-center>
       <CreatePreviewTransition name="remove" mode="out-in">
         <ToolItem max-w-120 flex-1 v-if="step === 0" :tool="tool" />
         <Card max-w-2xl flex-1 v-else-if="step === 1">
           <ToolForms readonly :tool="tool" />
         </Card>
-        <Card max-w-2xl flex-1 v-else-if="step === 2">
+        <div v-else-if="step === 2" w-full>
           <ToolHeader :tool="tool" />
-          <ToolForms :tool="tool" />
-          <ToolRequestPreview :tool="tool" />
-        </Card>
+          <Card>
+            <ToolForms :tool="tool" />
+            <ToolRequestPreview :tool="tool" />
+          </Card>
+        </div>
       </CreatePreviewTransition>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ToolItem } from "~/composables/useTools";
+import { ToolItem } from "~~/types";
 
 defineProps<{
   tool: ToolItem;

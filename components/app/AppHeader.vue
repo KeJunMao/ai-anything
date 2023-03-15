@@ -12,7 +12,7 @@
       <AppSettings />
       <AppThemeSelect />
       <AppSocialIcons />
-      <AppLogin />
+      <AppAccount />
     </div>
   </el-header>
 </template>

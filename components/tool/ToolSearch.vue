@@ -23,10 +23,12 @@ const localePath = useLocalePath();
           Create
         </el-button>
       </nuxt-link>
-      <el-button type="primary" w-full>
-        <el-icon class="i-carbon:apps mr-1"></el-icon>
-        Workshop
-      </el-button>
+      <nuxt-link :to="localePath('/workshop')" w-full>
+        <el-button type="primary" w-full>
+          <el-icon class="i-carbon:apps mr-1"></el-icon>
+          Workshop
+        </el-button>
+      </nuxt-link>
     </div>
   </div>
 </template>

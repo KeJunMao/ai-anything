@@ -1,6 +1,6 @@
 <script lang="ts">
-import { ToolItem } from "~/composables/useTools";
 import { ElInput } from "element-plus";
+import { ToolItem } from "~/types";
 
 export default defineComponent({
   components: { ElInput },

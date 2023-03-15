@@ -1,5 +1,5 @@
-import { ToolItem } from "./useTools";
 import { v4 as uuidv4 } from "uuid";
+import { ToolItem } from "~~/types";
 
 export const useCreateTool = createSharedComposable(() => {
   const maxStep = ref(3);
@@ -45,6 +45,7 @@ export const useCreateTool = createSharedComposable(() => {
         template: "${message}",
       },
     ],
+    author: "",
   });
   const isCreate = computed(() => oldTool.value?.id !== tool.value.id);
 

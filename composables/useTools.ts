@@ -1,62 +1,26 @@
-import { ChatGPTOptions } from "./useChatGPT";
+import { ToolItem } from "~~/types";
 
-// @unocss-include
-export interface ToolItemOptions extends Partial<ChatGPTOptions> {}
-export interface ToolItemRole {
-  id?: string;
-  type: string;
-  template: string;
-}
-export interface ToolItemFormItem {
-  id?: string;
-  type: string;
-  name: string;
-  lable?: string;
-  props?: Record<string, any>;
-}
-export type ToolItemForms = ToolItemFormItem[];
-export interface ToolItemMeta {
-  /**
-   * uuid
-   */
-  id?: string;
-  /**
-   * tool name
-   */
-  name?: string;
-  /**
-   * tool desc
-   */
-  desc?: string;
-  /**
-   * tool icon
-   */
-  icon?: string;
-  author?: string;
-}
+const initializeTools = async () => {
+  const { tools: local } = useLocalTools();
+  const { tools: remote } = await useAsyncRemoteTools();
+  return computed<ToolItem[]>(() => {
+    return [
+      ...local.value.filter((v) => !remote.value.find((r) => r.id === v.id)),
+      ...remote.value,
+    ];
+  });
+};
 
-export interface ToolItem extends ToolItemMeta {
-  roles: ToolItemRole[];
-  forms: ToolItemForms;
-  options?: ToolItemOptions;
-}
+const tools = await initializeTools();
 
 export const useTools = () => {
-  const { tools: customTools } = useCustomTools();
   const { data } = useSession();
-
-  const buildInTools = ref<ToolItem[]>([]);
-
-  const tools = computed<ToolItem[]>(() => {
-    return [...buildInTools.value, ...customTools.value];
-  });
-  const isLocalTool = (id: string) =>
-    !!customTools.value.find((v) => v.id === id);
   const isRemoteTool = (id: string) => !id.includes("-");
+  const isLocalTool = (id: string) => !isRemoteTool(id);
   const isOwnTool = (tool: ToolItem) => tool.author === data.value?.user?.email;
   return {
     tools,
-    isLocalTool: isLocalTool,
+    isLocalTool,
     isRemoteTool,
     isOwnTool,
   };

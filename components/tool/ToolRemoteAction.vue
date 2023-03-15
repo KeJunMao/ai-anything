@@ -1,76 +1,91 @@
 <script lang="ts" setup>
-import { ToolItem } from "~/composables/useTools";
-const { status, signIn } = useSession();
-const loading = ref(false);
-const { save, remove } = useCustomTools();
+import { ToolItem } from "~~/types";
+import { v4 as uuidv4 } from "uuid";
 const localePath = useLocalePath();
-const { isRemoteTool, isOwnTool } = useTools();
+const { isOwnTool } = useTools();
+
+const {
+  remove: localRemove,
+  update: localUpdate,
+  create: localCreate,
+} = useLocalTools();
+const { update, remove } = await useAsyncRemoteTools({
+  immediate: false,
+});
+
+const loading = ref(false);
 const props = defineProps<{
   tool: ToolItem;
 }>();
 
-async function handleUpload() {
-  if (status.value === "authenticated") {
-    loading.value = true;
-    try {
-      const data = await $fetch("/api/tool", {
-        method: "post",
-        body: props.tool,
-      });
-      await remove(props.tool.id!);
-      await save(data as unknown as ToolItem);
-      if (!isRemoteTool(props.tool.id!)) {
-        ElMessage.success("Upload WorkShop success!");
-      } else {
-        ElMessage.success("Update success!");
-      }
-      navigateTo({
-        path: localePath(`/ai-${data.id}`),
-        replace: true,
-      });
-    } catch (error) {
-      ElMessage.error(`Upload Error: ${error}`);
-    }
-
-    loading.value = false;
-  } else {
-    signIn();
-  }
-}
-async function handleRemove() {
-  await $fetch(`/api/tool/${props.tool.id!}`, {
-    method: "delete",
-    body: props.tool,
-  });
+const handleRemove = async () => {
+  loading.value = true;
   await remove(props.tool.id!);
+  localRemove(props.tool.id!);
   navigateTo({
-    path: localePath(`/`),
+    path: localePath("/"),
     replace: true,
   });
-  ElMessage.success("Remove success!");
-}
+  ElMessage.success("Delete Success");
+  loading.value = false;
+};
+
+const handleUpdate = async () => {
+  loading.value = true;
+  await update(props.tool);
+  localUpdate(props.tool);
+  ElMessage.success("Update Success");
+  loading.value = false;
+};
+const handleFork = () => {
+  const { author, id, ...body } = props.tool;
+  const newId = uuidv4();
+  localCreate({
+    ...body,
+    id: newId,
+    author: "",
+  });
+  navigateTo({
+    path: localePath(`/ai-${newId}`),
+    replace: true,
+  });
+  ElMessage.success("Fork Success");
+};
 </script>
 
 <template>
   <div>
-    <el-button
-      :loading="loading"
-      type="danger"
-      size="small"
-      text
-      @click="handleRemove"
-      v-if="isOwnTool(tool)"
-    >
-      <el-icon class="i-carbon:subtract-alt"></el-icon>
-    </el-button>
-    <el-button
-      class="ml-1!"
-      :loading="loading"
-      size="small"
-      text
-      @click="handleUpload"
-    >
-      <el-icon class="i-carbon:upload"></el-icon>
-    </el-button>
+    <template v-if="isOwnTool(tool)">
+      <el-button
+        :loading="loading"
+        @click="handleRemove"
+        type="danger"
+        size="small"
+        text
+      >
+        <el-icon class="i-carbon:trash-can"></el-icon>
+      </el-button>
+      <el-button
+        :loading="loading"
+        class="ml-0!"
+        @click="handleUpdate"
+        type="primary"
+        size="small"
+        text
+      >
+        <el-icon class="i-carbon:cloud-upload"></el-icon>
+      </el-button>
+    </template>
+    <template v-else>
+      <el-button
+        :loading="loading"
+        @click="handleFork"
+        type="primary"
+        size="small"
+        text
+      >
+        <el-icon class="i-carbon:direction-fork"></el-icon>
+      </el-button>
+    </template>
   </div>
 </template>
