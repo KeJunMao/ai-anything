@@ -9,7 +9,7 @@ const {
   update: localUpdate,
   create: localCreate,
 } = useLocalTools();
-const { update, remove } = await useAsyncRemoteTools({
+const { update, remove, refresh } = await useAsyncRemoteTools({
   immediate: false,
 });
 
@@ -28,6 +28,7 @@ const handleRemove = async () => {
   });
   ElMessage.success("Delete Success");
   loading.value = false;
+  await refresh();
 };
 
 const handleUpdate = async () => {

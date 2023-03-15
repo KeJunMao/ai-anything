@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 const { signIn, status, data, signOut } = useSession();
+const { clearRemoteCache } = useLocalTools();
+async function handleSignOut() {
+  clearRemoteCache();
+  await signOut();
+}
 </script>
 
 <template>
@@ -13,7 +18,7 @@ const { signIn, status, data, signOut } = useSession();
       </el-avatar>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item @click="() => signOut()">Sign Out</el-dropdown-item>
+          <el-dropdown-item @click="handleSignOut">Sign Out</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>

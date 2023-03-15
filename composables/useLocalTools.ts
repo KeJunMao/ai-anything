@@ -29,11 +29,16 @@ export const useLocalTools = () => {
     });
   }
 
+  function clearRemoteCache() {
+    tools.value = tools.value.filter((v) => v.id?.includes("-"));
+  }
+
   return {
     tools,
     create,
     get,
     remove,
     update,
+    clearRemoteCache,
   };
 };
