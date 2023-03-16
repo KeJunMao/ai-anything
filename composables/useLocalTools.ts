@@ -33,6 +33,14 @@ export const useLocalTools = () => {
     tools.value = tools.value.filter((v) => v.id?.includes("-"));
   }
 
+  function createOrUpdate(tool: ToolItem) {
+    if (get(tool.id!)) {
+      update(tool);
+    } else {
+      create(tool);
+    }
+  }
+
   return {
     tools,
     create,
@@ -40,5 +48,6 @@ export const useLocalTools = () => {
     remove,
     update,
     clearRemoteCache,
+    createOrUpdate,
   };
 };

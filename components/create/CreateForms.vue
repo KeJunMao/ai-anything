@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 const { step, maxStep, nextStep, prevStep, tool, isCreate, formEl } =
   useCreateTool();
-const { create, update } = useLocalTools();
+const { create, createOrUpdate } = useLocalTools();
 const localePath = useLocalePath();
-const { isRemoteTool } = useTools();
 const handleSave = () => {
   formEl.value?.validate((isValid) => {
     if (isValid) {
@@ -15,11 +14,7 @@ const handleSave = () => {
         create(tool.value);
         ElMessage.success("Create Success");
       } else {
-        if (isRemoteTool(tool.value.id!)) {
-          create(tool.value);
-        } else {
-          update(tool.value);
-        }
+        createOrUpdate(tool.value);
         ElMessage.success("Update Success");
       }
     }
