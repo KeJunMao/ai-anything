@@ -4,8 +4,8 @@ const rules = reactive(
   defineRules({
     icon: [
       {
-        max: 20,
-        message: "Icon cannot be longer than 20 characters",
+        max: 40,
+        message: "Icon cannot be longer than 40 characters",
         trigger: "blur",
       },
     ],
@@ -44,7 +44,7 @@ const rules = reactive(
     <el-form-item label="Icon" prop="icon">
       <el-input
         placeholder="Please input i-<category>:<name>, emoji or text"
-        maxlength="20"
+        maxlength="40"
         show-word-limit
         v-model="tool.icon"
       ></el-input>
