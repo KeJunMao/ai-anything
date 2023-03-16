@@ -16,9 +16,7 @@ jobs:
       - name: Set node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-          cache: pnpm
-          registry-url: "https://registry.npmjs.org"
+          node-version: 16
 
       - run: npx changelogithub
         continue-on-error: true
