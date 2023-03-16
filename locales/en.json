@@ -56,5 +56,7 @@
   "tool.setting-dialog.title": "'{0}' GPT Options",
   "workshop.header.title": "Workshop",
   "workshop.header.desc": "Discover our list of tool to supercharge your AIAnything home page. Created by the community.",
-  "workshop.search.placeholder": "Search for tools from workshop"
+  "workshop.search.placeholder": "Search for tools from workshop",
+  "app.name": "AI Anything",
+  "app.desc": "Anyone can create GPT tools, AI Anything makes it possible for everyone to create ChatGPT widgets quickly"
 }

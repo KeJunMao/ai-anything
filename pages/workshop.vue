@@ -2,6 +2,13 @@
 definePageMeta({
   layout: "home",
 });
+const { t } = useI18n();
+useHead({
+  title: t("tool.search.workshop"),
+});
+useSeoMeta({
+  description: t("workshop.header.desc"),
+});
 </script>
 
 <template>

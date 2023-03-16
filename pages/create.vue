@@ -2,6 +2,10 @@
 definePageMeta({
   layout: false,
 });
+const { t } = useI18n();
+useHead({
+  title: t("tool.search.create"),
+});
 </script>
 
 <template>
