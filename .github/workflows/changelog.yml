@@ -1,0 +1,26 @@
+name: Changelog
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: pnpm
+          registry-url: "https://registry.npmjs.org"
+
+      - run: npx changelogithub
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
