@@ -53,5 +53,8 @@
   "tool.search.create": "创建",
   "tool.search.placeholder": "搜索工具",
   "tool.search.workshop": "创意工坊",
-  "tool.setting-dialog.title": "'{0}' GPT 选项"
+  "tool.setting-dialog.title": "'{0}' GPT 选项",
+  "workshop.header.desc": "探索由社区创建的工具列表，以增强您的 AIAnything 主页。",
+  "workshop.header.title": "创意工坊",
+  "workshop.search.placeholder": "搜索来自创意工坊的工具"
 }

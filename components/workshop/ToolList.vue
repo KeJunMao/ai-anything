@@ -47,7 +47,7 @@ const list = computed(() => data.value?.list ?? []);
       :description="
         search === ''
           ? 'There is nothing here :)'
-          : `No '${search}' results found`
+          : $t('tool.list.empty.description.no-search-tool', [search])
       "
     ></el-empty>
     <el-pagination

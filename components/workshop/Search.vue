@@ -8,7 +8,7 @@ const { search } = useQuerySearch();
       class="w-full sm:max-w-sm"
       v-model="search"
       type="search"
-      placeholder="Search Workshop Tool"
+      :placeholder="$t('workshop.search.placeholder')"
     >
       <template #prefix>
         <el-icon class="i-carbon:search"></el-icon>
