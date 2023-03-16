@@ -32,7 +32,8 @@ For now, most ChatGPT-related tools are essentially tweaks to prompts, and AI An
 - 🤙🏻 supports template interpolation, prompt is more flexible
 - 🎨 Clean UI, smooth animations, dark mode support
 - ⚡️ Power by Nuxt3 , just fast!
-- [ ] 🌍 Multi-language
+- 🌍 Multi-language
+- ☁️ Workshop, share or fork!
 
 ## 💻 Development
 
