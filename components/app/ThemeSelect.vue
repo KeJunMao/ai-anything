@@ -11,15 +11,15 @@ const onClick = () => {
 <template>
   <el-button text @click="onClick">
     <ColorScheme placeholder="...">
-      <div
-        v-if="colorMode.preference === 'dark'"
-        class="i-carbon:moon"
-      ></div>
-      <div
-        v-else-if="colorMode.preference === 'light'"
-        class="i-carbon:sun"
-      ></div>
-      <div v-else class="i-carbon:color-switch"></div>
+      <template v-if="colorMode.preference === 'dark'">
+        <el-icon class="i-carbon:moon mr-1"></el-icon> Dark
+      </template>
+      <template v-else-if="colorMode.preference === 'light'">
+        <el-icon class="i-carbon:sun mr-1"></el-icon> Light
+      </template>
+      <template v-else>
+        <el-icon class="i-app:color-mode mr-1"></el-icon> System
+      </template>
     </ColorScheme>
   </el-button>
 </template>

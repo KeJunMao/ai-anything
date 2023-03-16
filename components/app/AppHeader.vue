@@ -10,8 +10,6 @@
     </div>
     <div flex gap-1 sm:gap-2 items-center col-span-5 justify-end>
       <AppSettings />
-      <AppThemeSelect />
-      <AppSocialIcons />
       <AppAccount />
     </div>
   </el-header>

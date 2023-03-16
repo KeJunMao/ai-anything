@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from "nuxt/config";
+import { i18n } from "./config/i18n";
 
 export default defineNuxtConfig({
   app: {
@@ -45,32 +46,7 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: "",
   },
-  i18n: {
-    locales: [
-      {
-        code: "en",
-        name: "English",
-      },
-      {
-        code: "zh-cn",
-        name: "简体中文",
-      },
-    ],
-    defaultLocale: "en",
-    // vueI18n: {
-    //   legacy: false,
-    //   messages: {
-    //     en,
-    //     "zh-cn": zhCN,
-    //   },
-    // },
-    detectBrowserLanguage: {
-      useCookie: true,
-      alwaysRedirect: true,
-      redirectOn: "root",
-      fallbackLocale: "en",
-    },
-  },
+  i18n,
   vite: {
     css: {
       preprocessorOptions: {
