@@ -47,14 +47,14 @@ function appendVariable(index: number, _var: string) {
 </script>
 
 <template>
-  <h3 mb-2 text text-gray>The AI Role</h3>
+  <h3 mb-2 text text-gray>{{ $t("create.the-role.title") }}</h3>
   <CreateListTransition name="list">
     <el-form :model="tool.roles" ref="formEl" label-position="top" size="large">
       <div v-for="(item, index) in tool.roles" :key="item.id">
         <el-form-item :prop="`${index}.type`">
           <template #label>
             <div w-full flex items-center justify-between>
-              <div>Role</div>
+              <div>{{ $t("create.the-role.role.label") }}</div>
               <div>
                 <el-button
                   @click="insertRole(index)"
@@ -62,7 +62,8 @@ function appendVariable(index: number, _var: string) {
                   size="small"
                   type="primary"
                 >
-                  <el-icon class="i-carbon:add-alt mr-1"></el-icon> Insert
+                  <el-icon class="i-carbon:add-alt mr-1"></el-icon>
+                  {{ $t("create.the-forms.form.insert") }}
                 </el-button>
                 <el-button
                   @click="removeRole(index)"
@@ -72,7 +73,7 @@ function appendVariable(index: number, _var: string) {
                   type="danger"
                 >
                   <el-icon class="i-carbon:subtract-alt mr-1"></el-icon>
-                  Delete
+                  {{ $t("create.the-forms.form.delete") }}
                 </el-button>
               </div>
             </div>
@@ -87,12 +88,12 @@ function appendVariable(index: number, _var: string) {
           </el-select>
         </el-form-item>
         <el-form-item
-          label="Template"
+          :label="$t('create.the-role.template.label')"
           :prop="`${index}.template`"
           :rules="rules.template"
         >
           <div flex items-center>
-            <div text-12px>Variable:</div>
+            <div text-12px>{{ $t("create.the-role.template.variable") }}:</div>
             <el-tag
               v-for="item in tool.forms"
               :key="item.name"
@@ -105,7 +106,7 @@ function appendVariable(index: number, _var: string) {
             </el-tag>
           </div>
           <el-input
-            placeholder="Please input template"
+            :label="$t('create.the-role.template.placeholder')"
             type="textarea"
             v-model="item.template"
           ></el-input>

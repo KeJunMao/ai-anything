@@ -21,7 +21,7 @@ const models = [
     <el-form-item :label="$t('app.gpt-setting-forms.api-base-url')">
       <el-input
         v-model="options.apiBaseUrl"
-        placeholder="API Base Url"
+        placeholder="https://api.openai.com"
       ></el-input>
     </el-form-item>
     <el-form-item :label="$t('app.gpt-setting-forms.model')">

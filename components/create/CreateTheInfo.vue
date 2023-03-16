@@ -33,7 +33,7 @@ const rules = reactive(
 </script>
 
 <template>
-  <h3 mb-2 text text-gray>The Info</h3>
+  <h3 mb-2 text text-gray>{{ $t("create.the-info.title") }}</h3>
   <el-form
     :rules="rules"
     :model="tool"
@@ -41,25 +41,25 @@ const rules = reactive(
     label-position="top"
     size="large"
   >
-    <el-form-item label="Icon" prop="icon">
+    <el-form-item :label="$t('create.the-info.icon.label')" prop="icon">
       <el-input
-        placeholder="Please input i-<category>:<name>, emoji or text"
+        :placeholder="$t('create.the-info.icon.placeholder')"
         maxlength="40"
         show-word-limit
         v-model="tool.icon"
       ></el-input>
     </el-form-item>
-    <el-form-item label="Name" prop="name">
+    <el-form-item :label="$t('create.the-info.name.label')" prop="name">
       <el-input
-        placeholder="Please input tool name"
+        :placeholder="$t('create.the-info.name.placeholder')"
         maxlength="40"
         show-word-limit
         v-model="tool.name"
       ></el-input>
     </el-form-item>
-    <el-form-item label="Desc" prop="desc">
+    <el-form-item :label="$t('create.the-info.desc.label')" prop="desc">
       <el-input
-        placeholder="Please input tool desc"
+        :placeholder="$t('create.the-info.desc.placeholder')"
         type="textarea"
         maxlength="100"
         show-word-limit

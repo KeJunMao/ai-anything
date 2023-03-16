@@ -24,15 +24,17 @@ const handleSave = () => {
 <template>
   <div relative>
     <h2 text-xl>
-      {{ isCreate ? "Create" : "Update" }} Settings ({{ step + 1 }}/{{
-        maxStep
-      }})
+      <template v-if="isCreate">
+        {{ $t("create.forms.create-title") }}
+      </template>
+      <template v-else> {{ $t("create.forms.update-title") }} </template>
+      ({{ step + 1 }}/{{ maxStep }})
     </h2>
     <CreateTheInfo v-if="step === 0" />
     <CreateTheForms v-else-if="step === 1" />
     <CreateTheRole v-else-if="step === 2" />
     <el-button :disabled="step === 0" size="default" @click="prevStep">
-      Prev
+      {{ $t("create.forms.prev") }}
     </el-button>
     <el-button
       v-if="step + 1 === maxStep"
@@ -40,10 +42,10 @@ const handleSave = () => {
       size="default"
       @click="handleSave"
     >
-      Done
+      {{ $t("create.forms.done") }}
     </el-button>
     <el-button v-else type="primary" size="default" @click="nextStep">
-      Next
+      {{ $t("create.forms.next") }}
     </el-button>
   </div>
 </template>

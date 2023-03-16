@@ -3,7 +3,7 @@ const { tool, step } = useCreateTool();
 </script>
 <template>
   <div w-full h-full flex flex-1 flex-col>
-    <h2 text-xl mb-2>Preview</h2>
+    <h2 text-xl mb-2>{{ $t("create.previews.title") }}</h2>
     <div flex-1 flex items-center justify-center>
       <CreatePreviewTransition name="remove" mode="out-in">
         <ToolItem max-w-120 flex-1 v-if="step === 0" :tool="tool" />

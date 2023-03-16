@@ -93,7 +93,7 @@ const propsRules = reactive(
 </script>
 
 <template>
-  <h3 mb-2 text text-gray>The Forms</h3>
+  <h3 mb-2 text text-gray>{{ $t("create.the-forms.title") }}</h3>
   <el-form :model="tool.forms" ref="formEl" label-position="top" size="large">
     <el-collapse accordion>
       <CreateListTransition name="list">
@@ -107,19 +107,25 @@ const propsRules = reactive(
             >
               <el-input
                 v-model="item.name"
-                placeholder="Please input name"
+                :placeholder="$t('create.the-forms.form.name.placeholder')"
                 maxlength="20"
                 show-word-limit
               >
                 <template #append>
                   <el-button id="expand">
-                    <el-icon id="expand" class="i-carbon:row-expand"></el-icon>
+                    <el-icon
+                      id="expand"
+                      class="i-carbon:row-expand mr-1"
+                    ></el-icon>
+                    <span id="expand">
+                      {{ $t("create.the-forms.form.expand.label") }}
+                    </span>
                   </el-button>
                 </template>
               </el-input>
               <template #label>
                 <div w-full flex items-center justify-between>
-                  <div>Name</div>
+                  <div>{{ $t("create.the-forms.form.name.label") }}</div>
                   <div>
                     <el-button
                       @click="insertForm(index)"
@@ -127,7 +133,8 @@ const propsRules = reactive(
                       size="small"
                       type="primary"
                     >
-                      <el-icon class="i-carbon:add-alt mr-1"></el-icon> Insert
+                      <el-icon class="i-carbon:add-alt mr-1"></el-icon>
+                      {{ $t("create.the-forms.form.insert") }}
                     </el-button>
                     <el-button
                       @click="removeForm(index)"
@@ -137,7 +144,7 @@ const propsRules = reactive(
                       type="danger"
                     >
                       <el-icon class="i-carbon:subtract-alt mr-1"></el-icon>
-                      Delete
+                      {{ $t("create.the-forms.form.delete") }}
                     </el-button>
                   </div>
                 </div>
@@ -146,24 +153,24 @@ const propsRules = reactive(
           </template>
           <div>
             <el-form-item
-              label="Label"
+              :label="$t('create.the-forms.form.label.label')"
               :prop="`${index}.label`"
               :rules="rules.label"
             >
               <el-input
                 v-model="item.lable"
-                placeholder="Please input label"
+                :placeholder="$t('create.the-forms.form.label.placeholder')"
                 maxlength="20"
                 show-word-limit
               ></el-input>
             </el-form-item>
             <el-form-item
-              label="Type"
+              :label="$t('create.the-forms.form.type.label')"
               :prop="`${index}.type`"
               :rules="rules.type"
             >
               <el-select
-                placeholder="Please select type"
+                :placeholder="$t('create.the-forms.form.type.placeholder')"
                 w-full
                 v-model="item.type"
               >
@@ -175,16 +182,18 @@ const propsRules = reactive(
                 ></el-option>
               </el-select>
             </el-form-item>
-            <el-divider> Props </el-divider>
+            <el-divider>
+              {{ $t("create.the-forms.props.label") }}
+            </el-divider>
             <div v-if="item.props">
               <el-form-item
                 v-if="item.type === 'ElInput'"
                 :prop="`${index}.props.type`"
                 :rules="propsRules.type"
-                label="Input Type"
+                :label="$t('create.the-forms.props.type.label')"
               >
                 <el-select
-                  placeholder="Select input type"
+                  placeholder='$t("create.the-forms.props.type.placeholder")'
                   w-full
                   clearable
                   v-model="item.props.type"
@@ -196,7 +205,7 @@ const propsRules = reactive(
                 v-if="item.type === 'ElSelect'"
                 :rules="propsRules.options"
                 :prop="`${index}.props.options`"
-                label="Create Options"
+                :label="$t('create.the-forms.props.options.label')"
               >
                 <el-select
                   w-full
@@ -206,30 +215,38 @@ const propsRules = reactive(
                   allow-create
                   default-first-option
                   :reserve-keyword="false"
-                  placeholder="Create select options"
-                  no-data-text="Please input something"
+                  :placeholder="
+                    $t('create.the-forms.props.options.placeholder')
+                  "
+                  :no-data-text="
+                    $t('create.the-forms.props.options.no-data-text')
+                  "
                 >
                 </el-select>
               </el-form-item>
               <el-form-item
-                label="Placeholder"
+                :label="$t('create.the-forms.props.placeholder.label')"
                 :prop="`${index}.props.placeholder`"
                 :rules="propsRules.placeholder"
               >
                 <el-input
-                  placeholder="Please input placeholder"
+                  :placeholder="
+                    $t('create.the-forms.props.placeholder.placeholder')
+                  "
                   v-model="item.props.placeholder"
                   maxlength="100"
                   show-word-limit
                 ></el-input>
               </el-form-item>
               <el-form-item
-                label="Default"
+                :label="$t('create.the-forms.props.default.label')"
                 :prop="`${index}.props.default`"
                 :rules="propsRules.default"
               >
                 <el-input
-                  placeholder="Please input default value"
+                  :placeholder="
+                    $t('create.the-forms.props.default.placeholder')
+                  "
                   v-model="item.props.default"
                   maxlength="100"
                   show-word-limit
