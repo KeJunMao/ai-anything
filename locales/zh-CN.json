@@ -1,1 +1,11 @@
-{}
+{
+  "app.account.sign-out": "登出",
+  "app.gpt-setting-forms.api-key": "API密钥",
+  "app.gpt-setting-forms.api-base-url": "API 基本网址",
+  "app.gpt-setting-forms.model": "模型",
+  "app.settings.app-settings": "应用设置",
+  "app.settings.please-set-the-api-key-first": "请先设置API密钥",
+  "app.theme-select.dark": "黑暗",
+  "app.theme-select.light": "明亮",
+  "app.theme-select.system": "系统"
+}

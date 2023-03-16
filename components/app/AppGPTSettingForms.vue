@@ -12,19 +12,19 @@ const models = [
 
 <template>
   <el-form size="large" label-position="top">
-    <el-form-item label="API Key">
+    <el-form-item :label="$t('app.gpt-setting-forms.api-key')">
       <el-input
         v-model="options.apiKey"
         placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       ></el-input>
     </el-form-item>
-    <el-form-item label="API Base Url">
+    <el-form-item :label="$t('app.gpt-setting-forms.api-base-url')">
       <el-input
         v-model="options.apiBaseUrl"
         placeholder="API Base Url"
       ></el-input>
     </el-form-item>
-    <el-form-item label="Model">
+    <el-form-item :label="$t('app.gpt-setting-forms.model')">
       <el-select w-full v-model="options.model">
         <el-option v-for="item in models" :value="item"></el-option>
       </el-select>

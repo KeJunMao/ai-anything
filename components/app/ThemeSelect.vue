@@ -12,13 +12,16 @@ const onClick = () => {
   <el-button text @click="onClick">
     <ColorScheme placeholder="...">
       <template v-if="colorMode.preference === 'dark'">
-        <el-icon class="i-carbon:moon mr-1"></el-icon> Dark
+        <el-icon class="i-carbon:moon mr-1"></el-icon>
+        {{ $t("app.theme-select.dark") }}
       </template>
       <template v-else-if="colorMode.preference === 'light'">
-        <el-icon class="i-carbon:sun mr-1"></el-icon> Light
+        <el-icon class="i-carbon:sun mr-1"></el-icon>
+        {{ $t("app.theme-select.light") }}
       </template>
       <template v-else>
-        <el-icon class="i-app:color-mode mr-1"></el-icon> System
+        <el-icon class="i-app:color-mode mr-1"></el-icon>
+        {{ $t("app.theme-select.system") }}
       </template>
     </ColorScheme>
   </el-button>

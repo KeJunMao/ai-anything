@@ -1,1 +1,11 @@
-{}
+{
+  "app.account.sign-out": "Sign Out",
+  "app.gpt-setting-forms.api-key": "API Key",
+  "app.gpt-setting-forms.api-base-url": "API Base Url",
+  "app.gpt-setting-forms.model": "Model",
+  "app.settings.please-set-the-api-key-first": "Please set the API key first",
+  "app.settings.app-settings": "App Settings",
+  "app.theme-select.dark": "Dark",
+  "app.theme-select.light": "Light",
+  "app.theme-select.system": "System"
+}

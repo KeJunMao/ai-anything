@@ -25,7 +25,9 @@ async function handleSignIn() {
       </el-avatar>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item @click="handleSignOut">Sign Out</el-dropdown-item>
+          <el-dropdown-item @click="handleSignOut">{{
+            $t("app.account.sign-out")
+          }}</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>

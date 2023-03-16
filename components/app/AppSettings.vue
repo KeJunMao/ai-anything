@@ -6,11 +6,16 @@ const showWarning = computed(() => !storageOptions.value.apiKey);
 <template>
   <div>
     <ClientOnly>
-      <el-button :text="!showWarning" :plain="showWarning" :type="showWarning ? 'danger' : ''" @click="show = true">
+      <el-button
+        :text="!showWarning"
+        :plain="showWarning"
+        :type="showWarning ? 'danger' : ''"
+        @click="show = true"
+      >
         <el-icon class="i-carbon:settings"></el-icon>
-        <span hidden sm:block ml-1 v-if="showWarning"
-          >Please set the API key first</span
-        >
+        <span hidden sm:block ml-1 v-if="showWarning">{{
+          $t("app.settings.please-set-the-api-key-first")
+        }}</span>
       </el-button>
       <el-dialog
         v-model="show"
@@ -18,7 +23,7 @@ const showWarning = computed(() => !storageOptions.value.apiKey);
         width="auto"
         class="max-w-2xl w-full! h-screen sm:h-auto"
         lock-scroll
-        title="App Settings"
+        :title="$t('app.settings.app-settings')"
         append-to-body
       >
         <AppGPTSettingForms />
