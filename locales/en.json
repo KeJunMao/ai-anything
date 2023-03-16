@@ -45,5 +45,13 @@
   "create.the-role.role.label": "Role",
   "create.the-role.template.label": "Template",
   "create.the-role.template.placeholder": "Please input template",
-  "create.the-role.template.variable": "Variable"
+  "create.the-role.template.variable": "Variable",
+  "tool.forms.submit": "Submit",
+  "tool.list.explore": "Explore",
+  "tool.list.empty.description.no-tool": "Please create the tool first",
+  "tool.list.empty.description.no-search-tool": "No '{0}' results found",
+  "tool.search.placeholder": "Search Tool",
+  "tool.search.create": "Create",
+  "tool.search.workshop": "Workshop",
+  "tool.setting-dialog.title": "{0}' GPT Options"
 }

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { marked } from "marked";
-import { ToolItem } from "~/composables/useTools";
+import { ToolItem } from "~~/types";
 
 const props = defineProps<{
   tool: ToolItem;

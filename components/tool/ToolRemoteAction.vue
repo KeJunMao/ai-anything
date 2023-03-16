@@ -64,7 +64,8 @@ const handleFork = () => {
         size="small"
         text
       >
-        <el-icon class="i-carbon:trash-can mr-1"></el-icon> Remove from workshop
+        <el-icon class="i-carbon:trash-can mr-1"></el-icon>
+        <span hidden sm:inline>Remove from workshop</span>
       </el-button>
       <el-button
         :loading="loading"
@@ -74,7 +75,8 @@ const handleFork = () => {
         size="small"
         text
       >
-        <el-icon class="i-carbon:cloud-upload mr-1"></el-icon> Sync to workshop
+        <el-icon class="i-carbon:cloud-upload mr-1"></el-icon>
+        <span hidden sm:inline>Sync to workshop</span>
       </el-button>
     </template>
     <template v-else>
@@ -85,7 +87,8 @@ const handleFork = () => {
         size="small"
         text
       >
-        <el-icon class="i-carbon:direction-fork mr-1"></el-icon> Fork to local
+        <el-icon class="i-carbon:direction-fork mr-1"></el-icon>
+        <span hidden sm:inline>Fork to local</span>
       </el-button>
     </template>
   </div>

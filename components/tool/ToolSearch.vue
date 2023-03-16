@@ -9,7 +9,7 @@ const localePath = useLocalePath();
       class="w-full sm:max-w-sm"
       v-model="search"
       type="search"
-      placeholder="Search Tool"
+      :placeholder="$t('tool.search.placeholder')"
     >
       <template #prefix>
         <el-icon class="i-carbon:search"></el-icon>
@@ -20,13 +20,13 @@ const localePath = useLocalePath();
       <nuxt-link :to="localePath('/create')" w-full>
         <el-button w-full>
           <el-icon class="i-carbon:add-filled mr-1"></el-icon>
-          Create
+          {{ $t("tool.search.create") }}
         </el-button>
       </nuxt-link>
       <nuxt-link :to="localePath('/workshop')" w-full>
         <el-button type="primary" w-full>
           <el-icon class="i-carbon:apps mr-1"></el-icon>
-          Workshop
+          {{ $t("tool.search.workshop") }}
         </el-button>
       </nuxt-link>
     </div>

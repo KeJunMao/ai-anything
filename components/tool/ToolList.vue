@@ -29,13 +29,13 @@ const searchTools = computed(() =>
     <el-empty
       v-if="!searchTools.length"
       :description="
-        (tools.length === 0
-          ? 'Please create the tool first'
-          : `No '${search}' results found`) + ', or'
+        tools.length === 0
+          ? $t('tool.list.empty.description.no-tool')
+          : $t('tool.list.empty.description.no-search-tool', [search])
       "
     >
       <NuxtLink :to="localePath('/workshop')">
-        <el-button type="primary">Explore</el-button>
+        <el-button type="primary">{{ $t("tool.list.explore") }}</el-button>
       </NuxtLink>
     </el-empty>
   </div>

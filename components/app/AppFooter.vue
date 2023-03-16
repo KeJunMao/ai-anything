@@ -1,9 +1,9 @@
 <template>
-  <div h-16 text-gray-500 flex flex-col>
+  <div text-gray-500 flex flex-col pt-10>
     <el-divider class="m-0!">
       <div class="i-app:logo"></div>
     </el-divider>
-    <div flex-1 flex items-center justify-between px-2>
+    <div flex-1 flex items-center justify-between px-2 py-4>
       <div flex gap-1>
         <AppThemeSelect />
         <AppLangSwitcher />

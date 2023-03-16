@@ -38,7 +38,7 @@ function handleSave() {
     </el-button>
     <el-dialog
       v-model="show"
-      :title="`'${tool.name || 'Tool'}' GPT Options`"
+      :title="$t('tool.setting-dialog.title', [tool.name || 'Tool'])"
       align-center
       width="auto"
       class="max-w-2xl w-full! h-screen sm:h-auto sm:max-h-3xl of-auto"

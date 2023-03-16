@@ -44,9 +44,9 @@ export default defineComponent({
       </component>
     </el-form-item>
     <el-form-item>
-      <el-button :loading="loading" @click="submit" type="primary" w-full
-        >Submit</el-button
-      >
+      <el-button :loading="loading" @click="submit" type="primary" w-full>
+        {{ $t("tool.forms.submit") }}
+      </el-button>
     </el-form-item>
   </el-form>
 </template>
