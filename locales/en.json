@@ -53,5 +53,5 @@
   "tool.search.placeholder": "Search Tool",
   "tool.search.create": "Create",
   "tool.search.workshop": "Workshop",
-  "tool.setting-dialog.title": "{0}' GPT Options"
+  "tool.setting-dialog.title": "'{0}' GPT Options"
 }

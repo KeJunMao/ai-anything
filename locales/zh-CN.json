@@ -45,5 +45,13 @@
   "create.the-role.template.label": "模板",
   "create.the-role.template.placeholder": "请输入模板",
   "create.the-role.title": "AI角色信息",
-  "create.the-role.template.variable": "变量"
+  "create.the-role.template.variable": "变量",
+  "tool.forms.submit": "提交",
+  "tool.list.empty.description.no-search-tool": "找不到“{0}”结果",
+  "tool.list.empty.description.no-tool": "请先创建工具",
+  "tool.list.explore": "探索",
+  "tool.search.create": "创建",
+  "tool.search.placeholder": "搜索工具",
+  "tool.search.workshop": "创意工坊",
+  "tool.setting-dialog.title": "'{0}' GPT 选项"
 }
