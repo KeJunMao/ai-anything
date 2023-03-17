@@ -22,7 +22,7 @@ const list = computed(() => data.value?.list ?? []);
 
 <template>
   <div v-loading="pending">
-    <div min-h-120>
+    <div>
       <div
         mt-8
         grid

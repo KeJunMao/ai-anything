@@ -1,5 +1,5 @@
 <template>
-  <div text-gray-500 flex flex-col pt-10>
+  <div class="footer" text-gray-500 flex flex-col pt-10>
     <el-divider class="m-0!">
       <div class="i-app:logo"></div>
     </el-divider>
@@ -23,3 +23,9 @@
     </div>
   </div>
 </template>
+
+<style>
+.dark .footer .el-divider__text {
+  @apply bg-black;
+}
+</style>
