@@ -1,6 +1,10 @@
+export type ChatGPTProvider = "OpenAI" | "Azure";
+
 export interface ChatGPTOptions {
   apiKey: string;
   apiBaseUrl: string;
+  apiUrlPath: string;
+  provider: ChatGPTProvider;
   model: "gpt-3.5-turbo" | "gpt-3.5-turbo-0301";
   temperature?: number;
   top_p?: number;
@@ -16,4 +20,4 @@ export interface ChatGPTMessage {
   content: string;
 }
 
-export type ChatGPTMessages = ChatGPTMessage[];
+export type OpenAIMessages = ChatGPTMessage[];

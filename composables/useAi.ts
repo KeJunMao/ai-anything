@@ -24,7 +24,9 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
         options.value
       );
     } catch (error: any) {
-      result.value = error?.message ?? String(error);
+      result.value = error.data
+        ? JSON.stringify(error.data, null, 2)
+        : null ?? error?.message ?? error;
     }
     loading.value = false;
   };

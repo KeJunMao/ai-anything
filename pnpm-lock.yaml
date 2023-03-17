@@ -15,6 +15,7 @@ specifiers:
   '@vueuse/nuxt': ^9.13.0
   bumpp: ^9.0.0
   element-plus: ^2.3.0
+  eventsource-parser: ^0.1.0
   marked: ^4.2.12
   next-auth: 4.20.1
   nuxt: ^3.3.1
@@ -31,6 +32,7 @@ dependencies:
   '@unocss/reset': 0.50.4
   '@vueuse/core': 9.13.0
   element-plus: 2.3.0
+  eventsource-parser: 0.1.0
   marked: 4.2.12
   next-auth: 4.20.1
   std-env: 3.3.2
@@ -3562,6 +3564,11 @@ packages:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
     optional: true
+
+  /eventsource-parser/0.1.0:
+    resolution: {integrity: sha512-M9QjFtEIkwytUarnx113HGmgtk52LSn3jNAtnWKi3V+b9rqSfQeVdLsaD5AG/O4IrGQwmAAHBIsqbmURPTd2rA==}
+    engines: {node: '>=14.18'}
+    dev: false
 
   /execa/5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}

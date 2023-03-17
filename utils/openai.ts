@@ -1,4 +1,4 @@
-import { ChatGPTMessages, ToolItemRole } from "~~/types";
+import { OpenAIMessages, ToolItemRole } from "~~/types";
 
 export const parseTemplate = (
   data: Record<string, any>,
@@ -18,5 +18,5 @@ export const parseRoles = (
       role: v.type,
       content: parseTemplate(data, v.template) ?? "",
     };
-  }) as ChatGPTMessages;
+  }) as OpenAIMessages;
 };

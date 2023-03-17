@@ -58,5 +58,8 @@
   "workshop.header.desc": "Discover our list of tool to supercharge your AIAnything home page. Created by the community.",
   "workshop.search.placeholder": "Search for tools from workshop",
   "app.name": "AI Anything",
-  "app.desc": "Anyone can create GPT tools, AI Anything makes it possible for everyone to create ChatGPT widgets quickly"
+  "app.desc": "Anyone can create GPT tools, AI Anything makes it possible for everyone to create ChatGPT widgets quickly",
+  "app.gpt-setting-forms.api-url": "API URL",
+  "app.gpt-setting-forms.api-url-path": "API URL Path",
+  "app.gpt-setting-forms.default-provider": "Default Provider"
 }

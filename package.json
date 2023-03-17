@@ -31,6 +31,7 @@
     "@unocss/reset": "^0.50.4",
     "@vueuse/core": "^9.13.0",
     "element-plus": "^2.3.0",
+    "eventsource-parser": "^0.1.0",
     "marked": "^4.2.12",
     "next-auth": "4.20.1",
     "std-env": "^3.3.2",

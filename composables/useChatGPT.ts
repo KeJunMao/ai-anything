@@ -1,9 +1,14 @@
 import { STORAGE_KEY_GPT_SETTINGS } from "~/constants";
-import { ChatGPTMessages, ChatGPTOptions } from "~~/types";
+import { OpenAIMessages, ChatGPTOptions } from "~~/types";
+import { convertOpenAIMessagesToAzurePrompt } from "~~/utils/azure";
+import { createParser } from "eventsource-parser";
+import { streamAsyncIterator } from "~~/utils";
 
 export const defaultChatGPTOptions: ChatGPTOptions = {
   apiKey: "",
   apiBaseUrl: "https://api.openai.com",
+  apiUrlPath: "/v1/chat/completions",
+  provider: "OpenAI",
   model: "gpt-3.5-turbo",
   temperature: 1,
   top_p: 1,
@@ -14,56 +19,87 @@ export const defaultChatGPTOptions: ChatGPTOptions = {
   frequency_penalty: 0,
 };
 
+function createFetchGPTResponse(
+  options: ChatGPTOptions,
+  messages: OpenAIMessages
+) {
+  const { apiKey, apiBaseUrl, apiUrlPath, provider, ...opts } = options;
+
+  const body: Record<string, any> = {
+    ...opts,
+  };
+  const headers: Record<string, any> = {
+    "Content-Type": "application/json",
+  };
+  let url = apiUrlPath;
+  switch (provider) {
+    case "OpenAI":
+      headers["Authorization"] = `Bearer ${apiKey}`;
+      body["messages"] = messages;
+      break;
+    case "Azure":
+      headers["api-key"] = `${apiKey}`;
+      url = `${apiUrlPath}/${options.model}/completions?api-version=2022-12-01`;
+      Object.assign(body, convertOpenAIMessagesToAzurePrompt(messages));
+      break;
+  }
+
+  return $fetch.raw(url, {
+    baseURL: apiBaseUrl,
+    headers,
+    body,
+    method: "post",
+    responseType: "stream",
+  });
+}
+
 export const useChatGPT = createSharedComposable(() => {
   const storageOptions = useLocalStorage(
     STORAGE_KEY_GPT_SETTINGS,
     defaultChatGPTOptions
   );
   const sendMessage = async (
-    messages: ChatGPTMessages,
-    onProgress?: (message: string, data: Record<string, any>) => void,
+    messages: OpenAIMessages,
+    onProgress: (data: string) => void = () => {},
     options: Partial<ChatGPTOptions> = {}
   ) => {
-    const { apiKey, apiBaseUrl, ...opts } = {
+    options = {
       ...storageOptions.value,
       ...options,
     };
-    // @ts-ignroe
-    const response: ReadableStream = await $fetch("/v1/chat/completions", {
-      baseURL: apiBaseUrl,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      method: "post",
-      body: {
-        ...opts,
-        messages,
-      },
-      responseType: "stream",
-    });
-
-    const reader = response.getReader();
-    const decoder = new TextDecoder();
-    let isDone = false;
-    while (!isDone) {
-      const { value, done } = await reader.read();
-      isDone = done;
-      const text = decoder.decode(value);
-      const data = text
-        .split("data:")
-        .filter((v) => !!v.trim() && v.trim() !== "[DONE]")
-        .map((v) => JSON.parse(v));
-
-      const message = data
-        .map((v) => {
-          const msg = v.choices[0];
-          return msg.message ? msg.message.content : msg.delta.content;
-        })
-        .join("");
-      if (onProgress) {
-        onProgress(message, data);
+    // @ts-expect-error
+    const resp = await createFetchGPTResponse(options, messages);
+    const parser = createParser((event) => {
+      if (event.type === "event") {
+        let data: Record<string, any>;
+        try {
+          data = JSON.parse(event.data);
+        } catch {
+          console.log("Failed to parse event data", event.data);
+          return;
+        }
+        const { choices } = data;
+        if (!choices || choices.length === 0) {
+          throw new Error(`No choices found in response`);
+        }
+        let message = "";
+        switch (options.provider) {
+          case "OpenAI":
+            const { content = "" } = choices[0].delta;
+            message = content;
+            break;
+          case "Azure":
+            message = choices[0].text;
+            break;
+        }
+        onProgress(message);
       }
+    });
+    for await (const chunk of streamAsyncIterator[Symbol.asyncIterator](
+      resp.body
+    )) {
+      const str = new TextDecoder().decode(chunk);
+      parser.feed(str);
     }
   };
   return { sendMessage, storageOptions };
