@@ -14,7 +14,6 @@ const rules = reactive(
     chat: [
       {
         validator(_rule, value, cb) {
-          console.log(value);
           if (
             value &&
             tool.value.roles[tool.value.roles.length - 1].type !== "user"

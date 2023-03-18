@@ -29,6 +29,7 @@ export default defineEventHandler(async (event) => {
         desc: true,
         id: true,
         author: true,
+        chat: true,
       },
     }),
   ]);

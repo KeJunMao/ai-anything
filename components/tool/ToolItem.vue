@@ -22,6 +22,7 @@ defineProps<{
     hover:drop-shadow-lg
     hover:border-transparent
     dark:hover:border-light
+    relative
     class="group"
   >
     <div
@@ -48,5 +49,13 @@ defineProps<{
     >
       {{ tool?.desc }}
     </div>
+    <el-icon
+      v-if="tool.chat"
+      class="i-carbon:chat-bot text-5xl! opacity-10 right-1 bottom-1 absolute!"
+    ></el-icon>
+    <el-icon
+      v-else
+      class="i-carbon:terminal-3270 text-5xl! opacity-10 right-1 bottom-1 absolute!"
+    ></el-icon>
   </div>
 </template>
