@@ -21,7 +21,8 @@ export const defaultChatGPTOptions: ChatGPTOptions = {
 
 function createFetchGPTResponse(
   options: ChatGPTOptions,
-  messages: OpenAIMessages
+  messages: OpenAIMessages,
+  signal?: AbortSignal
 ) {
   const { apiKey, apiBaseUrl, apiUrlPath, provider, ...opts } = options;
 
@@ -50,7 +51,15 @@ function createFetchGPTResponse(
     body,
     method: "post",
     responseType: "stream",
+    signal,
   });
+}
+
+export interface SendMessageOptions {
+  messages: OpenAIMessages;
+  gptOptions?: Partial<ChatGPTOptions>;
+  onProgress?: (data: string) => void;
+  signal?: AbortSignal;
 }
 
 export const useChatGPT = createSharedComposable(() => {
@@ -58,17 +67,13 @@ export const useChatGPT = createSharedComposable(() => {
     STORAGE_KEY_GPT_SETTINGS,
     defaultChatGPTOptions
   );
-  const sendMessage = async (
-    messages: OpenAIMessages,
-    onProgress: (data: string) => void = () => {},
-    options: Partial<ChatGPTOptions> = {}
-  ) => {
-    options = {
+  const sendMessage = async (userOptions: SendMessageOptions) => {
+    const options = {
       ...storageOptions.value,
-      ...options,
+      ...userOptions.gptOptions,
     };
-    // @ts-expect-error
-    const resp = await createFetchGPTResponse(options, messages);
+    const { onProgress = () => {}, messages, signal } = userOptions;
+    const resp = await createFetchGPTResponse(options, messages, signal);
     const parser = createParser((event) => {
       if (event.type === "event") {
         let data: Record<string, any>;

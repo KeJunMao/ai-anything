@@ -64,6 +64,7 @@ const rules = reactive(
         maxlength="100"
         show-word-limit
         v-model="tool.desc"
+        :autosize="{ minRows: 3 }"
       ></el-input>
     </el-form-item>
   </el-form>

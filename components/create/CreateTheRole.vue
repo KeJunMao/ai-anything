@@ -11,6 +11,23 @@ const rules = reactive(
         message: "Template is required",
       },
     ],
+    chat: [
+      {
+        validator(_rule, value, cb) {
+          console.log(value);
+          if (
+            value &&
+            tool.value.roles[tool.value.roles.length - 1].type !== "user"
+          ) {
+            cb(
+              "When chat mode is enabled, the last conversation must be is user."
+            );
+          }
+          cb();
+        },
+        trigger: "change",
+      },
+    ],
   })
 );
 
@@ -44,10 +61,34 @@ function appendVariable(index: number, _var: string) {
     tool.value.roles[index].template += `\$\{${_var}\}`;
   }
 }
+
+const messageOrderWarning = computed(() => {
+  const roles = tool.value.roles;
+  const firstSystem = roles.find((v) => v.type === "system");
+  if (firstSystem && firstSystem !== roles[0]) {
+    return "Typically, a conversation is formatted with a system message first.";
+  } else if (
+    roles.length > 1 &&
+    roles.some((role, index, arr) => arr[index - 1]?.type === role.type)
+  ) {
+    return "Typically, a conversation is alternating user and assistant messages.";
+  } else if (roles[roles.length - 1].type !== "user") {
+    return "Typically, the last conversation is user.";
+  }
+});
 </script>
 
 <template>
   <h3 mb-2 text text-gray>{{ $t("create.the-role.title") }}</h3>
+
+  <div pb-4 v-if="messageOrderWarning">
+    <el-alert
+      :title="messageOrderWarning"
+      :closable="false"
+      type="warning"
+      show-icon
+    />
+  </div>
   <CreateListTransition name="list">
     <el-form :model="tool.roles" ref="formEl" label-position="top" size="large">
       <div v-for="(item, index) in tool.roles" :key="item.id">
@@ -106,12 +147,22 @@ function appendVariable(index: number, _var: string) {
             </el-tag>
           </div>
           <el-input
-            :label="$t('create.the-role.template.placeholder')"
+            :placeholder="$t('create.the-role.template.placeholder')"
             type="textarea"
             v-model="item.template"
+            :autosize="{ minRows: 3 }"
           ></el-input>
         </el-form-item>
       </div>
     </el-form>
   </CreateListTransition>
+  <el-form ref="formEl" :model="tool" label-position="top">
+    <el-form-item
+      prop="chat"
+      :label="$t('create.the-role.chat.label')"
+      :rules="rules.chat"
+    >
+      <el-switch v-model="tool.chat" />
+    </el-form-item>
+  </el-form>
 </template>

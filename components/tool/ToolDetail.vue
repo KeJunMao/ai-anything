@@ -6,8 +6,7 @@ const props = defineProps<{
 }>();
 const { storageOptions } = useChatGPT();
 const tool = computed(() => props.tool);
-const { send, loading, result, resultHtml } = useAi(tool);
-
+const { send, loading, result, resultHtml, cancel, contexts } = useAi(tool);
 function submit(data: any) {
   if (storageOptions.value.apiKey) {
     send(data);
@@ -15,14 +14,32 @@ function submit(data: any) {
     ElMessage.warning("Please set the API key first");
   }
 }
+function stop() {
+  cancel();
+}
 </script>
 <template>
   <div>
     <ToolHeader :tool="tool" />
-    <Card relative class="group">
-      <ToolActions :tool="tool" />
-      <ToolForms :loading="loading" @submit="submit" :tool="tool" />
-      <ToolResult v-if="result" :html="resultHtml" />
+    <Card relative class="group" px-0>
+      <template v-if="tool.chat">
+        <ToolChatResult
+          :contexts="contexts"
+          :result="result"
+          :loading="loading"
+        />
+        <el-divider />
+      </template>
+      <div px-4>
+        <ToolActions :tool="tool" />
+        <ToolForms
+          :loading="loading"
+          @submit="submit"
+          @stop="stop"
+          :tool="tool"
+        />
+        <ToolResult v-if="!tool.chat && result" :html="resultHtml" />
+      </div>
     </Card>
   </div>
 </template>

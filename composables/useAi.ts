@@ -1,6 +1,6 @@
 import { MaybeRef } from "@vueuse/core";
 import { marked } from "marked";
-import { ToolItem } from "~~/types";
+import { OpenAIMessages, ToolItem } from "~~/types";
 import { useChatGPT } from "./useChatGPT";
 
 export const useAi = (_tool: MaybeRef<ToolItem>) => {
@@ -9,31 +9,65 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
   const result = ref("");
   const loading = ref(false);
   const resultHtml = computed(() => marked.parse(result.value));
+  const contexts = ref<OpenAIMessages>([]);
+  let controller = new AbortController();
+  let signal = controller.signal;
 
   const send = async (data: MaybeRef<Record<string, any>>) => {
+    const tool = unref(_tool);
     data = unref(data);
-    const messages = parseRoles(data, unref(_tool)?.roles!);
+    let messages = parseRoles(data, tool?.roles!);
+    if (tool.chat) {
+      if (!contexts.value.length) {
+        contexts.value.push(...messages);
+      } else {
+        contexts.value.push(messages[messages.length - 1]);
+      }
+      messages = contexts.value;
+    }
     result.value = "";
     loading.value = true;
     try {
-      await sendMessage(
+      await sendMessage({
         messages,
-        (message) => {
+        onProgress: (message) => {
           result.value += message;
         },
-        options.value
-      );
+        gptOptions: options.value,
+        signal,
+      });
     } catch (error: any) {
-      result.value = error.data
-        ? JSON.stringify(error.data, null, 2)
-        : null ?? error?.message ?? error;
+      if (error.message?.includes("The user aborted a request")) {
+        // pass
+      } else {
+        result.value = error.data
+          ? JSON.stringify(error.data, null, 2)
+          : null ?? error?.message ?? error;
+      }
     }
+    contexts.value.push({
+      content: result.value,
+      role: "assistant",
+    });
     loading.value = false;
+  };
+  const reset = () => {
+    contexts.value = [];
+    result.value = "";
+    loading.value = false;
+  };
+  const cancel = () => {
+    controller.abort();
+    controller = new AbortController();
+    signal = controller.signal;
   };
   return {
     send,
     resultHtml,
     result,
     loading,
+    contexts,
+    cancel,
+    reset,
   };
 };

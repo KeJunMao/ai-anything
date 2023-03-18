@@ -8,11 +8,12 @@ datasource db {
 }
 
 model Tool {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
   name    String
   desc    String
   icon    String
   author  String
+  chat    Boolean @default(false)
   roles   Json
   forms   Json
   options Json?

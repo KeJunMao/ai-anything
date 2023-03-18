@@ -18,16 +18,22 @@ export default defineComponent({
   methods: {
     submit() {
       this.$emit("submit", this.formData);
+      // @ts-ignore
+      this.$refs.form?.resetFields()
+    },
+    stop() {
+      this.$emit("stop");
     },
   },
 });
 </script>
 <template>
-  <el-form label-position="top" size="large">
+  <el-form :model="formData" ref="form" label-position="top" size="large">
     <el-form-item
       v-for="item in tool?.forms"
       :key="item.name"
       :label="item.lable"
+      :prop="item.name"
     >
       <component
         w-full
@@ -35,6 +41,7 @@ export default defineComponent({
         v-model="formData[item.name]"
         v-bind="item.props"
         :readonly="readonly"
+        :autosize="{ minRows: 3 }"
       >
         <el-option
           v-if="item.props.options && item.type === 'ElSelect'"
@@ -44,8 +51,13 @@ export default defineComponent({
       </component>
     </el-form-item>
     <el-form-item>
-      <el-button :loading="loading" @click="submit" type="primary" w-full>
+      <el-button v-if="!loading" @click="submit" type="primary" w-full>
+        <el-icon class="text-xl! i-carbon:send-alt-filled mr-2"></el-icon>
         {{ $t("tool.forms.submit") }}
+      </el-button>
+      <el-button v-else @click="stop" type="warning" w-full class="ml-0!">
+        <el-icon class="text-xl! i-carbon:stop-filled mr-2"></el-icon>
+        {{ $t("tool.forms.stop") }}
       </el-button>
     </el-form-item>
   </el-form>
