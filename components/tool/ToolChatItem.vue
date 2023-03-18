@@ -7,6 +7,7 @@ const props = defineProps<{
   showTyping?: boolean;
 }>();
 const resultHtml = computed(() => marked.parse(props.content || "..."));
+const { data, status } = useSession();
 </script>
 
 <template>
@@ -19,6 +20,12 @@ const resultHtml = computed(() => marked.parse(props.content || "..."));
             text-2xl
             name="simple-icons:openai"
           ></Icon>
+          <img
+            v-else-if="role === 'user' && status === 'authenticated'"
+            referrerpolicy="no-referrer"
+            :src="data?.user?.image ?? ''"
+            :alt="data?.user?.name ?? 'avatar'"
+          />
           <Icon
             v-else-if="role === 'user'"
             text-2xl
