@@ -49,20 +49,10 @@ export default defineNuxtConfig({
         },
       },
     },
-    build: {
-      target: "esnext",
-    },
   },
   elementPlus: {
     themes: ["dark"],
     importStyle: "scss",
     components: ["ElInput", "ElSelect", "ElOption"],
-  },
-  nitro: {
-    esbuild: {
-      options: {
-        target: "esnext",
-      },
-    },
   },
 });

@@ -9,9 +9,7 @@ const {
   update: localUpdate,
   create: localCreate,
 } = useLocalTools();
-const { update, remove, refresh } = await useAsyncRemoteTools({
-  immediate: false,
-});
+const { update, remove, refresh } = useRemoteTools();
 
 const loading = ref(false);
 const props = defineProps<{

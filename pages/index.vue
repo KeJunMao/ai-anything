@@ -7,6 +7,8 @@ definePageMeta({
 <template>
   <div max-w-400 mx-auto px-4 mt-10>
     <ToolSearch />
-    <ToolList />
+    <ClientOnly>
+      <ToolList />
+    </ClientOnly>
   </div>
 </template>

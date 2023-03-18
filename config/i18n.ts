@@ -54,6 +54,8 @@ export const i18n: NuxtI18nOptions = {
   vueI18n: {
     availableLocales: currentLocales.map((l) => l.code),
     fallbackLocale: "en-US",
+    fallbackWarn: false,
+    missingWarn: false,
   },
   detectBrowserLanguage: {
     useCookie: true,

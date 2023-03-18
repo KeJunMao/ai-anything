@@ -1,9 +1,7 @@
 import { MaybeRef } from "@vueuse/core";
 import { ToolItem } from "~~/types";
 
-const { get } = await useAsyncRemoteTools({
-  immediate: false,
-});
+const { get } = useRemoteTools();
 
 export const useTool = (id?: MaybeRef<string>) => {
   const { tools } = useTools();

@@ -5,9 +5,7 @@ const localePath = useLocalePath();
 const { status } = useSession();
 
 const { remove, create: localCreate } = useLocalTools();
-const { create } = await useAsyncRemoteTools({
-  immediate: false,
-});
+const { create } = useRemoteTools();
 const loading = ref(false);
 
 const props = defineProps<{

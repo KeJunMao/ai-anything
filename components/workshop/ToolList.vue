@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const localePath = useLocalePath();
 const { search } = useQuerySearch();
-const pageSize = ref(9);
+const pageSize = ref(12);
 const currentPage = ref(1);
 const { data, pending } = useAsyncData(
   () =>
