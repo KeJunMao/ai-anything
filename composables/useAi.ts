@@ -17,6 +17,10 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
     const tool = unref(_tool);
     data = unref(data);
     let messages = parseRoles(data, tool?.roles!);
+    if (messages.some((v) => !v.content)) {
+      ElMessage.error("Content cannot be empty");
+      return;
+    }
     if (tool.chat) {
       if (!contexts.value.length) {
         contexts.value.push(...messages);
@@ -45,21 +49,24 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
           : null ?? error?.message ?? error;
       }
     }
-    contexts.value.push({
-      content: result.value,
-      role: "assistant",
-    });
-    loading.value = false;
-  };
-  const reset = () => {
-    contexts.value = [];
-    result.value = "";
+    if (result.value) {
+      contexts.value.push({
+        content: result.value,
+        role: "assistant",
+      });
+    }
     loading.value = false;
   };
   const cancel = () => {
     controller.abort();
     controller = new AbortController();
     signal = controller.signal;
+  };
+  const reset = () => {
+    cancel();
+    contexts.value = [];
+    result.value = "";
+    loading.value = false;
   };
   return {
     send,

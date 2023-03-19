@@ -19,10 +19,13 @@ export default defineComponent({
     submit() {
       this.$emit("submit", this.formData);
       // @ts-ignore
-      this.$refs.form?.resetFields()
+      this.$refs.form?.resetFields();
     },
     stop() {
       this.$emit("stop");
+    },
+    reset() {
+      this.$emit("reset");
     },
   },
 });
@@ -51,10 +54,15 @@ export default defineComponent({
       </component>
     </el-form-item>
     <el-form-item>
-      <el-button v-if="!loading" @click="submit" type="primary" w-full>
-        <el-icon class="text-xl! i-carbon:send-alt-filled mr-2"></el-icon>
-        {{ $t("tool.forms.submit") }}
-      </el-button>
+      <div v-if="!loading" flex gap-x-2 w-full>
+        <el-button v-if="tool?.chat" @click="reset">
+          {{ $t("tool.forms.new") }}
+        </el-button>
+        <el-button flex-1 @click="submit" type="primary" w-full>
+          <el-icon class="text-xl! i-carbon:send-alt-filled mr-2"></el-icon>
+          {{ $t("tool.forms.submit") }}
+        </el-button>
+      </div>
       <el-button v-else @click="stop" type="warning" w-full class="ml-0!">
         <el-icon class="text-xl! i-carbon:stop-filled mr-2"></el-icon>
         {{ $t("tool.forms.stop") }}

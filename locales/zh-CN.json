@@ -60,5 +60,6 @@
   "app.desc": "任何人都可以创建 GPT 工具，AI Anything 使每个人都可以快速创建 ChatGPT 小工具",
   "tool.forms.stop": "停止",
   "app.gpt-setting-forms.default-provider": "默认GPT提供商",
-  "create.the-role.chat.label": "关联上下文 (Chat Mode)"
+  "create.the-role.chat.label": "关联上下文 (Chat Mode)",
+  "tool.forms.new": "新会话"
 }

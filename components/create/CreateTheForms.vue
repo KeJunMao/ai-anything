@@ -193,7 +193,7 @@ const propsRules = reactive(
                 :label="$t('create.the-forms.props.type.label')"
               >
                 <el-select
-                  placeholder='$t("create.the-forms.props.type.placeholder")'
+                  :placeholder='$t("create.the-forms.props.type.placeholder")'
                   w-full
                   clearable
                   v-model="item.props.type"

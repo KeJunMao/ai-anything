@@ -6,7 +6,8 @@ const props = defineProps<{
 }>();
 const { storageOptions } = useChatGPT();
 const tool = computed(() => props.tool);
-const { send, loading, result, resultHtml, cancel, contexts } = useAi(tool);
+const { send, loading, result, resultHtml, cancel, contexts, reset } =
+  useAi(tool);
 function submit(data: any) {
   if (storageOptions.value.apiKey) {
     send(data);
@@ -16,6 +17,10 @@ function submit(data: any) {
 }
 function stop() {
   cancel();
+}
+
+function handleReset() {
+  reset();
 }
 </script>
 <template>
@@ -36,6 +41,7 @@ function stop() {
           :loading="loading"
           @submit="submit"
           @stop="stop"
+          @reset="handleReset"
           :tool="tool"
         />
         <ToolResult v-if="!tool.chat && result" :html="resultHtml" />
