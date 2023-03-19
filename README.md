@@ -21,19 +21,21 @@ English | [简体中文](./README.zh-cn.md)
 
 ## Introduction
 
-For now, most ChatGPT-related tools are essentially tweaks to prompts, and AI Anything makes it possible for everyone to create ChatGPT widgets quickly
+Most of the tools related to ChatGPT are essentially prompt adjustments, but AI Anything allows everyone to quickly create ChatGPT tools.
 
 ## Features
 
-- 🔥 Create a GPT widget in seconds
-- 😃 [100,000+](https://icones.js.org/) icons available
-- 🦾 Allows to configure the AI's role!
-- ⚙️ More than one input box, how willing you can create countless ones!
-- 🤙🏻 supports template interpolation, prompt is more flexible
-- 🎨 Clean UI, smooth animations, dark mode support
-- ⚡️ Power by Nuxt3 , just fast!
-- 🌍 Multi-language
-- ☁️ Workshop, share or fork!
+- 🔥 Create a GPT tool in seconds
+- 😃 [100,000+](https://icones.js.org/) icons available for use
+- 🦾 Allow configuration of AI roles!
+- ⚙️ Not just one input box, you can create as many as you like!
+- 🤙🏻 Support for template interpolation, making prompts more flexible
+- 🎨 Clean UI, smooth animations, and support for dark mode
+- ⚡️ Powered by Nuxt3, it's fast!
+- 🌍 Multilingual, of course!
+- ☁️ Creative Workshop, share and publish!
+- 🗨 Context association, chat mode interaction
+- 👍 No need to log in to use all features locally!
 
 ## 💻 Development
 
