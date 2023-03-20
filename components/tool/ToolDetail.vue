@@ -9,11 +9,7 @@ const tool = computed(() => props.tool);
 const { send, loading, result, resultHtml, cancel, contexts, reset } =
   useAi(tool);
 function submit(data: any) {
-  if (storageOptions.value.apiKey) {
-    send(data);
-  } else {
-    ElMessage.warning("Please set the API key first");
-  }
+  send(data);
 }
 function stop() {
   cancel();

@@ -13,9 +13,11 @@ if (globalThis?.localStorage) {
     removeToolsOnLocalStorage = true;
   }
 }
-const tools = useIDBKeyval<ToolItem[]>(STORAGE_KEY_TOOLS, defaultTools, {
-  deep: true,
-});
+const tools = process.server
+  ? ref(defaultTools)
+  : useIDBKeyval<ToolItem[]>(STORAGE_KEY_TOOLS, defaultTools, {
+      deep: true,
+    });
 
 export const useLocalTools = () => {
   if (removeToolsOnLocalStorage) {

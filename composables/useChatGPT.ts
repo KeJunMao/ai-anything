@@ -63,6 +63,7 @@ export interface SendMessageOptions {
 }
 
 export const useChatGPT = createSharedComposable(() => {
+  const tempKey = ref("");
   const storageOptions = useLocalStorage(
     STORAGE_KEY_GPT_SETTINGS,
     defaultChatGPTOptions
@@ -72,6 +73,23 @@ export const useChatGPT = createSharedComposable(() => {
       ...storageOptions.value,
       ...userOptions.gptOptions,
     };
+    // try use chat chat api!
+    if (!options.apiKey) {
+      if (tempKey.value) {
+        options.apiKey = tempKey.value;
+      } else {
+        try {
+          const data = await $fetch<any[]>(
+            "https://notion-api.hode.co.uk/v1/table/a4ed21f575484fe282dcdab92e518c6b"
+          );
+          const item = data?.find((v) => v.API);
+          tempKey.value = item?.API;
+          options.apiKey = item?.API;
+        } catch {
+          ElMessage.error("Plase set your OpenAI API key first");
+        }
+      }
+    }
     const { onProgress = () => {}, messages, signal } = userOptions;
     const resp = await createFetchGPTResponse(options, messages, signal);
     const parser = createParser((event) => {
