@@ -11,7 +11,9 @@ useSeoMeta({
 <template>
   <div>
     <template v-if="tool">
-      <ToolDetail :tool="tool" />
+      <ClientOnly>
+        <ToolDetail :tool="tool" />
+      </ClientOnly>
     </template>
   </div>
 </template>

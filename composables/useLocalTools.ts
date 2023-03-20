@@ -1,9 +1,27 @@
 import { MaybeRef } from "@vueuse/shared";
 import { STORAGE_KEY_TOOLS } from "~~/constants";
 import { ToolItem } from "~~/types";
+import { useIDBKeyval } from "@vueuse/integrations/useIDBKeyval";
+
+let defaultTools: ToolItem[] = [];
+let removeToolsOnLocalStorage = false;
+if (globalThis?.localStorage) {
+  const usersOnLocalStorageString =
+    globalThis.localStorage.getItem(STORAGE_KEY_TOOLS);
+  if (usersOnLocalStorageString) {
+    defaultTools = JSON.parse(usersOnLocalStorageString);
+    removeToolsOnLocalStorage = true;
+  }
+}
+const tools = useIDBKeyval<ToolItem[]>(STORAGE_KEY_TOOLS, defaultTools, {
+  deep: true,
+});
 
 export const useLocalTools = () => {
-  const tools = useLocalStorage<ToolItem[]>(STORAGE_KEY_TOOLS, []);
+  if (removeToolsOnLocalStorage) {
+    globalThis.localStorage.removeItem(STORAGE_KEY_TOOLS);
+  }
+
   function create(tool: ToolItem) {
     tools.value.push(tool);
   }
