@@ -2,8 +2,10 @@ import { MaybeRef } from "@vueuse/core";
 import { marked } from "marked";
 import { OpenAIMessages, ToolItem } from "~~/types";
 import { useChatGPT } from "./useChatGPT";
+import { HistoryItem } from "./useHistory";
 
 export const useAi = (_tool: MaybeRef<ToolItem>) => {
+  const { create, update, currentHistoryId } = useHistory(_tool);
   const options = computed(() => unref(_tool).options);
   const { sendMessage } = useChatGPT();
   const result = ref("");
@@ -21,14 +23,18 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
       ElMessage.error("Content cannot be empty");
       return;
     }
-    if (tool.chat) {
-      if (!contexts.value.length) {
-        contexts.value.push(...messages);
-      } else {
-        contexts.value.push(messages[messages.length - 1]);
-      }
-      messages = contexts.value;
+    if (!tool.chat) {
+      reset();
     }
+
+    if (!contexts.value.length) {
+      contexts.value.push(...messages);
+      create(contexts.value);
+    } else if (tool.chat) {
+      contexts.value.push(messages[messages.length - 1]);
+    }
+    messages = contexts.value;
+
     result.value = "";
     loading.value = true;
     try {
@@ -55,6 +61,10 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
         role: "assistant",
       });
     }
+    update({
+      id: currentHistoryId.value,
+      context: contexts.value,
+    });
     loading.value = false;
   };
   const cancel = () => {
@@ -67,6 +77,20 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
     contexts.value = [];
     result.value = "";
     loading.value = false;
+    currentHistoryId.value = "";
+  };
+  const toggleHistory = (item: HistoryItem) => {
+    if (item.id && item.id !== currentHistoryId.value) {
+      reset();
+      contexts.value = item.context;
+      currentHistoryId.value = item.id;
+      if (!unref(_tool).chat) {
+        const lastItem = item.context[item.context.length - 1];
+        if (lastItem.role === "assistant") {
+          result.value = lastItem.content;
+        }
+      }
+    }
   };
   return {
     send,
@@ -76,5 +100,6 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
     contexts,
     cancel,
     reset,
+    toggleHistory,
   };
 };

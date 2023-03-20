@@ -1,6 +1,9 @@
 <template>
-  <main flex-1>
-    <div max-w-2xl mx-auto px-4 mt-6 sm:mt-10>
+  <main>
+    <div grid class="grid-cols-1 md:grid-cols-[300px_1fr]">
+      <div hidden md:block>
+        <slot name="left" />
+      </div>
       <slot></slot>
     </div>
   </main>

@@ -155,7 +155,7 @@ const messageOrderWarning = computed(() => {
       </div>
     </el-form>
   </CreateListTransition>
-  <el-form ref="formEl" :model="tool" label-position="top">
+  <el-form :model="tool" label-position="top">
     <el-form-item
       prop="chat"
       :label="$t('create.the-role.chat.label')"

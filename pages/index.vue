@@ -5,7 +5,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div max-w-400 mx-auto px-4 mt-10>
+  <div max-w-400 mx-auto px-4 py-10>
     <ToolSearch />
     <ClientOnly>
       <ToolList />

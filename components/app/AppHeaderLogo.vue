@@ -12,5 +12,6 @@ const localePath = useLocalePath();
     :to="localePath('/')"
   >
     <div class="i-app:logo"></div>
+    <slot />
   </NuxtLink>
 </template>

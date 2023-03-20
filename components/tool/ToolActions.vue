@@ -11,7 +11,7 @@ const canEdit = computed(
 </script>
 
 <template>
-  <div absolute left-0 top--8 w-full flex justify-end gap-1 items-center>
+  <div left-0 top--8 w-full flex justify-end gap-1 items-center>
     <ToolRemoteAction v-if="isRemoteTool(tool.id!)" :tool="tool" />
     <ToolLocalAction v-else :tool="tool" />
     <template v-if="canEdit">

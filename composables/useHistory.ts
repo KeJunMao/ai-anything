@@ -1,4 +1,4 @@
-import { MaybeRef } from "@vueuse/core";
+import { MaybeRef, RemovableRef, formatDate } from "@vueuse/core";
 import { OpenAIMessages, ToolItem } from "~~/types";
 import { useIDBKeyval } from "@vueuse/integrations/useIDBKeyval";
 import { STORAGE_KEY_TOOL_HISTORY } from "~~/constants";
@@ -6,30 +6,38 @@ import { v4 as uuidv4 } from "uuid";
 
 export interface HistoryItem {
   id: string;
-  name: number;
+  name: string;
   context: OpenAIMessages;
 }
 
+let _history: RemovableRef<HistoryItem[]>;
+const currentHistoryId = ref("");
+// TODO: fix first useIDB
 export const useHistory = (_tool: MaybeRef<ToolItem>) => {
-  const history = useIDBKeyval<HistoryItem[]>(
+  _history = useIDBKeyval<HistoryItem[]>(
     `${STORAGE_KEY_TOOL_HISTORY}${unref(_tool).id}`,
-    []
+    [],
+    {
+      deep: true,
+    }
   );
+  const history = computed(() => _history.value);
 
   function create(context: OpenAIMessages) {
-    history.value.push({
-      id: uuidv4(),
-      name: Date.now(),
+    currentHistoryId.value = uuidv4();
+    _history.value.push({
+      id: currentHistoryId.value,
+      name: formatDate(new Date(), "YYYY-MM-DD hh:mm:ss"),
       context: context,
     });
   }
 
   function remove(id: string) {
-    history.value = history.value.filter((item) => item.id !== id);
+    _history.value = history.value.filter((item) => item.id !== id);
   }
 
   function clear() {
-    history.value = [];
+    _history.value = [];
   }
 
   function get(id: string) {
@@ -38,7 +46,7 @@ export const useHistory = (_tool: MaybeRef<ToolItem>) => {
 
   function update(item: Partial<HistoryItem>) {
     if (item.id) {
-      history.value = history.value.map((v) => {
+      _history.value = history.value.map((v) => {
         if (v.id === item.id) {
           return { ...v, ...item };
         }
@@ -48,6 +56,7 @@ export const useHistory = (_tool: MaybeRef<ToolItem>) => {
   }
 
   return {
+    currentHistoryId,
     history,
     create,
     remove,
