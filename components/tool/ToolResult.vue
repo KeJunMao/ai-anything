@@ -6,7 +6,7 @@ defineProps<{
 
 <template>
   <div text-base w-full>
-    <div prose dark:prose-invert>
+    <div prose dark:prose-invert max-w-full>
       <div v-html="html"></div>
     </div>
   </div>

@@ -38,7 +38,9 @@ const { data, status } = useSession();
       </el-avatar>
     </div>
     <Card w-full relative>
-      <div text-base prose dark:prose-invert v-html="resultHtml"></div>
+      <div text-base prose dark:prose-invert max-w-full>
+        <div v-html="resultHtml"></div>
+      </div>
       <FadeTransition>
         <div
           v-show="showTyping"
