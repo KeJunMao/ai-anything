@@ -39,6 +39,7 @@
     "next-auth": "4.20.1",
     "std-env": "^3.3.2",
     "unstorage": "^1.4.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "vue-command-palette": "^0.1.4"
   }
 }
