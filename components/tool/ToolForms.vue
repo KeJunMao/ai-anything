@@ -18,14 +18,39 @@ export default defineComponent({
   methods: {
     submit() {
       this.$emit("submit", this.formData);
-      // @ts-ignore
-      this.$refs.form?.resetFields();
+      this.$nextTick(() => {
+        this.resetUserFormField();
+      });
     },
     stop() {
       this.$emit("stop");
     },
     reset() {
       this.$emit("reset");
+    },
+    resetUserFormField() {
+      const userRoles = this.tool?.roles.filter((v) => v.type === "user");
+      const fields = userRoles
+        ?.map((v) =>
+          v.template
+            .replace(/.*?\${(.*?)}.*?/gm, "$1,")
+            .split(",")
+            .filter((v) => v)
+        )
+        .flat();
+
+      [...new Set(fields)].forEach((v) => {
+        if (this.formData && this.formData[v]) {
+          this.formData[v] = "";
+        }
+      });
+    },
+    handleEnter(e: KeyboardEvent) {
+      if (e.shiftKey) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.submit();
+      }
     },
   },
 });
@@ -45,6 +70,7 @@ export default defineComponent({
         v-bind="item.props"
         :readonly="readonly"
         :autosize="{ minRows: 3 }"
+        @keydown.enter="handleEnter"
       >
         <el-option
           v-if="item.props.options && item.type === 'ElSelect'"
@@ -59,8 +85,15 @@ export default defineComponent({
           {{ $t("tool.forms.new") }}
         </el-button>
         <el-button flex-1 @click="submit" type="primary" w-full>
-          <el-icon class="text-xl! i-carbon:send-alt-filled mr-2"></el-icon>
-          {{ $t("tool.forms.submit") }}
+          <div flex items-center>
+            <el-icon class="text-xl! i-carbon:send-alt-filled mr-1"></el-icon>
+            <span>{{ $t("tool.forms.submit") }}</span>
+            <div ml-4 hidden md:block>
+              <kbd>Shift</kbd>
+              <span>+</span>
+              <kbd>Enter</kbd>
+            </div>
+          </div>
         </el-button>
       </div>
       <el-button v-else @click="stop" type="warning" w-full class="ml-0!">
