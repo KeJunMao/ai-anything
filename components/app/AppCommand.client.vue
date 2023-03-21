@@ -2,10 +2,11 @@
 // @ts-ignore
 import { Command } from "vue-command-palette";
 import "~/assets/scss/algolia.scss";
-const localePath = useLocalePath();
 
-const inputValue = ref("");
+const { search } = useQuerySearch();
+
 const visible = ref(false);
+
 const keys = useMagicKeys({
   passive: false,
   onEventFired(e) {
@@ -27,72 +28,28 @@ watch(Escape, (v) => {
     visible.value = false;
   }
 });
-
-const { tools } = useTools();
-
-const toolList = computed(() => {
-  return tools.value.map((tool) => {
-    return {
-      ...tool,
-      perform: () => {
-        visible.value = false;
-        navigateTo(localePath(`/ai-${tool.id}`));
-      },
-    };
-  });
-});
 </script>
 <template>
   <div class="w-full mx-auto">
     <Command.Dialog :visible="visible" theme="algolia">
       <template #header>
-        <Command.Input
-          placeholder="Type a command or search..."
-          v-model:value="inputValue"
-        />
+        <Command.Input placeholder="Type search..." v-model:value="search" />
       </template>
       <template #body>
         <Command.List>
           <Command.Empty>No results found.</Command.Empty>
-          <Command.Group heading="Tools">
-            <Command.Item
-              v-for="item in toolList"
-              :key="item.id"
-              :data-value="item.name"
-              @select="item.perform()"
-            >
-              <ToolIcon :icon="item.icon" />
-              <div>{{ item.name }}</div>
-              <div command-linear-shortcuts class="hidden">
-                <svg width="20" height="20" viewBox="0 0 20 20">
-                  <g
-                    stroke="currentColor"
-                    fill="none"
-                    fill-rule="evenodd"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M18 3v4c0 2-2 4-4 4H2"></path>
-                    <path d="M8 17l-6-6 6-6"></path>
-                  </g>
-                </svg>
-              </div>
-            </Command.Item>
-          </Command.Group>
-          <!-- <Command.Group heading="Preference">
-
-          </Command.Group> -->
+          <AppCommandTools @select="visible = false" />
         </Command.List>
       </template>
       <template #footer>
         <div class="command-palette-logo">
           <a
-            href="https://github.com/xiaoluoboding/vue-command-palette"
+            href="https://github.com/KeJunMao/ai-anything"
             target="_blank"
             rel="noopener noreferrer"
           >
             <span class="command-palette-Label">Search by</span>
-            Ai Anything
+            <div class="i-app:logo text-2xl"></div>
           </a>
         </div>
         <ul class="command-palette-commands">

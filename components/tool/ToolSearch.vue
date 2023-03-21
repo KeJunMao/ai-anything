@@ -14,6 +14,11 @@ const localePath = useLocalePath();
       <template #prefix>
         <el-icon class="i-carbon:search"></el-icon>
       </template>
+      <template #suffix>
+        <kbd>⌘</kbd>
+        +
+        <kbd>K</kbd>
+      </template>
     </el-input>
     <div flex items-center gap-2>
       <div hidden sm:block mr-2 class="animate-bounce-x" text-2xl>👉🏻</div>
