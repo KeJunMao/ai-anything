@@ -11,17 +11,22 @@ export interface HistoryItem {
 }
 
 let _history: RemovableRef<HistoryItem[]>;
+const history = ref<HistoryItem[]>([]);
 const currentHistoryId = ref("");
-// TODO: fix first useIDB
 export const useHistory = (_tool: MaybeRef<ToolItem>) => {
   _history = useIDBKeyval<HistoryItem[]>(
     `${STORAGE_KEY_TOOL_HISTORY}${unref(_tool).id}`,
     [],
     {
       deep: true,
+      flush: "sync",
     }
   );
-  const history = computed(() => _history.value);
+  const stop = watchEffect(() => {
+    history.value = _history.value;
+  });
+
+  tryOnScopeDispose(stop);
 
   function create(context: OpenAIMessages) {
     currentHistoryId.value = uuidv4();

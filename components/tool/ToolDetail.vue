@@ -39,7 +39,7 @@ defineExpose({
   <div flex flex-col style="height: calc(100vh - 125px)">
     <el-scrollbar height="100%">
       <div p-4 sm:p-10>
-        <ToolResult v-if="!tool.chat" flex-1 :html="resultHtml" />
+        <ToolResult v-if="!tool.chat" :html="resultHtml" />
         <ToolChatResult
           v-else
           :contexts="contexts"
