@@ -8,10 +8,10 @@ const iconName = computed(() =>
 </script>
 
 <template>
-  <span v-if="iconName">
+  <template v-if="iconName">
     <Icon transition-all :name="iconName" />
-  </span>
-  <span v-else>
+  </template>
+  <template v-else>
     {{ icon }}
-  </span>
+  </template>
 </template>
