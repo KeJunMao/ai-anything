@@ -1,17 +1,17 @@
 import { ToolItem } from "~~/types";
 
-const tools = ref<ToolItem[]>([])
+const tools = ref<ToolItem[]>([]);
 
 export const initializeTools = async () => {
   const { tools: local } = useLocalTools();
   const { tools: remote } = await useAsyncRemoteTools();
-  watchEffect(()=>{
+  watchEffect(() => {
     tools.value = [
-      ...local.value.filter((v) => !remote.value.find((r) => r.id === v.id)),
-      ...remote.value,
-    ]
-  })
-  return tools
+      ...remote.value.filter((v) => !local.value.find((r) => r.id === v.id)),
+      ...local.value,
+    ];
+  });
+  return tools;
 };
 
 export const useTools = () => {

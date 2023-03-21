@@ -1,11 +1,8 @@
 <script lang="ts" setup>
 import { ToolItem } from "~~/types";
-const emits = defineEmits(["update:historyId"]);
 const props = defineProps<{
   tool: ToolItem;
 }>();
-const { storageOptions } = useChatGPT();
-const tool = computed(() => props.tool);
 const {
   send,
   loading,
@@ -15,7 +12,7 @@ const {
   contexts,
   reset,
   toggleHistory,
-} = useAi(tool);
+} = useAi(props.tool);
 function submit(data: any) {
   send(data);
 }
