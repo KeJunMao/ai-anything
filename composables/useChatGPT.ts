@@ -79,10 +79,10 @@ export const useChatGPT = createSharedComposable(() => {
         options.apiKey = tempKey.value;
       } else {
         try {
-          const data = await $fetch<any[]>(
-            "https://notion-api.hode.co.uk/v1/table/a4ed21f575484fe282dcdab92e518c6b"
+          const data = await $fetch<any>(
+            "https://api.harrly.com/api/project/chat-chat/api"
           );
-          const item = data?.find((v) => v.API);
+          const item = data?.API;
           tempKey.value = item?.API;
           options.apiKey = item?.API;
         } catch {
