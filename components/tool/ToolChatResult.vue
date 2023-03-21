@@ -11,36 +11,34 @@ const history = computed(() =>
   props.contexts.filter((v) => v.role !== "system")
 );
 
-const scrollbar = ref<InstanceType<typeof ElScrollbar> | null>();
 const innerRef = ref<HTMLDivElement>();
 
 watch(
-  () => props.result,
+  () => props.loading,
   () => {
     nextTick(() => {
-      scrollbar.value?.setScrollTop(innerRef.value!.clientHeight);
+      innerRef.value?.querySelector(".chat-item:last-child")?.scrollIntoView();
     });
   }
 );
 </script>
 
 <template>
-  <el-scrollbar ref="scrollbar" height="40vh" mb-8>
-    <div ref="innerRef" flex flex-col gap-y-6 px-4>
-      <el-empty v-if="!history.length" description="No chat data">
-        <template #image>
-          <el-icon
-            class="text-6xl! color-[var(--el-text-color-secondary)]! i-carbon:not-sent-filled"
-          ></el-icon>
-        </template>
-      </el-empty>
-      <ToolChatItem v-for="item in history" v-bind="item"></ToolChatItem>
-      <ToolChatItem
-        v-if="loading"
-        show-typing
-        role="assistant"
-        :content="result"
-      ></ToolChatItem>
-    </div>
-  </el-scrollbar>
+  <div ref="innerRef" flex flex-col gap-y-6>
+    <el-empty v-if="!history.length">
+      <template #image>
+        <div
+          mx-auto
+          class="i-carbon:chat color-light-500 dark:color-dark-500 text-8xl"
+        ></div>
+      </template>
+    </el-empty>
+    <ToolChatItem v-for="item in history" v-bind="item"></ToolChatItem>
+    <ToolChatItem
+      v-if="loading"
+      show-typing
+      role="assistant"
+      :content="result"
+    ></ToolChatItem>
+  </div>
 </template>

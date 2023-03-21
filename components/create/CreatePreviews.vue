@@ -6,7 +6,7 @@ const { tool, step } = useCreateTool();
     <h2 text-xl mb-2>{{ $t("create.previews.title") }}</h2>
     <div flex-1 flex items-center justify-center>
       <CreatePreviewTransition name="remove" mode="out-in">
-        <ToolItem max-w-120 flex-1 v-if="step === 0" :tool="tool" />
+        <ToolItem max-w-65 flex-1 v-if="step === 0" :tool="tool" />
         <Card max-w-2xl flex-1 v-else-if="step === 1">
           <ToolForms readonly :tool="tool" />
         </Card>

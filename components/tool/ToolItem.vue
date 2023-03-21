@@ -8,54 +8,50 @@ defineProps<{
 
 <template>
   <div
-    cursor-pointer
-    rounded-xl
-    border="~ gray-200"
-    dark:border-gray-800
-    bg-white
-    dark:bg-dark-900
-    px-16px
-    py-20px
+    rounded
     flex
     flex-col
+    bg-whtie
+    dark:bg-black
+    border
+    items-center
+    min-h-24
     transition-all
-    hover:drop-shadow-lg
-    hover:border-transparent
-    dark:hover:border-light
-    relative
-    class="group"
+    hover:bg-light-100
+    hover:dark:bg-dark-900
+    hover:border-primary
+    class="group border-[var(--el-border-color)]"
   >
     <div
-      v-if="tool?.icon"
-      transition-all
-      text-xl
+      m-5
+      w-16
+      h-16
+      rounded
+      text-4xl
+      bg-light-300
+      dark:bg-dark-700
+      flex
+      items-center
+      justify-center
       class="group-hover:color-primary"
-      text-gray-800
-      dark:text-gray-200
-      mb-2
+      of-hidden
     >
-      <ToolIcon :icon="tool.icon" />
+      <ToolIcon :icon="tool.icon || 'i-simple-icons:openai'" />
     </div>
-    <div text-2xl font-semibold text-gray-900 dark:text-gray-100>
-      {{ tool?.name }}
+    <div py-4 px-6 mt-2 w-full text-center>
+      <h2 font-bold>
+        {{ tool.name }}
+      </h2>
+      <p
+        v-if="tool.desc"
+        text-sm
+        mt-1
+        text-gray-500
+        dark:text-gray-400
+        line-clamp-3
+      >
+        {{ tool.desc }}
+      </p>
     </div>
-    <div
-      v-if="tool?.desc"
-      mt-1
-      font-medium
-      text-gray-500
-      dark:text-gray-400
-      sm:line-clamp-2
-    >
-      {{ tool?.desc }}
-    </div>
-    <el-icon
-      v-if="tool.chat"
-      class="i-carbon:chat-bot text-5xl! opacity-10 right-1 bottom-1 absolute!"
-    ></el-icon>
-    <el-icon
-      v-else
-      class="i-carbon:terminal-3270 text-5xl! opacity-10 right-1 bottom-1 absolute!"
-    ></el-icon>
   </div>
 </template>
