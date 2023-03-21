@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div
     bg-white
@@ -15,5 +13,6 @@
       <slot />
     </div>
     <AppFooter />
+    <AppCommand />
   </div>
 </template>
