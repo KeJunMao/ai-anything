@@ -1,8 +1,14 @@
+@use "sass:meta";
+
 html,
 body {
   --color-primary: var(--el-color-primary);
   --el-border-radius-base: 8px;
   --el-border-radius-small: 4px;
+  @include meta.load-css("highlight.js/styles/a11y-light");
+}
+html.dark {
+  @include meta.load-css("highlight.js/styles/a11y-dark");
 }
 
 .page-enter-active,
@@ -23,4 +29,43 @@ body {
 .layout-leave-to {
   opacity: 0;
   filter: grayscale(1);
+}
+
+.aianything-scrollbars {
+  & ::-webkit-scrollbar {
+    width: 0.6em;
+    height: 0.6em;
+    background: transparent;
+  }
+
+  & ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  & ::-webkit-scrollbar-thumb {
+    border-radius: 0.6em;
+    @apply bg-gray-300;
+    &:hover {
+      @apply bg-gray-400;
+    }
+    &:active {
+      @apply bg-gray-500;
+    }
+  }
+
+  &.dark {
+    & ::-webkit-scrollbar-track {
+      @apply bg-gray-800;
+    }
+
+    & ::-webkit-scrollbar-thumb {
+      @apply bg-gray-700;
+      &:hover {
+        @apply bg-gray-600;
+      }
+      &:active {
+        @apply bg-gray-500;
+      }
+    }
+  }
 }

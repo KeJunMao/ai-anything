@@ -33,6 +33,7 @@
     "@vueuse/integrations": "^9.13.0",
     "element-plus": "^2.3.0",
     "eventsource-parser": "^0.1.0",
+    "highlight.js": "^11.7.0",
     "idb-keyval": "^6.2.0",
     "marked": "^4.2.12",
     "next-auth": "4.20.1",
