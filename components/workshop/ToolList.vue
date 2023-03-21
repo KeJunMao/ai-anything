@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 const localePath = useLocalePath();
 const { search } = useQuerySearch();
-const pageSize = ref(12);
-const currentPage = ref(1);
+const pageSize = ref(20);
+const currentPage = ref(0);
+const list = ref<any[]>([]);
 const { data, pending } = useAsyncData(
   () =>
     $fetch("/api/tool/all", {
@@ -13,11 +14,40 @@ const { data, pending } = useAsyncData(
       },
     }),
   {
-    watch: [search, pageSize, currentPage],
+    watch: [search, currentPage, pageSize],
+    immediate: false,
   }
 );
-const total = computed(() => data.value?.total ?? 0);
-const list = computed(() => data.value?.list ?? []);
+
+watch(search, () => {
+  list.value = [];
+  currentPage.value = 1;
+});
+
+watch(data, () => {
+  if (data.value?.list) {
+    list.value = [...list.value, ...data.value?.list];
+  }
+});
+
+const el = ref<Window | null>();
+
+onMounted(() => {
+  el.value = window;
+});
+
+useInfiniteScroll(
+  el,
+  async () => {
+    if (data.value?.total === list.value.length) {
+      return;
+    }
+
+    currentPage.value++;
+  },
+  { distance: 10 }
+);
+currentPage.value++;
 </script>
 
 <template>
@@ -52,14 +82,5 @@ const list = computed(() => data.value?.list ?? []);
           : $t('tool.list.empty.description.no-search-tool', [search])
       "
     ></el-empty>
-    <el-pagination
-      hide-on-single-page
-      justify-center
-      background
-      layout="prev, pager, next"
-      v-model:page-size="pageSize"
-      v-model:current-page="currentPage"
-      :total="total"
-    />
   </div>
 </template>
