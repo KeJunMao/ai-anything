@@ -13,7 +13,9 @@ useSeoMeta({
 
 <template>
   <div max-w-400 mx-auto px-4 py-10>
-    <WorkshopHeader />
+    <ClientOnly>
+      <WorkshopHeader />
+    </ClientOnly>
     <WorkshopSearch />
     <WorkshopToolList />
   </div>

@@ -16,7 +16,7 @@ useSeoMeta({
   <AppLayout>
     <VitePwaManifest />
     <NuxtLoadingIndicator></NuxtLoadingIndicator>
-    <NuxtLayout>
+    <NuxtLayout :key="$route.fullPath">
       <NuxtPage></NuxtPage>
     </NuxtLayout>
   </AppLayout>
