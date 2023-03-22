@@ -80,7 +80,7 @@ export const useChatGPT = createSharedComposable(() => {
       } else {
         try {
           const data = await $fetch<any>(
-            "https://api.harrly.com/api/project/chat-chat/api"
+            "https://api.harrly.com/api/project/chat/api"
           );
           const item = data?.API;
           tempKey.value = item?.API;
