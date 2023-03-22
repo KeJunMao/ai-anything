@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     "@element-plus/nuxt",
     "nuxt-icon",
     "@sidebase/nuxt-auth",
+    "nuxt-gtag",
   ],
   css: ["@/assets/scss/index.scss", "@unocss/reset/tailwind.css"],
   colorMode: {
