@@ -11,6 +11,7 @@ const showWarning = computed(() => !storageOptions.value.apiKey);
         :plain="showWarning"
         :type="showWarning ? 'danger' : ''"
         @click="show = true"
+        aria-label="Settings"
       >
         <el-icon class="i-carbon:settings"></el-icon>
         <span hidden sm:block ml-1 v-if="showWarning">{{

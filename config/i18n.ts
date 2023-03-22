@@ -3,8 +3,8 @@ import type { LocaleObject } from "#i18n";
 
 const countryLocaleVariants: Record<string, LocaleObject[]> = {
   en: [
-    { code: "en-US", name: "English (US)" },
-    { code: "en-GB", name: "English (UK)" },
+    { code: "en-US", name: "English (US)", iso: "en-US" },
+    { code: "en-GB", name: "English (UK)", iso: "en-GB" },
   ],
 };
 
@@ -18,6 +18,7 @@ const locales: LocaleObject[] = [
     code: "zh-CN",
     file: "zh-CN.json",
     name: "简体中文",
+    iso: "zh-CN",
   },
 ];
 
@@ -28,8 +29,7 @@ const buildLocales = () => {
       locales.forEach((l) => {
         const entry: LocaleObject = {
           ...data,
-          code: l.code,
-          name: l.name,
+          ...l,
           files: [data.file!, `${l.code}.json`],
         };
         delete entry.file;

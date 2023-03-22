@@ -29,7 +29,7 @@ const localePath = useLocalePath();
         </el-button>
       </nuxt-link>
       <nuxt-link :to="localePath('/workshop')" w-full>
-        <el-button type="primary" w-full>
+        <el-button type="primary" w-full class="color-dark-500!">
           <el-icon class="i-carbon:apps mr-1"></el-icon>
           {{ $t("tool.search.workshop") }}
         </el-button>

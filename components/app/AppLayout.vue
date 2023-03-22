@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+const head = useLocaleHead({ addSeoAttributes: true });
+</script>
+
 <template>
   <div
     bg-white
@@ -8,11 +12,13 @@
     flex-col
     min-h-screen
   >
-    <AppHeader />
-    <div flex-1>
-      <slot />
-    </div>
-    <AppFooter />
-    <AppCommand />
+    <Html :lang="head?.htmlAttrs?.lang">
+      <AppHeader />
+      <div flex-1>
+        <slot />
+      </div>
+      <AppFooter />
+      <AppCommand />
+    </Html>
   </div>
 </template>

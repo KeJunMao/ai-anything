@@ -10,6 +10,7 @@ const localePath = useLocalePath();
     hover:color-gray-500
     whitespace-nowrap
     :to="localePath('/')"
+    aria-label="Go back to the homepage"
   >
     <div class="i-app:logo"></div>
     <slot />
