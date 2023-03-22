@@ -61,5 +61,6 @@
   "tool.forms.stop": "停止",
   "app.gpt-setting-forms.default-provider": "默认GPT提供商",
   "create.the-role.chat.label": "关联上下文 (Chat Mode)",
-  "tool.forms.new": "新会话"
+  "tool.forms.new": "新会话",
+  "tool.forms.retry": "重试"
 }

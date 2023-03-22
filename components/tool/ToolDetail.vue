@@ -13,10 +13,15 @@ const {
   reset,
   toggleHistory,
   error,
+  resend,
 } = useAi(props.tool);
 
 function submit(data: any) {
-  send(data);
+  if (error.value) {
+    resend();
+  } else {
+    send(data);
+  }
 }
 function stop() {
   cancel();
@@ -60,6 +65,7 @@ defineExpose({
         @stop="stop"
         @reset="handleReset"
         :tool="tool"
+        :error="error"
       />
     </div>
   </div>

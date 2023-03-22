@@ -64,5 +64,6 @@
   "app.gpt-setting-forms.default-provider": "Default Provider",
   "create.the-role.chat.label": "With Context (Chat Mode)",
   "tool.forms.stop": "Stop",
-  "tool.forms.new": "New Chat"
+  "tool.forms.new": "New Chat",
+  "tool.forms.retry": "Retry"
 }

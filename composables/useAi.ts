@@ -16,27 +16,8 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
   let signal = controller.signal;
   const error = ref<any>(null);
 
-  const send = async (data: MaybeRef<Record<string, any>>) => {
+  const _send = async (messages: OpenAIMessages) => {
     error.value = null;
-    const tool = unref(_tool);
-    data = unref(data);
-    let messages = parseRoles(data, tool?.roles!);
-    if (messages.some((v) => !v.content)) {
-      ElMessage.error("Content cannot be empty");
-      return;
-    }
-    if (!tool.chat) {
-      reset();
-    }
-
-    if (!contexts.value.length) {
-      contexts.value.push(...messages);
-      create(contexts.value);
-    } else if (tool.chat) {
-      contexts.value.push(messages[messages.length - 1]);
-    }
-    messages = contexts.value;
-
     result.value = "";
     loading.value = true;
     try {
@@ -68,6 +49,33 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
     });
     loading.value = false;
   };
+
+  const send = async (data: MaybeRef<Record<string, any>>) => {
+    const tool = unref(_tool);
+    data = unref(data);
+    let messages = parseRoles(data, tool?.roles!);
+    if (messages.some((v) => !v.content)) {
+      ElMessage.error("Content cannot be empty");
+      return;
+    }
+    if (!tool.chat) {
+      reset();
+    }
+
+    if (!contexts.value.length) {
+      contexts.value.push(...messages);
+      create(contexts.value);
+    } else if (tool.chat) {
+      contexts.value.push(messages[messages.length - 1]);
+    }
+    messages = contexts.value;
+    await _send(messages);
+  };
+
+  const resend = async () => {
+    _send(contexts.value);
+  };
+
   const cancel = () => {
     controller.abort();
     controller = new AbortController();
@@ -96,6 +104,7 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
   };
   return {
     send,
+    resend,
     resultHtml,
     result,
     loading,

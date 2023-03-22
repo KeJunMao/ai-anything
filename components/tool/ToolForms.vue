@@ -8,6 +8,7 @@ export default defineComponent({
     tool: Object as PropType<ToolItem>,
     readonly: Boolean,
     loading: Boolean,
+    error: {} as any,
   },
   setup(props) {
     const { formData } = useToolFormData(props.tool!);
@@ -87,7 +88,8 @@ export default defineComponent({
         <el-button flex-1 @click="submit" type="primary" w-full>
           <div flex items-center>
             <el-icon class="text-xl! i-carbon:send-alt-filled mr-1"></el-icon>
-            <span>{{ $t("tool.forms.submit") }}</span>
+            <span v-if="!error">{{ $t("tool.forms.submit") }}</span>
+            <span v-else="">{{ $t("tool.forms.retry") }}</span>
             <div ml-4 hidden md:block>
               <kbd>Shift</kbd>
               <span>+</span>
