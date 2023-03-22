@@ -22,7 +22,7 @@ function handleUpdateName(id: string, name: string) {
   <el-scrollbar height="calc(100vh - 125px)">
     <div p-4 sm:p-y-10>
       <h2 font-bold>
-        {{ tool.name }} 
+        {{ tool.name }}
       </h2>
       <p text-gray-500 dark:text-gray-400>{{ tool.desc }}</p>
     </div>
@@ -43,6 +43,7 @@ function handleUpdateName(id: string, name: string) {
         :active="item.id === currentHistoryId"
         :id="item.id"
         :name="item.name"
+        :context="item.context"
       />
     </div>
   </el-scrollbar>

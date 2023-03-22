@@ -6,6 +6,7 @@ import { HistoryItem } from "./useHistory";
 
 export const useAi = (_tool: MaybeRef<ToolItem>) => {
   const { create, update, currentHistoryId } = useHistory(_tool);
+  currentHistoryId.value = "";
   const options = computed(() => unref(_tool).options);
   const { sendMessage } = useChatGPT();
   const result = ref("");
