@@ -44,6 +44,10 @@ Most of the tools related to ChatGPT are essentially prompt adjustments, but AI 
 - Install dependencies using `pnpm install`
 - Run interactive tests using `pnpm dev`
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=KeJunMao/ai-anything&type=Timeline)](https://star-history.com/#KeJunMao/ai-anything&Timeline)
+
 ## License
 
 Made with 💛

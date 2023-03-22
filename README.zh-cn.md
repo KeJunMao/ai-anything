@@ -45,6 +45,10 @@
 - 使用 `pnpm install` 安装依赖项
 - 使用 `pnpm dev` 运行交互测试
 
+## Star 历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=KeJunMao/ai-anything&type=Timeline)](https://star-history.com/#KeJunMao/ai-anything&Timeline)
+
 ## 协议
 
 用 💛 发电
