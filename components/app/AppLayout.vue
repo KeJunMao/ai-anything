@@ -1,5 +1,16 @@
 <script lang="ts" setup>
 const head = useLocaleHead({ addSeoAttributes: true });
+const lightThemeColor = "#ffffff";
+const darkThemeColor = "#000000";
+const colorMode = useColorMode();
+useHead(() => ({
+  meta: [
+    {
+      name: "theme-color",
+      content: colorMode.value === "dark" ? darkThemeColor : lightThemeColor,
+    },
+  ],
+}));
 </script>
 
 <template>

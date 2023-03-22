@@ -5,9 +5,13 @@ const tools = ref<ToolItem[]>([]);
 
 export const useRemoteTools = () => {
   async function refresh() {
-    const _tools = await $fetch<ToolItem[]>("/api/tool");
-    if (_tools) {
-      tools.value = _tools;
+    try {
+      const _tools = await $fetch<ToolItem[]>("/api/tool");
+      if (_tools) {
+        tools.value = _tools;
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 

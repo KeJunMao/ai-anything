@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from "nuxt/config";
 import { i18n } from "./config/i18n";
+import { pwa } from "./config/pwa";
 
 export default defineNuxtConfig({
   app: {
@@ -28,13 +29,13 @@ export default defineNuxtConfig({
         },
       ],
       meta: [
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
-          name: "theme-color",
-          content: "#ffffff",
+          name: "apple-mobile-web-app-status-bar-style",
+          content: "black-translucent",
         },
       ],
     },
-
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "layout", mode: "out-in" },
   },
@@ -79,40 +80,12 @@ export default defineNuxtConfig({
     importStyle: "scss",
     components: ["ElInput", "ElSelect", "ElOption"],
   },
-  pwa: {
-    registerType: "autoUpdate",
-    manifest: {
-      name: "AI Anything",
-      short_name: "AIAnything",
-      theme_color: "#ffffff",
-      icons: [
-        {
-          src: "android-chrome-192x192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          src: "android-chrome-512x512.png",
-          sizes: "512x512",
-          type: "image/png",
-        },
-        {
-          src: "android-chrome-512x512.png",
-          sizes: "512x512",
-          type: "image/png",
-          purpose: "any maskable",
-        },
-      ],
-      display: "standalone",
-    },
-    workbox: {
-      navigateFallback: "/",
-      globPatterns: ["**/*.{js,css,html,png,svg,ico}"],
-    },
-    registerWebManifestInRouteRules: true,
-    devOptions: {
-      enabled: true,
-      type: "module",
+  pwa,
+  nitro: {
+    prerender: {
+      crawlLinks: false,
+      routes: ["/"],
+      ignore: ["/ai-*"],
     },
   },
 });

@@ -4,7 +4,15 @@ const localePath = useLocalePath();
 </script>
 
 <template>
-  <div flex flex-col justify-between gap-3 sm:flex-row sm:items-center>
+  <div
+    key="tool-search"
+    flex
+    flex-col
+    justify-between
+    gap-3
+    sm:flex-row
+    sm:items-center
+  >
     <el-input
       class="w-full sm:max-w-sm"
       v-model="search"

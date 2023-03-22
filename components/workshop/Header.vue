@@ -1,5 +1,13 @@
 <template>
-  <div mb-8 flex flex-col justify-center gap-y-4 sm:gap-y-5>
+  <div
+    key="workshop-header"
+    mb-8
+    flex
+    flex-col
+    justify-center
+    gap-y-4
+    sm:gap-y-5
+  >
     <h2
       text-4xl
       font-semibold
