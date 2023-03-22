@@ -18,6 +18,8 @@ async function handleSignIn() {
     <el-dropdown v-else-if="status === 'authenticated'">
       <el-avatar :size="32">
         <img
+          w-32px
+          h-32px
           referrerpolicy="no-referrer"
           :src="data?.user?.image ?? ''"
           :alt="data?.user?.name ?? 'avatar'"

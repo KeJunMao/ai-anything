@@ -45,7 +45,7 @@ function createFetchGPTResponse(
       break;
   }
 
-  return $fetch.raw(url, {
+  return $fetch(url, {
     baseURL: apiBaseUrl,
     headers,
     body,
@@ -91,7 +91,14 @@ export const useChatGPT = createSharedComposable(() => {
       }
     }
     const { onProgress = () => {}, messages, signal } = userOptions;
-    const resp = await createFetchGPTResponse(options, messages, signal);
+    let isError = false;
+    let resp: ReadableStream;
+    try {
+      resp = (await createFetchGPTResponse(options, messages, signal)) as any;
+    } catch (error: any) {
+      isError = true;
+      resp = error.data;
+    }
     const parser = createParser((event) => {
       if (event.type === "event") {
         let data: Record<string, any>;
@@ -118,10 +125,12 @@ export const useChatGPT = createSharedComposable(() => {
         onProgress(message);
       }
     });
-    for await (const chunk of streamAsyncIterator[Symbol.asyncIterator](
-      resp.body
-    )) {
+    for await (const chunk of streamAsyncIterator[Symbol.asyncIterator](resp)) {
       const str = new TextDecoder().decode(chunk);
+      if (isError) {
+        const error = JSON.parse(str);
+        throw new Error(error.error.message);
+      }
       parser.feed(str);
     }
   };

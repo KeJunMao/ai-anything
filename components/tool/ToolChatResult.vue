@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { ElScrollbar } from "element-plus";
 import { OpenAIMessages } from "~~/types";
 
 const props = defineProps<{
   contexts: OpenAIMessages;
   result: string;
   loading: boolean;
+  error: any;
 }>();
 const history = computed(() =>
   props.contexts.filter((v) => v.role !== "system")
@@ -35,7 +35,7 @@ watch(
     </el-empty>
     <ToolChatItem v-for="item in history" v-bind="item"></ToolChatItem>
     <ToolChatItem
-      v-if="loading"
+      v-if="loading || error"
       show-typing
       role="assistant"
       :content="result"

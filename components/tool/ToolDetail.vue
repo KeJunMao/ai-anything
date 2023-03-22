@@ -12,6 +12,7 @@ const {
   contexts,
   reset,
   toggleHistory,
+  error,
 } = useAi(props.tool);
 
 function submit(data: any) {
@@ -47,6 +48,7 @@ defineExpose({
           :contexts="contexts"
           :result="result"
           :loading="loading"
+          :error="error"
         />
       </div>
     </el-scrollbar>

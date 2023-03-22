@@ -14,8 +14,10 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
   const contexts = ref<OpenAIMessages>([]);
   let controller = new AbortController();
   let signal = controller.signal;
+  const error = ref<any>(null);
 
   const send = async (data: MaybeRef<Record<string, any>>) => {
+    error.value = null;
     const tool = unref(_tool);
     data = unref(data);
     let messages = parseRoles(data, tool?.roles!);
@@ -46,16 +48,15 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
         gptOptions: options.value,
         signal,
       });
-    } catch (error: any) {
-      if (error.message?.includes("The user aborted a request")) {
+    } catch (e: any) {
+      error.value = e;
+      if (e.message?.includes("The user aborted a request")) {
         // pass
       } else {
-        result.value = error.data
-          ? JSON.stringify(error.data, null, 2)
-          : null ?? error?.message ?? error;
+        result.value = e?.message ?? e;
       }
     }
-    if (result.value) {
+    if (result.value && !error.value) {
       contexts.value.push({
         content: result.value,
         role: "assistant",
@@ -73,6 +74,7 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
     signal = controller.signal;
   };
   const reset = () => {
+    error.value = null;
     cancel();
     contexts.value = [];
     result.value = "";
@@ -98,6 +100,7 @@ export const useAi = (_tool: MaybeRef<ToolItem>) => {
     result,
     loading,
     contexts,
+    error,
     cancel,
     reset,
     toggleHistory,
