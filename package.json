@@ -18,6 +18,7 @@
     "@types/marked": "^4.0.8",
     "@types/uuid": "^9.0.1",
     "@unocss/nuxt": "^0.50.4",
+    "@vite-pwa/nuxt": "^0.0.7",
     "@vueuse/nuxt": "^9.13.0",
     "bumpp": "^9.0.0",
     "nuxt": "^3.3.1",
