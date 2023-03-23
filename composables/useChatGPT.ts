@@ -97,7 +97,11 @@ export const useChatGPT = createSharedComposable(() => {
       resp = (await createFetchGPTResponse(options, messages, signal)) as any;
     } catch (error: any) {
       isError = true;
-      resp = error.data;
+      if (error.data) {
+        resp = error.data;
+      } else {
+        throw error;
+      }
     }
     const parser = createParser((event) => {
       if (event.type === "event") {
