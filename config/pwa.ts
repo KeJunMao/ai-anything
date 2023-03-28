@@ -49,7 +49,7 @@ export const pwa: ModuleOptions = {
   registerWebManifestInRouteRules: true,
   writePlugin: true,
   devOptions: {
-    enabled: true,
+    enabled: false,
     navigateFallback: scope,
   },
 };

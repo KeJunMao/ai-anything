@@ -47,13 +47,21 @@ defineExpose({
   >
     <el-scrollbar height="100%">
       <div p-4 sm:p-10>
-        <ToolResult v-if="!tool.chat" :html="resultHtml" :loading="loading" />
+        <ToolResult
+          v-if="!tool.chat"
+          :html="resultHtml"
+          :loading="loading"
+          :result="result"
+          :contexts="contexts"
+          :tool="tool"
+        />
         <ToolChatResult
           v-else
           :contexts="contexts"
           :result="result"
           :loading="loading"
           :error="error"
+          :tool="tool"
         />
       </div>
     </el-scrollbar>

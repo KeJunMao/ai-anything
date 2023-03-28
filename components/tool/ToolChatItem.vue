@@ -8,6 +8,9 @@ const props = defineProps<{
 }>();
 const resultHtml = computed(() => marked.parse(props.content || "&nbsp;"));
 const { data, status } = useSession();
+const { copy, copied, isSupported } = useClipboard({
+  source: props.content,
+});
 </script>
 
 <template>
@@ -54,6 +57,19 @@ const { data, status } = useSession();
           OpenAI is typing...
         </div>
       </FadeTransition>
+      <el-button
+        absolute
+        right-2
+        bottom-2
+        v-if="role === 'assistant' && isSupported && !showTyping"
+        @click="copy(content)"
+        title="Copy Text"
+        text
+        size="small"
+      >
+        <div class="i-carbon-copy mr-1"></div>
+        <span v-if="copied">Copied</span>
+      </el-button>
     </Card>
   </div>
 </template>
