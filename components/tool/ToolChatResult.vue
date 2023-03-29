@@ -46,7 +46,7 @@ function handleDownload() {
       :content="result"
     ></ToolChatItem>
     <div
-      v-if="!loading"
+      v-if="!loading && history.length"
       class="opacity-0 group-hover:opacity-100 transition-opacity"
     >
       <el-button-group size="small">

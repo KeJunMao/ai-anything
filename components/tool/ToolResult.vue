@@ -24,7 +24,7 @@ function handleDownload() {
       </FadeTransition>
     </div>
     <div
-      v-if="!loading"
+      v-if="!loading && html"
       class="opacity-0 group-hover:opacity-100 transition-opacity"
     >
       <el-button-group size="small">
