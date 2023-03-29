@@ -52,6 +52,8 @@ watch(value, () => {
     px-2
     py-1
     class="hover:bg-[var(--el-color-primary-light-9)] group"
+    border="~ gray-200"
+    dark:border-gray-800
     :class="active ? 'color-primary bg-[var(--el-color-primary-light-8)] ' : ''"
     gap-x-1
   >
